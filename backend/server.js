@@ -1,8 +1,15 @@
 const express=require("express")
 const app=express()
+const cors=require("cors")
+const cookieParser = require('cookie-parser');
 require("dotenv").config()
 const mongoose=require("mongoose")
 const router=require("./routes/routes")
+
+
+
+
+
 const connect_to_db=async()=>{
     try {
         await mongoose.connect(process.env.MONGO_URI)
@@ -11,8 +18,11 @@ const connect_to_db=async()=>{
         console.log("err",error)
     }
 }
-
-
+app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:3000', 
+    credentials: true
+}))
 app.use(express.json())
 
 
