@@ -11,7 +11,7 @@ const Navbar = () => {
                     <a>Centres</a>
                 </div>
                 <div>
-                    <a>Faculty</a>
+                    <a href="/professors">Faculty</a>
                 </div>
                 <div>
                     <a>Research-Scholar</a>
@@ -30,6 +30,9 @@ const Navbar = () => {
                 </div>
                 <div>
                     <a>Research Support</a>
+                </div>
+                <div className="p-4">
+                    <a href="/login">login</a>
                 </div>
             </div>
         </div>
