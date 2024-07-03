@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import Navbar from './Navbar';
 
 const Profile = () => {
     const [profile, setProfile] = useState({});
@@ -29,6 +30,9 @@ const Profile = () => {
 
     return (
         <div>
+            <div>
+                <Navbar/>
+            </div>
             <h2>Profile Page</h2>
             <div>
                 <p>Name: {profile.name}</p>
