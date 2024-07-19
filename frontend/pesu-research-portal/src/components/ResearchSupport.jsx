@@ -52,9 +52,17 @@ const ResearchSupport = () => {
                 <Navbar/>
             </div>
 
-        <div className="font-serif grid grid-cols-5 gap-2">  
-        <div className="col-span-1 p-10 bg-slate-300 h-screen justify-evenly">
-            <ul className="font-serif text-xl cursor-pointer gap-5 leading-10 text-center">
+        <div className="font-serif grid grid-cols-5 gap-2" style={{
+                backgroundImage: "url(/img/pixelcut-export.jpg)",
+                backgroundSize: 'cover', // Ensures the image covers the entire div
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                width: '100vw', // Full viewport width
+                height: '100vh', // Full viewport height
+                overflow: 'hidden' // Hide any overflow
+        }}>  
+        <div className="col-span-1 p-10 bg-white bg-opacity-80 h-screen justify-evenly">
+            <ul className="font-serif text-lg cursor-pointer gap-5 leading-10 text-center">
                 <li data-question='a' data-answer='b'>RESEARCH ETHICS</li>
                 <li data-question='c' data-answer='d'>COLLABORATIONS</li>
             </ul>
@@ -63,7 +71,7 @@ const ResearchSupport = () => {
         <div className="col-span-4 col-start-2">
         <section id="blocks">
             
-            <article className="p-5 hidden" id="b" data-answer-content>
+            <article className="p-5 hidden bg-white opacity-100" id="b" data-answer-content>
                 <p className="text-center text-gray-800 text-2xl">Research ethics represents a set of principles and guidelines that scholars and researchers adhere to, ensuring that their inquiries and examinations uphold the highest standards of integrity, respect, and care. It's a commitment to ensuring that the pursuit of knowledge remains trustworthy and beneficial for participants and society. Embracing research ethics means prioritizing the well-being and rights of study participants, maintaining accuracy in data collection and reporting, and fostering a transparent and honest environment throughout the 
                 research process.</p> <br />
                 

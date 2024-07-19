@@ -17,7 +17,10 @@ const Navbar = () => {
                     <a>PHD program</a>
                 </div>
                 <div>
-                    <a href="patent-process">Research-Grant</a>
+                    <a href="patent-process">Patents</a>
+                </div>
+                <div>
+                    <a>Research-Grant</a>
                 </div>
                 <div>
                     <a>Conference</a>

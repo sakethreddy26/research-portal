@@ -524,7 +524,7 @@ const Professors = () => {
         <div className="flex">
           <div className="flex flex-col items-center w-1/5 bg-white bg-opacity-80 h-screen p-4">
             <nav className="text-center">
-              <ul className='text-3xl'>
+              <ul className='text-lg'>
                 <li className="mb-4">
                   <button
                     className="text-blue-800 hover:underline transition ease-out duration-500"

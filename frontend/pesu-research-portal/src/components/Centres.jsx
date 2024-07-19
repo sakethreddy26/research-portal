@@ -57,26 +57,33 @@ const Centres = () => {
             </div>
 
      
-            <div className="grid grid-cols-4 gap-2  ">
+            <div className="grid grid-cols-4 gap-2" style={{
+                    backgroundImage: "url(/img/pixelcut-export.jpg)",
+                    backgroundSize: 'cover', // Ensures the image covers the entire div
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    width: '100vw', // Full viewport width
+                    height: '100vh', // Full viewport height
+                    overflow: 'hidden' // Hide any overflow
+                }}>
+            <div className="col-span-1 p-10  bg-white bg-opacity-80  w-4/5  h-full justify-evenly">
 
-            <div className="col-span-1 p-10  bg-slate-300 h-full fixed justify-evenly">
-
-                <ul className="font-serif text-xl leading-10 cursor-pointer">
-                    <li className="hover:text-blue-600" data-question='q1' data-answer="a1">Ring Road Campus</li>
-                    <li className="hover:text-blue-600" data-question='q2' data-answer="a2">Electronic City Campus</li>
-                    <li className="hover:text-blue-600" data-question='q3' data-answer="a3">Hanumanthanagar Campus</li>
+                <ul className="font-serif text-lg leading-10 cursor-pointer flex flex-col items-center justify-center">
+                    <li className="hover:text-blue-600" data-question='q1' data-answer="a1">RR Campus</li>
+                    <li className="hover:text-blue-600" data-question='q2' data-answer="a2">EC Campus</li>
+                    <li className="hover:text-blue-600" data-question='q3' data-answer="a3">HN Campus</li>
                 </ul>
 
             </div>
 
             {/* Ring Road */}
-            <div className="font-serif bold p-10 md:text-xl col-span-3 col-start-2 hidden " id="a1" data-answer-content>
+            <div className="font-serif bold p-10 md:text-xl col-span-3 col-start-2 hidden" id="a1" data-answer-content>
                
-                
+                <div className=" bg-white opacity-90 rounded-lg">
 
                <a href="https://research.pes.edu/cloud-computing-big-data/" className="p-5 flex text-center gap-7  hover:text-blue-800 hover:shadow-xl">
                     
-               <img className="object-fill h-6 w-6 mt-1 " src="img-c/button.png" alt="" />
+               <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="" />
                     Centre for Cloud Computing & Big Data
                </a>
 
@@ -116,7 +123,7 @@ const Centres = () => {
                     Center of Excellence in Interest of Things (C-IoT)
                </a>
 
-
+               </div>
 
             </div>
             
@@ -124,30 +131,35 @@ const Centres = () => {
 
             {/* Electronic City */}
             <div className="font-serif p-10 md:text-lg  col-start-2 col-span-3 hidden  gap-4" id="a2" data-answer-content>
+
+            <div className=" bg-white opacity-90 rounded-lg">
+
                
                 <a href="https://cie.pes.edu/" className="p-3 flex text-center gap-10  hover:text-blue-800 hover:shadow-xl">
-                    <img className="object-fill h-20 w-20 " src="img-c/CIE.jpg" alt="CIE" />
+                    <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="CIE" />
 
                     CIE - CENTRE FOR INNOVATION AND ENTREPRENEURSHIP
                 </a>
                 <a href="https://www.pesuventurelabs.com/" className="p-3 flex text-center gap-10   hover:text-blue-800 hover:shadow-xl ">
-                    <img className="object-fill h-20 w-20 " src="img-c/PVL.png" alt="PVL" />
+                    <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="PVL" />
                     PVL - PESU VENTURE LABS
                 </a>
 
                 <a href="https://research.pes.edu/centre-of-data-modelling-analytics-and-visualization-codmav/" className="p-3 flex text-center gap-10   hover:text-blue-800 hover:shadow-xl ">
-                    <img className="object-fill h-20 w-20" src="img-c/CoDMAV.jpg" alt="CoDMAV" />
+                    <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="CoDMAV" />
                     CoDMAV - CENTRE FOR DATA MODELLING ANALYTICS AND VISUALISATION
                 </a>
 
                 <a href="https://research.pes.edu/centre-of-cognitive-computing-and-computational-intelligence-c3i/" className="p-3 flex text-center gap-10  hover:text-blue-800 hover:shadow-xl ">
-                    <img className="object-fill h-20 w-20  " src="img-c/C3I.png" alt="C3I" />
+                    <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="C3I" />
                     C3I - CENTRE OF COGNITIVE COMPUTING AND COMPUTATIONAL INTELLIGENCE
                 </a>
 
                 <a href="https://research.pes.edu/center-for-computer-networks-and-cyber-security-ccncs/" className="p-3 flex text-center gap-10 hover:text-blue-800 hover:shadow-xl ">
-                    <img className="object-fill h-20 w-20 " src="img-c/CCNCS.jpeg" alt="CCNCS" />
+                    <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="CCNCS" />
                     CCNCS - CENTRE FOR COMPUTER NETWORKS AND CYBER SECURITY</a>
+
+                    </div>
 
             </div>
 
