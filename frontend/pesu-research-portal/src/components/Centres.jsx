@@ -1,46 +1,168 @@
 import Navbar from "../components/Navbar"
+import React, { useEffect} from 'react';
+
+
+
 const Centres = () => {
-    return ( 
+    useEffect(() => {
+        const questions = document.querySelectorAll('[data-question]');
+        const answers = document.querySelectorAll('[data-answer-content]');
+        if (questions.length === 0 || answers.length === 0) {
+            console.error('Questions or answers not found');
+            return;
+        }    
+    
+        // Function to toggle visibility of the answer
+        const toggleAnswer = (event) => {
+            // Hide all answers first
+            answers.forEach(answer => {
+                answer.classList.add('hidden');
+            });
+
+            questions.forEach(question => {
+                question.classList.remove('text-blue-600');
+            });
+            // Show the clicked answer
+            const answerId = event.currentTarget.getAttribute('data-answer');
+            const answer = document.getElementById(answerId);
+            
+            if (answer) {
+                answer.classList.remove('hidden');
+                
+                }
+                event.currentTarget.classList.add('text-blue-600');
+            
+            // Add the class to the clicked question
+        
+        };
+
+        // Add event listeners to each question
+        questions.forEach(question => {
+            question.addEventListener('click', toggleAnswer);   
+        });
+
+        // Cleanup function to remove event listeners
+        return () => {
+            questions.forEach(question => {
+                question.removeEventListener('click', toggleAnswer);
+            });
+        };
+    }, []); // Empty dependency array ensures this effect runs once
+
+
+    return (
         <div>
             <div>
-                <Navbar/>
+                <Navbar />
             </div>
-            <div>
-                <h2 className="text-center text-black font-bold text-3xl font-serif p-2">
-                    CENTRES
-                </h2>
 
-                <div className="font-serif bold p-10 md:text-lg gap-6 grid lg:grid-cols-2">
-                    
-                    <a href="https://cie.pes.edu/" className="p-10 flex text-center gap-10 font-semibold hover:text-blue-800 hover:shadow-xl">
-                        <img className="object-fill h-20 w-20 " src="https://media.licdn.com/dms/image/C4E0BAQE2ql7KssrFYw/company-logo_200_200/0/1655792284877?e=2147483647&v=beta&t=AN0r1Wl2r7p46tmtTYGV6_NFbKV6Y5LDJX9lQR0eSH0" alt="CIE" />
-    
-                        CIE - CENTRE FOR INNOVATION AND ENTREPRENEURSHIP
-                    </a>
-                    <a href="https://www.pesuventurelabs.com/" className="p-10 flex text-center gap-10 font-bold  hover:text-blue-800 hover:shadow-xl ">
-                        <img className="object-fill h-20 w-20 " src="https://www.pesuventurelabs.com/PVL_Monogram.png" alt="PVL" />
-                        PVL - PESU VENTURE LABS
-                    </a>
-                    
-                    <a href="https://research.pes.edu/centre-of-data-modelling-analytics-and-visualization-codmav/" className="p-10  flex text-center gap-10 font-bold  hover:text-blue-800 hover:shadow-xl ">
-                        <img  className="object-fill h-20 w-20" src="https://media.licdn.com/dms/image/D5603AQFcdCsKi7bo3w/profile-displayphoto-shrink_200_200/0/1711896888074?e=2147483647&v=beta&t=XMlWaIcio4Wcj5FxoELZqmgxLuUvu5pduAhNGCLdWps" alt="CoDMAV" />
-                        CoDMAV - CENTRE FOR DATA MODELLING ANALYTICS AND VISUALISATION
-                    </a>
+     
+            <div className="grid grid-cols-4 gap-2  ">
 
-                    <a href="https://research.pes.edu/centre-of-cognitive-computing-and-computational-intelligence-c3i/" className="p-10 flex text-center gap-10 font-bold hover:text-blue-800 hover:shadow-xl ">
-                        <img className="object-fill h-20 w-20  " src="https://research.pes.edu/wp-content/uploads/2023/11/Picture111.png" alt="C3I" />
-                        C3I - CENTRE OF COGNITIVE COMPUTING AND COMPUTATIONAL INTELLIGENCE
-                    </a> 
-                    
-                    <a href="https://research.pes.edu/center-for-computer-networks-and-cyber-security-ccncs/" className="p-10 flex text-center gap-10 font-bold  hover:text-blue-800 hover:shadow-xl ">
-                        <img  className="object-fill h-20 w-20 " src="https://www.vidyavision.com/CollegeUploads/Logos/2023-03-2-15-54-32_pes%20logo.jpeg" alt="CCNCS" />
-                        CCNCS - CENTRE FOR COMPUTER NETWORKS AND CYBER SECURITY</a>               
-                    
-                </div>
+            <div className="col-span-1 p-10  bg-slate-300 h-full fixed justify-evenly">
+
+                <ul className="font-serif text-xl leading-10 cursor-pointer">
+                    <li className="hover:text-blue-600" data-question='q1' data-answer="a1">Ring Road Campus</li>
+                    <li className="hover:text-blue-600" data-question='q2' data-answer="a2">Electronic City Campus</li>
+                    <li className="hover:text-blue-600" data-question='q3' data-answer="a3">Hanumanthanagar Campus</li>
+                </ul>
 
             </div>
+
+            {/* Ring Road */}
+            <div className="font-serif bold p-10 md:text-xl col-span-3 col-start-2 hidden " id="a1" data-answer-content>
+               
+                
+
+               <a href="https://research.pes.edu/cloud-computing-big-data/" className="p-5 flex text-center gap-7  hover:text-blue-800 hover:shadow-xl">
+                    
+               <img className="object-fill h-6 w-6 mt-1 " src="img-c/button.png" alt="" />
+                    Centre for Cloud Computing & Big Data
+               </a>
+
+               <a href="https://research.pes.edu/knowledge-analytics-ont-ological-engineering-kanoe/" className="p-5 flex text-center gap-7  hover:text-blue-800 hover:shadow-xl">
+               
+               <img className="object-fill h-6 w-6 mt-1 " src="img-c/button.png" alt="" />
+                    Knowledge Analytics & Ont-ological Engineering (KANOE)
+               </a>
+
+               <a href="https://research.pes.edu/center-for-pattern-recognition/" className="p-5 flex text-center gap-7  hover:text-blue-800 hover:shadow-xl">
+               
+               <img className="object-fill h-6 w-6 mt-1 " src="img-c/button.png" alt="" />
+                    Center for Pattern Recognition
+               </a>
+
+               <a href="https://research.pes.edu/crsst/" className="p-5 flex text-center gap-7  hover:text-blue-800 hover:shadow-xl">
+                    
+               <img className="object-fill h-6 w-6 mt-1 " src="img-c/button.png" alt="" />
+                    Centre for Research in Space Science and Technology (CRSST)
+               </a>
+
+               <a href="https://research.pes.edu/center-for-data-sciences-and-applied-machine-learning/" className="p-5 flex text-center gap-7  hover:text-blue-800 hover:shadow-xl">
+                    
+               <img className="object-fill h-6 w-6 mt-1 " src="img-c/button.png" alt="" />
+                    Center for Data Sciences and Applied Machine Learning (CDSAML)
+               </a>
+
+               <a href="https://www.isfcr.pes.edu/?_gl=1*w5oypt*_gcl_au*ODg4MTQ3NDUwLjE3MjExMzUwMzI.*_ga*MTA5NTIyMjU0MS4xNzEzMDIxODYz*_ga_BK9HRDTZR1*MTcyMTIwNzYyMy4yNi4xLjE3MjEyMDgxNTkuMjYuMC4w" className="p-5 flex text-center gap-7  hover:text-blue-800 hover:shadow-xl">
+                    
+               <img className="object-fill h-6 w-6 mt-1 " src="img-c/button.png" alt="" />
+                    Center of Excellence in Information Security, Forensics and Cyber Resilience (C- ISFCR)
+               </a>
+
+               <a href="https://www.iot.pes.edu/?_gl=1*4px0su*_gcl_au*ODg4MTQ3NDUwLjE3MjExMzUwMzI.*_ga*MTA5NTIyMjU0MS4xNzEzMDIxODYz*_ga_BK9HRDTZR1*MTcyMTIwNzYyMy4yNi4xLjE3MjEyMDgxNTkuMjYuMC4w" className="p-5 flex text-center gap-7 hover:text-blue-800 hover:shadow-xl">
+                    
+               <img className="object-fill h-6 w-6 mt-1 " src="img-c/button.png" alt="" />
+                    Center of Excellence in Interest of Things (C-IoT)
+               </a>
+
+
+
+            </div>
+            
+
+
+            {/* Electronic City */}
+            <div className="font-serif p-10 md:text-lg  col-start-2 col-span-3 hidden  gap-4" id="a2" data-answer-content>
+               
+                <a href="https://cie.pes.edu/" className="p-3 flex text-center gap-10  hover:text-blue-800 hover:shadow-xl">
+                    <img className="object-fill h-20 w-20 " src="img-c/CIE.jpg" alt="CIE" />
+
+                    CIE - CENTRE FOR INNOVATION AND ENTREPRENEURSHIP
+                </a>
+                <a href="https://www.pesuventurelabs.com/" className="p-3 flex text-center gap-10   hover:text-blue-800 hover:shadow-xl ">
+                    <img className="object-fill h-20 w-20 " src="img-c/PVL.png" alt="PVL" />
+                    PVL - PESU VENTURE LABS
+                </a>
+
+                <a href="https://research.pes.edu/centre-of-data-modelling-analytics-and-visualization-codmav/" className="p-3 flex text-center gap-10   hover:text-blue-800 hover:shadow-xl ">
+                    <img className="object-fill h-20 w-20" src="img-c/CoDMAV.jpg" alt="CoDMAV" />
+                    CoDMAV - CENTRE FOR DATA MODELLING ANALYTICS AND VISUALISATION
+                </a>
+
+                <a href="https://research.pes.edu/centre-of-cognitive-computing-and-computational-intelligence-c3i/" className="p-3 flex text-center gap-10  hover:text-blue-800 hover:shadow-xl ">
+                    <img className="object-fill h-20 w-20  " src="img-c/C3I.png" alt="C3I" />
+                    C3I - CENTRE OF COGNITIVE COMPUTING AND COMPUTATIONAL INTELLIGENCE
+                </a>
+
+                <a href="https://research.pes.edu/center-for-computer-networks-and-cyber-security-ccncs/" className="p-3 flex text-center gap-10 hover:text-blue-800 hover:shadow-xl ">
+                    <img className="object-fill h-20 w-20 " src="img-c/CCNCS.jpeg" alt="CCNCS" />
+                    CCNCS - CENTRE FOR COMPUTER NETWORKS AND CYBER SECURITY</a>
+
+            </div>
+
+            {/* Hanumanthanagar Campus */}
+
+            <div  className="font-serif bold p-10 md:text-lg col-span-3 col-start-2 hidden" id="a3" data-answer-content>
+                
+  
+            </div>
+
+            </div>
+        
         </div>
-     );
+     
+    );
 }
- 
+
 export default Centres;
