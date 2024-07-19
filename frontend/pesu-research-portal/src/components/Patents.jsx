@@ -17,6 +17,7 @@ const Patents = () => {
         // Add event listeners to each question
         questions.forEach(question => {
             question.addEventListener('click', toggleAnswer);
+
         });
 
         // Cleanup function to remove event listeners
@@ -28,31 +29,27 @@ const Patents = () => {
     }, []); // Empty dependency array ensures this effect runs once
 
     return ( 
+        <div className="relative min-h-screen bg-cover bg-center opacity-100" style={{ backgroundImage: 'url(https://www.pesuacademy.com/Academy/images/login_bg_acdemy.jpg)' }}>
         
         <div>
             <div>
                 <Navbar/>
             </div>
-            <header className="bg-sky-800 text-white p-4 font-bold text-center w-full mt-1 mb-0">
+            <header className="bg-sky-800 text-white p-4 font-bold text-center w-full">
                 <h2>PATENTS</h2>
-            </header><br />
-            <div className="grid grid-cols-4 mt-0">
-                <div className="col-span-1 bg-slate-300 flex justify-center">
+            </header>
+            <div className="grid grid-cols-4 ">
+                <div className="col-span-1 bg-slate-300 opacity-85 justify-center w-100 h-full">
                     <nav className="text-center">
-                        <ul className="block">
-                            <li >
-                            <br />
-                                <a href="/" className="hover: text-blue-800 hover: underline transition ease-out duration-500"><span>Patents</span></a>
-                                <br />
-                                </li>
-                            <li className="cursor-pointer">
-                            <br />
-                                <a href="/" className="hover: text-blue-800 hover: underline transition ease-out duration-500"><span>Process of Claiming a Patent</span></a>
-                                </li>
+                        <ul className="leading-10 p-5 font-serif text-xl" >
+                        <li className="cursor-pointer " data-question='p' data-answer='pa'>Patents Claimed</li>
+
+                            <li className="cursor-pointer " data-question='pp' data-answer='ppa'>Patent Processess</li>
+                           
                         </ul>
                     </nav>
                 </div>
-                <div className="w-full px-16  col-span-3">
+                <div className=" px-16 hidden col-span-3 bg-white rounded opacity-90" id='ppa'>
                     <h2 className="font-bold text-left text-nowrap">Process of Claiming a Patent in India</h2>
                     <img src="img/patent-procedure.png" alt="An overview of the process of filing a Patent in India" />
                     <div className="justify-center">
@@ -259,7 +256,7 @@ const Patents = () => {
             </div>
             
         </div>
-        
+        </div>
      );
 }
  
