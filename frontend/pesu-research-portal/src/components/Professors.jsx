@@ -1,3 +1,4 @@
+
 // import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import Navbar from './Navbar';
@@ -7,9 +8,29 @@
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState(null);
 //   const [currentPage, setCurrentPage] = useState(1);
+//   const [selectedDomain, setSelectedDomain] = useState('');
 //   const [searchTerm, setSearchTerm] = useState('');
-//   const professorsPerPage = 20; // 5 rows * 4 columns
+//   const [selectedDesignation, setSelectedDesignation] = useState('');
+//   const [selectedCampus, setSelectedCampus] = useState('');
+//   const [departments, setDepartments] = useState([]);
+//   const [openDropdown, setOpenDropdown] = useState('');
+//   const professorsPerPage = 8;
 //   const navigate = useNavigate();
+
+//   const rrCampusDepartments = [
+//     'biotechnology',
+//     'civil',
+//     'computer-science-AIML',
+//     'computer-science',
+//     'electrical-&-electronics',
+//     'electronics-&-communications',
+//     'mechanical',
+//   ];
+
+//   const ecCampusDepartments = [
+//     'Computer Science',
+//     'electronics-&-communications',
+//   ];
 
 //   useEffect(() => {
 //     const fetchProfessors = async () => {
@@ -30,20 +51,40 @@
 //     fetchProfessors();
 //   }, []);
 
-//   const handleSearchChange = (event) => {
-//     setSearchTerm(event.target.value);
+//   const handleCampusClick = (campus) => {
+//     if (openDropdown === campus) {
+//       setOpenDropdown(''); // close the dropdown if it's already open
+//     } else {
+//       setOpenDropdown(campus); // open the dropdown
+//       setSelectedCampus(campus);
+//       setSelectedDomain(''); // clear the selected domain
+//       if (campus === 'RR Campus') {
+//         setDepartments(rrCampusDepartments);
+//       } else if (campus === 'EC Campus') {
+//         setDepartments(ecCampusDepartments);
+//       }
+//     }
+//   };
+
+//   const handleDomainClick = (dept) => {
+//     setSelectedDomain(dept);
+//     setOpenDropdown(''); // close the dropdown when a department is selected
 //   };
 
 //   const filteredProfessors = professors.filter((professor) =>
-//     professor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//     professor.designation.join(', ').toLowerCase().includes(searchTerm.toLowerCase())
-//   );
+//   (selectedDomain ? professor.department.toLowerCase() === selectedDomain.toLowerCase() : true) &&
+//   (selectedDesignation ? professor.designation?.toLowerCase().includes(selectedDesignation.toLowerCase()) : true) &&
+//   (searchTerm ? professor.name.toLowerCase().includes(searchTerm.toLowerCase()) : true)
+// );
 
 //   const indexOfLastProfessor = currentPage * professorsPerPage;
 //   const indexOfFirstProfessor = indexOfLastProfessor - professorsPerPage;
 //   const currentProfessors = filteredProfessors.slice(indexOfFirstProfessor, indexOfLastProfessor);
 
 //   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+//   const handleSearchChange = (event) => {
+//     setSearchTerm(event.target.value);
+//   };
 
 //   const handleCardClick = (id) => {
 //     navigate(`/getProfessorbyid/${id}`);
@@ -54,43 +95,101 @@
 
 //   return (
 //     <div>
-//       <div>
-//         <Navbar />
-//       </div>
-//       <div className="opacity-80" style={{ backgroundImage: 'url(https://www.pesuacademy.com/Academy/images/login_bg_acdemy.jpg)', height: '100vh' }}>
-//         <div className="container px-4">
-//           <h1 className="text-3xl font-bold mb-6">Professors</h1>
-//           <input
-//             type="text"
-//             placeholder="Search professors..."
-//             value={searchTerm}
-//             onChange={handleSearchChange}
-//             className="mb-4 p-2 border border-gray-300 rounded"
-//           />
-//           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-//             {currentProfessors.map((professor) => (
-//               <div key={professor._id} className="bg-white shadow-md rounded-lg p-6 cursor-pointer" onClick={() => handleCardClick(professor._id)}>
-//                 <h2 className="text-xl font-semibold mb-2">{professor.name}</h2>
-//                 <p className="text-gray-700 mb-1">Designation: {professor.designation?.join(', ') || 'N/A'}</p>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//         <div className="flex justify-center mt-6">
-//           <nav>
-//             <ul className="inline-flex -space-x-px">
-//               {Array.from({ length: Math.ceil(filteredProfessors.length / professorsPerPage) }, (_, index) => (
-//                 <li key={index}>
+//       <Navbar />
+//       <div className="opacity-80 h-screen" style={{ backgroundImage: 'url(https://www.pesuacademy.com/Academy/images/login_bg_acdemy.jpg)' }}>
+//         <div className="flex">
+//           <div className="flex flex-col items-center w-1/5 bg-white bg-opacity-80 h-screen p-4">
+//             <nav className="text-center">
+//               <ul>
+//                 <li className="mb-4">
 //                   <button
-//                     onClick={() => paginate(index + 1)}
-//                     className={`px-3 py-2 leading-tight ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300 text-gray-500 hover:bg-gray-200'} rounded-lg`}
+//                     className="text-blue-800 hover:underline transition ease-out duration-500"
+//                     onClick={() => handleCampusClick('RR Campus')}
 //                   >
-//                     {index + 1}
+//                     RR Campus
 //                   </button>
+//                   {openDropdown === 'RR Campus' && (
+//                     <ul>
+//                       {rrCampusDepartments.map((dept) => (
+//                         <li key={dept} className="mb-2">
+//                           <button
+//                             className="text-blue-600 hover:underline transition ease-out duration-500"
+//                             onClick={() => handleDomainClick(dept)}
+//                           >
+//                             {dept.replace(/-/g, ' ')}
+//                           </button>
+//                         </li>
+//                       ))}
+//                     </ul>
+//                   )}
 //                 </li>
-//               ))}
-//             </ul>
-//           </nav>
+//                 <li className="mb-4">
+//                   <button
+//                     className="text-blue-800 hover:underline transition ease-out duration-500"
+//                     onClick={() => handleCampusClick('EC Campus')}
+//                   >
+//                     EC Campus
+//                   </button>
+//                   {openDropdown === 'EC Campus' && (
+//                     <ul>
+//                       {ecCampusDepartments.map((dept) => (
+//                         <li key={dept} className="mb-2">
+//                           <button
+//                             className="text-blue-600 hover:underline transition ease-out duration-500"
+//                             onClick={() => handleDomainClick(dept)}
+//                           >
+//                             {dept.replace(/-/g, ' ')}
+//                           </button>
+//                         </li>
+//                       ))}
+//                     </ul>
+//                   )}
+//                 </li>
+//               </ul>
+//             </nav>
+//           </div>
+//           <div className="flex-1 p-8 overflow-auto">
+//             {isSelected && ()}
+//             {selectedDomain && (
+//               <div>
+//                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+//                   {currentProfessors.map((professor) => (
+//                     <div
+//                       key={professor._id}
+//                       className="bg-white shadow-md rounded-lg p-6 cursor-pointer"
+//                       onClick={() => handleCardClick(professor._id)}
+//                     >
+//                       <div className="mb-4">
+//                         <img
+//                           src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg"
+//                           alt="Professor"
+//                           className="w-full h-auto rounded-md mb-2"
+//                         />
+//                       </div>
+//                       <h2 className="text-xl font-semibold mb-2">{professor.name}</h2>
+//                       <p className="text-gray-700 mb-1">Department: {professor.department || 'N/A'}</p>
+//                     </div>
+//                   ))}
+//                 </div>
+//                 <div className="flex justify-center mt-6">
+//                   <nav>
+//                     <ul className="inline-flex -space-x-px">
+//                       {Array.from({ length: Math.ceil(filteredProfessors.length / professorsPerPage) }, (_, index) => (
+//                         <li key={index}>
+//                           <button
+//                             onClick={() => paginate(index + 1)}
+//                             className={`px-3 py-2 leading-tight ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300 text-gray-500 hover:bg-gray-200'} rounded-lg`}
+//                           >
+//                             {index + 1}
+//                           </button>
+//                         </li>
+//                       ))}
+//                     </ul>
+//                   </nav>
+//                 </div>
+//               </div>
+//             )}
+//           </div>
 //         </div>
 //       </div>
 //     </div>
@@ -100,7 +199,6 @@
 // export default Professors;
 
 
-
 // import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import Navbar from './Navbar';
@@ -110,11 +208,29 @@
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState(null);
 //   const [currentPage, setCurrentPage] = useState(1);
-//   const [searchTerm, setSearchTerm] = useState('');
 //   const [selectedDomain, setSelectedDomain] = useState('');
+//   const [searchTerm, setSearchTerm] = useState('');
 //   const [selectedDesignation, setSelectedDesignation] = useState('');
-//   const professorsPerPage = 20; // 5 rows * 4 columns
+//   const [selectedCampus, setSelectedCampus] = useState('');
+//   const [departments, setDepartments] = useState([]);
+//   const [openDropdown, setOpenDropdown] = useState('');
+//   const professorsPerPage = 8;
 //   const navigate = useNavigate();
+
+//   const rrCampusDepartments = [
+//     'biotechnology',
+//     'civil',
+//     'computer-science-AIML',
+//     'computer-science',
+//     'electrical-&-electronics',
+//     'electronics-&-communications',
+//     'mechanical',
+//   ];
+
+//   const ecCampusDepartments = [
+//     'Computer Science',
+//     'electronics-&-communications',
+//   ];
 
 //   useEffect(() => {
 //     const fetchProfessors = async () => {
@@ -135,22 +251,33 @@
 //     fetchProfessors();
 //   }, []);
 
-//   const handleSearchChange = (event) => {
-//     setSearchTerm(event.target.value);
+//   const handleCampusClick = (campus) => {
+//     if (openDropdown === campus) {
+//       setOpenDropdown(''); // close the dropdown if it's already open
+//     } else {
+//       setOpenDropdown(campus); // open the dropdown
+//       setSelectedCampus(campus);
+//       setSelectedDomain(''); // clear the selected domain
+//       if (campus === 'RR Campus') {
+//         setDepartments(rrCampusDepartments);
+//       } else if (campus === 'EC Campus') {
+//         setDepartments(ecCampusDepartments);
+//       }
+//     }
 //   };
 
-//   const handleDomainChange = (event) => {
-//     setSelectedDomain(event.target.value);
+//   const handleDomainClick = (dept) => {
+//     setSelectedDomain(dept);
+//     setOpenDropdown(''); // close the dropdown when a department is selected
+//     if (dept === 'Computer Science' && selectedCampus === 'EC Campus') {
+//       setSearchTerm(''); // Clear search term when Computer Science under EC Campus is selected
+//     }
 //   };
 
-//   const handleDesignationChange = (event) => {
-//     setSelectedDesignation(event.target.value);
-//   };
-
-//   const filteredProfessors = professors.filter((professor) => 
-//     professor.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-//     (selectedDomain ? professor.domains?.includes(selectedDomain) : true) &&
-//     (selectedDesignation ? professor.designation?.includes(selectedDesignation) : true)
+//   const filteredProfessors = professors.filter((professor) =>
+//     (selectedDomain ? professor.department.toLowerCase() === selectedDomain.toLowerCase() : true) &&
+//     (selectedDesignation ? professor.designation?.toLowerCase().includes(selectedDesignation.toLowerCase()) : true) &&
+//     (searchTerm ? professor.name.toLowerCase().includes(searchTerm.toLowerCase()) : true)
 //   );
 
 //   const indexOfLastProfessor = currentPage * professorsPerPage;
@@ -158,6 +285,9 @@
 //   const currentProfessors = filteredProfessors.slice(indexOfFirstProfessor, indexOfLastProfessor);
 
 //   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+//   const handleSearchChange = (event) => {
+//     setSearchTerm(event.target.value);
+//   };
 
 //   const handleCardClick = (id) => {
 //     navigate(`/getProfessorbyid/${id}`);
@@ -166,63 +296,111 @@
 //   if (loading) return <div>Loading...</div>;
 //   if (error) return <div>Error: {error}</div>;
 
-//   const departments = [...new Set(professors.flatMap((professor) => professor.department || []))];
-//   const designations = [...new Set(professors.flatMap((professor) => professor.designation || []))];
-
 //   return (
 //     <div>
-//       <div>
-//         <Navbar />
-//       </div>
-//       <div className="opacity-80" style={{ backgroundImage: 'url(https://www.pesuacademy.com/Academy/images/login_bg_acdemy.jpg)', height: '100vh' }}>
-//         <div className="container px-4">
-//           <h1 className="text-3xl font-bold mb-6">Professors</h1>
-//           <input
-//             type="text"
-//             placeholder="Search professors..."
-//             value={searchTerm}
-//             onChange={handleSearchChange}
-//             className="mb-4 p-2 border border-gray-300 rounded"
-//           />
-//           <div className="mb-4 flex space-x-4">
-//             <select onChange={handleDomainChange} className="p-2 border border-gray-300 rounded">
-//               <option value="">All Domains</option>
-//               {departments.map((department) => (
-//                 <option key={department} value={department}>{department}</option>
-//               ))}
-//             </select>
-//             <select onChange={handleDesignationChange} className="p-2 border border-gray-300 rounded">
-//               <option value="">All Designations</option>
-//               {designations.map((designation) => (
-//                 <option key={designation} value={designation}>{designation}</option>
-//               ))}
-//             </select>
-//           </div>
-//           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-//             {currentProfessors.map((professor) => (
-//               <div key={professor._id} className="bg-white shadow-md rounded-lg p-6 cursor-pointer" onClick={() => handleCardClick(professor._id)}>
-//                 <h2 className="text-xl font-semibold mb-2">{professor.name}</h2>
-//                 <p className="text-gray-700 mb-1">Designation: {professor.designation?.join(', ') || 'N/A'}</p>
-//                 <p className="text-gray-700 mb-1">Domains: {professor.department}</p>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//         <div className="flex justify-center mt-6">
-//           <nav>
-//             <ul className="inline-flex -space-x-px">
-//               {Array.from({ length: Math.ceil(filteredProfessors.length / professorsPerPage) }, (_, index) => (
-//                 <li key={index}>
+//       <Navbar />
+//       <div className="opacity-80 h-screen" style={{ backgroundImage: 'url(https://www.pesuacademy.com/Academy/images/login_bg_acdemy.jpg)' }}>
+//         <div className="flex">
+//           <div className="flex flex-col items-center w-1/5 bg-white bg-opacity-80 h-screen p-4">
+//             <nav className="text-center">
+//               <ul>
+//                 <li className="mb-4">
 //                   <button
-//                     onClick={() => paginate(index + 1)}
-//                     className={`px-3 py-2 leading-tight ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300 text-gray-500 hover:bg-gray-200'} rounded-lg`}
+//                     className="text-blue-800 hover:underline transition ease-out duration-500"
+//                     onClick={() => handleCampusClick('RR Campus')}
 //                   >
-//                     {index + 1}
+//                     RR Campus
 //                   </button>
+//                   {openDropdown === 'RR Campus' && (
+//                     <ul>
+//                       {rrCampusDepartments.map((dept) => (
+//                         <li key={dept} className="mb-2">
+//                           <button
+//                             className="text-blue-600 hover:underline transition ease-out duration-500"
+//                             onClick={() => handleDomainClick(dept)}
+//                           >
+//                             {dept.replace(/-/g, ' ')}
+//                           </button>
+//                         </li>
+//                       ))}
+//                     </ul>
+//                   )}
 //                 </li>
-//               ))}
-//             </ul>
-//           </nav>
+//                 <li className="mb-4">
+//                   <button
+//                     className="text-blue-800 hover:underline transition ease-out duration-500"
+//                     onClick={() => handleCampusClick('EC Campus')}
+//                   >
+//                     EC Campus
+//                   </button>
+//                   {openDropdown === 'EC Campus' && (
+//                     <ul>
+//                       {ecCampusDepartments.map((dept) => (
+//                         <li key={dept} className="mb-2">
+//                           <button
+//                             className="text-blue-600 hover:underline transition ease-out duration-500"
+//                             onClick={() => handleDomainClick(dept)}
+//                           >
+//                             {dept.replace(/-/g, ' ')}
+//                           </button>
+//                         </li>
+//                       ))}
+//                     </ul>
+//                   )}
+//                 </li>
+//               </ul>
+//             </nav>
+//           </div>
+//           <div className="flex-1 p-8 overflow-auto">
+//             {selectedDomain === 'Computer Science' && selectedCampus === 'EC Campus' && (
+//                 <input
+//                   type="text"
+//                   placeholder="Search professors..."
+//                   value={searchTerm}
+//                   onChange={handleSearchChange}
+//                   className="mb-4 p-2 border border-gray-300 rounded"
+//                 />
+//               )}
+//             {selectedDomain && (
+//               <div>
+//                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+//                   {/* {currentProfessors.map((professor) => (
+//                     <div
+//                       key={professor._id}
+//                       className="bg-white shadow-md rounded-lg p-6 cursor-pointer"
+//                       onClick={() => handleCardClick(professor._id)}
+//                     >
+//                       <div className="mb-4">
+//                         <img
+//                           src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg"
+//                           alt="Professor"
+//                           className="w-full h-auto rounded-md mb-2"
+//                         />
+//                       </div>
+//                       <h2 className="text-xl font-semibold mb-2">{professor.name}</h2>
+//                       <p className="text-gray-700 mb-1">Department: {professor.department || 'N/A'}</p>
+//                     </div>
+//                   ))} */}
+//                 </div>
+//                 <div className="flex justify-center mt-6">
+//                   <nav>
+//                     <ul className="inline-flex -space-x-px">
+//                       {Array.from({ length: Math.ceil(filteredProfessors.length / professorsPerPage) }, (_, index) => (
+//                         <li key={index}>
+//                           <button
+//                             onClick={() => paginate(index + 1)}
+//                             className={`px-3 py-2 leading-tight ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300 text-gray-500 hover:bg-gray-200'} rounded-lg`}
+//                           >
+//                             {index + 1}
+//                           </button>
+//                         </li>
+//                       ))}
+//                     </ul>
+//                   </nav>
+//                 </div>
+//               </div>
+//             )}
+//           </div>
 //         </div>
 //       </div>
 //     </div>
@@ -242,11 +420,29 @@ const Professors = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedDomain, setSelectedDomain] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedDesignation, setSelectedDesignation] = useState('');
-  const professorsPerPage = 20; // 5 rows * 4 columns
+  const [selectedCampus, setSelectedCampus] = useState('');
+  const [departments, setDepartments] = useState([]);
+  const [openDropdown, setOpenDropdown] = useState('');
+  const professorsPerPage = 8;
   const navigate = useNavigate();
+
+  const rrCampusDepartments = [
+    'biotechnology',
+    'civil',
+    'computer-science-AIML',
+    'computer-science',
+    'electrical-&-electronics',
+    'electronics-&-communications',
+    'mechanical',
+  ];
+
+  const ecCampusDepartments = [
+    'Computer Science',
+    'electronics-&-communications',
+  ];
 
   useEffect(() => {
     const fetchProfessors = async () => {
@@ -267,22 +463,33 @@ const Professors = () => {
     fetchProfessors();
   }, []);
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
+  const handleCampusClick = (campus) => {
+    if (openDropdown === campus) {
+      setOpenDropdown(''); // close the dropdown if it's already open
+    } else {
+      setOpenDropdown(campus); // open the dropdown
+      setSelectedCampus(campus);
+      setSelectedDomain(''); // clear the selected domain
+      if (campus === 'RR Campus') {
+        setDepartments(rrCampusDepartments);
+      } else if (campus === 'EC Campus') {
+        setDepartments(ecCampusDepartments);
+      }
+    }
   };
 
-  const handleDomainChange = (event) => {
-    setSelectedDomain(event.target.value);
-  };
-
-  const handleDesignationChange = (event) => {
-    setSelectedDesignation(event.target.value);
+  const handleDomainClick = (dept) => {
+    setSelectedDomain(dept);
+    setOpenDropdown(''); // close the dropdown when a department is selected
+    if (dept === 'Computer Science' && selectedCampus === 'EC Campus') {
+      setSearchTerm(''); // Clear search term when Computer Science under EC Campus is selected
+    }
   };
 
   const filteredProfessors = professors.filter((professor) =>
-    professor.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedDomain ? professor.department === selectedDomain : true) &&
-    (selectedDesignation ? professor.designation?.includes(selectedDesignation) : true)
+    (selectedDomain ? professor.department.toLowerCase() === selectedDomain.toLowerCase() : true) &&
+    (selectedDesignation ? professor.designation?.toLowerCase().includes(selectedDesignation.toLowerCase()) : true) &&
+    (searchTerm ? professor.name.toLowerCase().includes(searchTerm.toLowerCase()) : true)
   );
 
   const indexOfLastProfessor = currentPage * professorsPerPage;
@@ -290,6 +497,9 @@ const Professors = () => {
   const currentProfessors = filteredProfessors.slice(indexOfFirstProfessor, indexOfLastProfessor);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const handleCardClick = (id) => {
     navigate(`/getProfessorbyid/${id}`);
@@ -298,63 +508,124 @@ const Professors = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  const departments = [...new Set(professors.flatMap((professor) => professor.department || []))];
-  const designations = [...new Set(professors.flatMap((professor) => professor.designation || []))];
-
   return (
     <div>
-      <div>
-        <Navbar />
-      </div>
-      <div className="opacity-80" style={{ backgroundImage: 'url(https://www.pesuacademy.com/Academy/images/login_bg_acdemy.jpg)', height: '125vh' }}>
-        <div className="container px-4">
-          <h1 className="text-3xl font-bold mb-6">Professors</h1>
-          <input
-            type="text"
-            placeholder="Search professors..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="mb-4 p-2 border border-gray-300 rounded"
-          />
-          <div className="mb-4 flex space-x-4">
-            <select onChange={handleDomainChange} className="p-2 border border-gray-300 rounded">
-              <option value="">All Departments</option>
-              {departments.map((department) => (
-                <option key={department} value={department}>{department}</option>
-              ))}
-            </select>
-            <select onChange={handleDesignationChange} className="p-2 border border-gray-300 rounded">
-              <option value="">All Designations</option>
-              {designations.map((designation) => (
-                <option key={designation} value={designation}>{designation}</option>
-              ))}
-            </select>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {currentProfessors.map((professor) => (
-              <div key={professor._id} className="bg-white shadow-md rounded-lg p-6 cursor-pointer" onClick={() => handleCardClick(professor._id)}>
-                <h2 className="text-xl font-semibold mb-2">{professor.name}</h2>
-                <p className="text-gray-700 mb-1">Designation: {professor.designation?.join(', ') || 'N/A'}</p>
-                <p className="text-gray-700 mb-1">Department: {professor.department || 'N/A'}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="flex justify-center mt-6">
-          <nav>
-            <ul className="inline-flex -space-x-px">
-              {Array.from({ length: Math.ceil(filteredProfessors.length / professorsPerPage) }, (_, index) => (
-                <li key={index}>
+      <Navbar />
+      <div className="opacity-80 h-screen" style={{
+        backgroundImage: "url(/img/pixelcut-export.jpg)",
+        backgroundSize: 'cover', // Ensures the image covers the entire div
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        width: '100vw', // Full viewport width
+        height: '100vh', // Full viewport height
+        overflow: 'hidden' // Hide any overflow
+    }}>
+
+        <div className="flex">
+          <div className="flex flex-col items-center w-1/5 bg-white bg-opacity-80 h-screen p-4">
+            <nav className="text-center">
+              <ul className='text-3xl'>
+                <li className="mb-4">
                   <button
-                    onClick={() => paginate(index + 1)}
-                    className={`px-3 py-2 leading-tight ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300 text-gray-500 hover:bg-gray-200'} rounded-lg`}
+                    className="text-blue-800 hover:underline transition ease-out duration-500"
+                    onClick={() => handleCampusClick('RR Campus')}
                   >
-                    {index + 1}
+                    RR Campus
                   </button>
+                  {openDropdown === 'RR Campus' && (
+                    <ul>
+                      {rrCampusDepartments.map((dept) => (
+                        <li key={dept} className="mb-2">
+                          <button
+                            className="text-blue-600 hover:underline transition ease-out duration-500"
+                            onClick={() => handleDomainClick(dept)}
+                          >
+                            {dept.replace(/-/g, ' ')}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
-              ))}
-            </ul>
-          </nav>
+                <li className="mb-4">
+                  <button
+                    className="text-blue-800 hover:underline transition ease-out duration-500"
+                    onClick={() => handleCampusClick('EC Campus')}
+                  >
+                    EC Campus
+                  </button>
+                  {openDropdown === 'EC Campus' && (
+                    <ul>
+                      {ecCampusDepartments.map((dept) => (
+                        <li key={dept} className="mb-2">
+                          <button
+                            className="text-blue-600 hover:underline transition ease-out duration-500"
+                            onClick={() => handleDomainClick(dept)}
+                          >
+                            {dept.replace(/-/g, ' ')}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="flex-1 p-8 overflow-auto">
+            {selectedDomain === 'Computer Science' && selectedCampus === 'EC Campus' && (
+              <input
+                type="text"
+                placeholder="Search professors..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="mb-4 p-2 border border-gray-300 rounded"
+              />
+            )}
+            {searchTerm !== '' && (
+              <div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {currentProfessors.length > 0 ? (
+                    currentProfessors.map((professor) => (
+                      <div
+                        key={professor._id}
+                        className="bg-white shadow-md rounded-lg p-6 cursor-pointer"
+                        onClick={() => handleCardClick(professor._id)}
+                      >
+                        <div className="mb-4">
+                          <img
+                            src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg"
+                            alt="Professor"
+                            className="w-full h-auto rounded-md mb-2"
+                          />
+                        </div>
+                        <h2 className="text-xl font-semibold mb-2">{professor.name}</h2>
+                        <p className="text-gray-700 mb-1">Department: {professor.department || 'N/A'}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center mt-4">No professors found.</div>
+                  )}
+                </div>
+                <div className="flex justify-center mt-6">
+                  <nav>
+                    <ul className="inline-flex -space-x-px">
+                      {Array.from({ length: Math.ceil(filteredProfessors.length / professorsPerPage) }, (_, index) => (
+                        <li key={index}>
+                          <button
+                            onClick={() => paginate(index + 1)}
+                            className={`px-3 py-2 leading-tight ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300 text-gray-500 hover:bg-gray-200'} rounded-lg`}
+                          >
+                            {index + 1}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -362,4 +633,3 @@ const Professors = () => {
 };
 
 export default Professors;
-

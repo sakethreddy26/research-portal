@@ -1,50 +1,72 @@
+// src/Profile.js
+
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import Navbar from './Navbar';
 
 const Profile = () => {
-    const [profile, setProfile] = useState({});
+    const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchProfileFromCookie = () => {
+        const fetchProfile = async () => {
             try {
-                const profileCookie = Cookies.get('profile');
-                if (profileCookie) {
-                    const parsedProfile = JSON.parse(profileCookie);
-                    setProfile(parsedProfile);
-                    console.log(profileCookie)
+                const response = await fetch("http://localhost:4000/v1/api/faculty/profile", {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+
+                const data = await response.json();
+                setProfile(data);
+                setLoading(false);
             } catch (error) {
-                console.error('Error parsing profile cookie:', error);
+                console.error('Error fetching profile:', error);
+                setError(error);
+                setLoading(false);
             }
-            setLoading(false);
         };
 
-        fetchProfileFromCookie();
-    }, []); 
+        fetchProfile();
+    }, []);
 
     if (loading) {
-        return <p>Loading profile...</p>;
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
     }
 
     return (
         <div>
-            <div>
-                <Navbar/>
-            </div>
-            <h2>Profile Page</h2>
-            <div>
-                <p>Name: {profile.name}</p>
-                <p>PRN: {profile.prn}</p>
-                <p>SRN: {profile.srn}</p>
-                <p>Program: {profile.program}</p>
-                <p>Branch: {profile.branch}</p>
-                <p>Semester: {profile.semester}</p>
-                <p>Section: {profile.section}</p>
-                <p>Email: {profile.email}</p>
-                <p>Phone: {profile.phone}</p>
-                <p>Campus: {profile.campus}</p>
+            <Navbar />
+            <div className="container w-3/12 mx-16 my-8 p-4 bg-white shadow-md rounded-lg">
+                <h1 className="text-3xl font-bold mb-4">Profile</h1>
+                {profile ? (
+                    <div>
+                        <img
+                            src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg"
+                            alt="Professor"
+                            className="w-44 h-auto rounded-md mb-2"
+                          />
+                        <p><strong>Name:</strong> {profile.name}</p>
+                        <p><strong>Email:</strong> {profile.email}</p>
+                        <p><strong>Department:</strong> {profile.department}</p>
+                        <p><strong>Campus:</strong> {profile.campus}</p>
+                        <p><strong>Designation:</strong> {profile.designation.join(', ')}</p>
+                        <p><strong>Education:</strong> {profile.education.join(', ')}</p>
+                        <p><strong>Responsibilities:</strong> {profile.responsibilities.join(', ')}</p>   
+                    </div>
+                ) : (
+                    <p>No profile data found.</p>
+                )}
             </div>
         </div>
     );

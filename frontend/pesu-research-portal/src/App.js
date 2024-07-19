@@ -7,6 +7,7 @@ import ProfessorDetail from './components/ProfessorDetail';
 import Centres from './components/Centres';
 import ResearchSupport from "./components/ResearchSupport"
 import Patents from './components/Patents';
+import Signup from './components/Signup';
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
@@ -22,6 +23,7 @@ const App = () => {
                 <Route path="/centres" element={<Centres/>} />
                 <Route path="/research-support" element={<ResearchSupport/>} />
                 <Route path="/patent-process" element={<Patents/>} />
+                <Route path="/signup" element={<Signup/>} />
             </Routes>
         </Router>
     );

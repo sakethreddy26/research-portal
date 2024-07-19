@@ -8,31 +8,34 @@ const Navbar = () => {
                     <img className="" src="https://research.pes.edu/wp-content/uploads/2023/03/PESU-new-logo.png" alt="" />
                 </div>
                 <div>
-                    <a>Centres</a>
+                    <a href="/centres">Centres</a>
                 </div>
                 <div>
                     <a href="/professors">Faculty</a>
                 </div>
                 <div>
-                    <a>Research-Scholar</a>
+                    <a>PHD program</a>
                 </div>
                 <div>
-                    <a>Patents</a>
+                    <a href="patent-process">Research-Grant</a>
                 </div>
                 <div>
-                    <a>Conference and Journal</a>
+                    <a>Conference</a>
                 </div>
                 <div>
-                    <a>Monetary Resources</a>
+                    <a>journals</a>
                 </div>
                 <div>
                     <a>Community</a>
                 </div>
                 <div>
-                    <a>Research Support</a>
+                    <a href="research-support">Research Support</a>
+                </div>
+                <div>
+                    <a href="research-support">Contact Us</a>
                 </div>
                 <div className="p-4">
-                    <a href="/login">login</a>
+                    <a href="/login">Login</a>
                 </div>
             </div>
         </div>
