@@ -26,7 +26,7 @@ const Navbar = () => {
                     <a>Conference</a>
                 </div>
                 <div>
-                    <a>journals</a>
+                    <a href="journals">Journals</a>
                 </div>
                 <div>
                     <a>Community</a>
