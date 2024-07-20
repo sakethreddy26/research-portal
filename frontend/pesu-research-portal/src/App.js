@@ -5,9 +5,10 @@ import Profile from './components/Profile';
 import Professors from './components/Professors';
 import ProfessorDetail from './components/ProfessorDetail';
 import Centres from './components/Centres';
-import ResearchSupport from "./components/ResearchSupport"
+import ResearchSupport from "./components/ResearchSupport";
 import Patents from './components/Patents';
 import Signup from './components/Signup';
+import Conference from "./components/Conference";
 import Journals from './components/Journals';
 // import axios from "axios";
 
@@ -25,6 +26,7 @@ const App = () => {
                 <Route path="/research-support" element={<ResearchSupport/>} />
                 <Route path="/patent-process" element={<Patents/>} />
                 <Route path="/signup" element={<Signup/>} />
+                <Route path="/conference" element={<Conference />} />
                 <Route path="/journals" element={<Journals />} />
             </Routes>
         </Router>
