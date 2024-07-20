@@ -9,6 +9,8 @@ import ResearchSupport from "./components/ResearchSupport"
 import Patents from './components/Patents';
 import Signup from './components/Signup';
 import Journals from './components/Journals';
+import Conference from './components/Conference';
+
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
@@ -25,7 +27,8 @@ const App = () => {
                 <Route path="/research-support" element={<ResearchSupport/>} />
                 <Route path="/patent-process" element={<Patents/>} />
                 <Route path="/signup" element={<Signup/>} />
-                <Route path="/journals" element={<Journals />} />
+                <Route path="/conference" element={<Conference/>} />
+                <Route path="/journals" element={<Journals/>} />
             </Routes>
         </Router>
     );

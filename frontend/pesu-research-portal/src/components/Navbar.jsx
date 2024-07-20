@@ -1,4 +1,5 @@
-import "../App.css"
+import { Link } from "react-router-dom";
+import "../App.css";
 
 const Navbar = () => {
     return ( 
@@ -23,10 +24,10 @@ const Navbar = () => {
                     <a>Research-Grant</a>
                 </div>
                 <div>
-                    <a>Conference</a>
+                <Link to={"/conference"}>Conference</Link>
                 </div>
                 <div>
-                    <a href="journals">Journals</a>
+                <a href="journals">Journals</a>
                 </div>
                 <div>
                     <a>Community</a>
@@ -42,7 +43,7 @@ const Navbar = () => {
                 </div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default Navbar;
