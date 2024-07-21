@@ -10,6 +10,8 @@ import Patents from './components/Patents';
 import Signup from './components/Signup';
 import Conference from "./components/Conference";
 import Journals from './components/Journals';
+import ResearchGrants from './components/ResearchGrants';
+import Contact from './components/Contact';
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
@@ -28,6 +30,10 @@ const App = () => {
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/conference" element={<Conference />} />
                 <Route path="/journals" element={<Journals />} />
+                <Route path="/ResearchGrants" element={<ResearchGrants />} />
+                <Route path="/Contact" element={<Contact />} />
+
+
             </Routes>
         </Router>
     );
