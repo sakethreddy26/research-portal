@@ -1,29 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Professors from './components/Professors';
 import ProfessorDetail from './components/ProfessorDetail';
 import Centres from './components/Centres';
-import ResearchSupport from "./components/ResearchSupport"
+import ResearchSupport from "./components/ResearchSupport";
 import Patents from './components/Patents';
 import Signup from './components/Signup';
-// import axios from "axios";
-
-// axios.defaults.withCredentials=true
+import Reasearch from './components/rprogram'; // Import the reasearch component
 
 const App = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/login" element={<Login/>} />
-                <Route path="/profile" element={<Profile/>} />
-                <Route path="/Professors" element={<Professors/>} />
-                <Route path="/getProfessorbyid/:id" element={<ProfessorDetail/>} />
-                <Route path="/centres" element={<Centres/>} />
-                <Route path="/research-support" element={<ResearchSupport/>} />
-                <Route path="/patent-process" element={<Patents/>} />
-                <Route path="/signup" element={<Signup/>} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/professors" element={<Professors />} />
+                <Route path="/rprogram" element={<Reasearch />} /> {/* Add the route for the reasearch component */}
+                <Route path="/getProfessorbyid/:id" element={<ProfessorDetail />} />
+                <Route path="/centres" element={<Centres />} />
+                <Route path="/research-support" element={<ResearchSupport />} />
+                <Route path="/patent-process" element={<Patents />} />
+                <Route path="/signup" element={<Signup />} />
             </Routes>
         </Router>
     );

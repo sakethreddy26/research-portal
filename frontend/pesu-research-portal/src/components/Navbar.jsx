@@ -8,13 +8,13 @@ const Navbar = () => {
                     <img className="" src="https://research.pes.edu/wp-content/uploads/2023/03/PESU-new-logo.png" alt="" />
                 </div>
                 <div>
-                    <a href="/centres">Centres</a>
+                    <a href="/Centres">Centres</a>
                 </div>
                 <div>
-                    <a href="/professors">Faculty</a>
+                    <a href="/Professors">Faculty</a>
                 </div>
                 <div>
-                    <a>PHD program</a>
+                    <a href="rprogram">PHD program</a>
                 </div>
                 <div>
                     <a href="patent-process">Patents</a>
