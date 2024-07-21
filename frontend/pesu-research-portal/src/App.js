@@ -10,7 +10,6 @@ import Patents from "./components/Patents";
 import Signup from "./components/Signup";
 import Journals from "./components/Journals";
 import Conference from "./components/Conference";
-
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
