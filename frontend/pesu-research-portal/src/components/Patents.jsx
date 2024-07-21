@@ -298,36 +298,33 @@ const Patents = () => {
 
   return (
     <div
-      className="relative min-h-screen bg-cover bg-center opacity-100"
+      className="relative min-h-screen bg-cover bg-center opacity-100 overflow-y-auto"
       style={{
         backgroundImage: "url(/img/pixelcut-export.jpg)",
+        backgroundAttachment: 'fixed',
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        width: "100vw",
-        height: "100vh",
-        overflow: "hidden",
+        //width: "100vw",
+        //height: "100vh",
+        //overflow: "hidden",
       }}
     >
       <div>
         <Navbar />
       </div>
       <div className="flex">
-        <div className="bg-white bg-opacity-80 w-1/5 h-[100vh] p-5">
-          <h2 className="text-center font-serif text-2xl mb-5">Patents</h2>
-          <div className="text-center">
-            <ul className="leading-10 font-serif text-xl">
-              <li className="cursor-pointer" data-question="p" data-answer="pa">
-                Patents Claimed
-              </li>
-              <li className="cursor-pointer" data-question="pp" data-answer="ppa">
-                Patent Processes
-              </li>
+
+        <div className="col-span-1 justify-evenly text-center bg-white bg-opacity-80 min-w-72 min-h-screen p-5">
+            <ul className="font-serif text-xl leading-10 cursor-pointer p-15">
+                <li className="hover:text-blue-600" data-question="p" data-answer="pa">Patents Claimed</li>
+                <li className="hover:text-blue-600" data-question="pp" data-answer="ppa">Patent Processes</li>
             </ul>
-          </div>
         </div>
-        <div className="hidden col-span-3 p-5 bg-white bg-opacity-90" id="ppa">
-          <h2 className="font-bold text-left mb-5">Process of Claiming a Patent in India</h2>
+    
+
+        <div className="hidden col-span-3 mr-10 ml-7 p-5 bg-white bg-opacity-90 font-serif min-w-screen" id="ppa">
+          <h2 className="font-bold mb-5">Process of Claiming a Patent in India</h2>
           <img
             src="img/patent-procedure.png"
             alt="An overview of the process of filing a Patent in India"
