@@ -71,15 +71,15 @@ const ResearchSupport = () => {
         <div className="col-span-4 col-start-2">
         <section id="blocks">
             
-            <article className="p-5 hidden bg-white opacity-100" id="b" data-answer-content>
-                <p className="text-center text-gray-800 text-2xl">Research ethics represents a set of principles and guidelines that scholars and researchers adhere to, ensuring that their inquiries and examinations uphold the highest standards of integrity, respect, and care. It's a commitment to ensuring that the pursuit of knowledge remains trustworthy and beneficial for participants and society. Embracing research ethics means prioritizing the well-being and rights of study participants, maintaining accuracy in data collection and reporting, and fostering a transparent and honest environment throughout the 
+            <article className="p-5 hidden bg-white opacity-90 h-screen" id="b" data-answer-content>
+                <p className="text-center text-gray-800 text-2xl leading-relaxed">Research ethics represents a set of principles and guidelines that scholars and researchers adhere to, ensuring that their inquiries and examinations uphold the highest standards of integrity, respect, and care. It's a commitment to ensuring that the pursuit of knowledge remains trustworthy and beneficial for participants and society. Embracing research ethics means prioritizing the well-being and rights of study participants, maintaining accuracy in data collection and reporting, and fostering a transparent and honest environment throughout the 
                 research process.</p> <br />
                 
 
                 <h2 className="text-center text-3xl m-2 p-4 ">Principles of Ethical Research</h2>
                 <p className="text-center text-xl m-2 p-4 text-gray-900">Certain principles in ethical research should be religiously followed by the researcher such that the outcomes are not harmed.</p>
 
-                <p className="text-center text-xl m-2 p-4 space-y-30 text-gray-800">
+                <p className="text-center text-xl m-2 p-4 space-y-30 text-gray-800 leading-relaxed">
                 - Justice: This means that the benefits of the research outcome should be provided to one and all. <br />
                 - Respect the rights and dignity of the participants: The participants whose data has been collected should be given privacy and confidentiality and the participant's identity is supposed to be kept anonymous. <br />
                 - Integrity: The researchers should be fair, honest, and respectful to others because participants' emotions should not be hurt. <br />
@@ -95,10 +95,7 @@ const ResearchSupport = () => {
                 - Confidentiality: The anonymity of the participants should be in place and protected so that this does not cause any harm to the participants in the future.<br className="mb-4"/>
                 - Professional behavior: The researcher is expected to behave very professionally with the participants involved such that the outcome remains bias-free.<br className="mb-4"/>
                 </p>
-
-            </article> <br />
-
-                
+            </article>
         </section>
         </div>
     </div>
