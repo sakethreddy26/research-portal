@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
+
 import "../App.css";
 
 const Navbar = () => {
-
   return (
     <div className="">
       <div className="bg-sky-800 text-white flex justify-between items-center cursor-pointer font-bold text-xl">
@@ -21,28 +20,29 @@ const Navbar = () => {
           <a href="/professors">Faculty</a>
         </div>
         <div>
-          <a>PHD program</a>
+          <a href="/">PHD program</a>
         </div>
         <div>
           <a href="patent-process">Patents</a>
         </div>
         <div>
-          <a>Research-Grant</a>
+          <a href="ResearchGrants">Research-Grant</a>
         </div>
         <div>
-          <Link to={"/conference"}>Conference</Link>
+            <a href="conference">Conference</a>
+          {/* <Link to={"/"}></Link> */}
         </div>
         <div>
-          <a href="journals">Journals</a>
+        <a href="journals">Journals</a>
         </div>
         <div>
-          <a>Community</a>
+          <a href="/">Community</a>
         </div>
         <div>
           <a href="research-support">Research Support</a>
         </div>
         <div>
-          <a href="research-support">Contact Us</a>
+          <a href="Contact">Contact Us</a>
         </div>
         <div className="p-4">
           <a href="/login">Login</a>
