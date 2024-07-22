@@ -1,7 +1,9 @@
 
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+
     return ( 
         <div className="">
             <div className="bg-sky-800 text-white flex justify-between items-center cursor-pointer font-bold text-xl">
@@ -22,13 +24,12 @@ const Navbar = () => {
                 </div>
                 <div>
                 <a href="ResearchGrants">Research-Grant</a>
-
                 </div>
                 <div>
-                <a href="conference">Conference</a>
+                <Link to={"/conference"}>Conference</Link>
                 </div>
                 <div>
-                <a href="journals">Journals</a>
+                    <a href="journals">Journals</a>
                 </div>
                 <div>
                     <a>Community</a>
@@ -44,7 +45,8 @@ const Navbar = () => {
                 </div>
             </div>
         </div>
-     );
-}
- 
+    );
+  }
+
+
 export default Navbar;
