@@ -1,5 +1,6 @@
 
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -29,8 +30,8 @@ const Navbar = () => {
           <a href="ResearchGrants">Research-Grant</a>
         </div>
         <div>
-            <a href="conference">Conference</a>
-          {/* <Link to={"/"}></Link> */}
+          <Link to ={"/conference"}>Conference</Link>
+        
         </div>
         <div>
         <a href="journals">Journals</a>
