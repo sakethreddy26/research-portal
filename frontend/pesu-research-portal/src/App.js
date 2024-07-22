@@ -1,18 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Login from './components/Login';
-import Profile from './components/Profile';
-import Professors from './components/Professors';
-import ProfessorDetail from './components/ProfessorDetail';
-import Centres from './components/Centres';
-import ResearchSupport from "./components/ResearchSupport"
-import Patents from './components/Patents';
-import Signup from './components/Signup';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import Professors from "./components/Professors";
+import ProfessorDetail from "./components/ProfessorDetail";
+import Centres from "./components/Centres";
+import ResearchSupport from "./components/ResearchSupport";
+import Patents from "./components/Patents";
+import Signup from "./components/Signup";
 import Journals from "./components/Journals";
 import Conference from "./components/Conference";
 import ResearchGrants from './components/ResearchGrants';
 import Contact from './components/Contact';
-import Reasearch from './components/rprogram'; // Import the reasearch component
+import Reasearch from './components/rprogram';
+
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
