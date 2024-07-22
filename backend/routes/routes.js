@@ -10,6 +10,7 @@ const profile = require("../controllers/profile");
 const {
   getAllPublicationsByYear,
   getAllPublicationsByName,
+  getAllPublications,
 } = require("../controllers/publication_controller");
 
 router.get("/", (_, res) => {
@@ -21,6 +22,7 @@ router.get("/getProfessorbyid/:id", getProfessorById);
 // router.get("/getResearchDetails/:authorId",getResearchDetails)
 router.get("/getPublications/:year", getAllPublicationsByYear);
 router.get("/getPublicationsByName/:name", getAllPublicationsByName);
+router.get("/getAllPublications", getAllPublications);
 router.get("/faculty/profile", profile);
 router.post("/faculty/signup", facultySignup);
 router.post("/faculty/login", facultyLogin);

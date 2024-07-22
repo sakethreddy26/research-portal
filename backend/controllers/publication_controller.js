@@ -1,5 +1,14 @@
 const publication = require("../models/publication_model");
 
+const getAllPublications = async (req, res) => {
+  try {
+    const publications = await publication.find();
+    res.status(200).json(publications);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getAllPublicationsByYear = async (req, res) => {
   const year = req.params.year;
   try {
@@ -26,6 +35,7 @@ const getAllPublicationsByName = async (req, res) => {
 };
 
 module.exports = {
+  getAllPublications,
   getAllPublicationsByYear,
   getAllPublicationsByName,
 };
