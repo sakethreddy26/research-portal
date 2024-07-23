@@ -134,7 +134,7 @@
 //         </div>
 //      );
 // }
- 
+
 // export default Journals;
 
 import Navbar from "./Navbar";

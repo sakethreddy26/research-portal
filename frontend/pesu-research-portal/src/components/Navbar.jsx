@@ -30,9 +30,7 @@ const Navbar = () => {
                 <div>
                   <a href="journals">Journals</a>
                 </div>
-                <div>
-                  <a href="/">Community</a>
-                </div>
+                
                 <div>
                     <a href="research-support">Research Support</a>
                 </div>

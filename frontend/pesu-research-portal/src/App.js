@@ -10,7 +10,6 @@ import Patents from './components/Patents';
 import Signup from './components/Signup';
 import Journals from "./components/Journals";
 import Conference from "./components/Conference";
-
 import ResearchGrants from './components/ResearchGrants';
 import Contact from './components/Contact';
 import Reasearch from './components/rprogram'; // Import the reasearch component
@@ -25,6 +24,7 @@ const App = () => {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/profile" element={<Profile/>} />
                 <Route path="/Professors" element={<Professors/>} />
+                <Route path="/rprogram" element={<Reasearch />} /> {/* Add the route for the reasearch component */}
                 <Route path="/rprogram" element={<Reasearch />} /> {/* Add the route for the reasearch component */}
                 <Route path="/getProfessorbyid/:id" element={<ProfessorDetail/>} />
                 <Route path="/centres" element={<Centres/>} />
