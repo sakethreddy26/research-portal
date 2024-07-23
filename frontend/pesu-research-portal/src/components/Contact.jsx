@@ -5,7 +5,7 @@ const Contact = () => {
 return (
     <div>
     <Navbar />
-    <div className="grid grid-cols-1 gap-2 overflow-y-auto" style={{
+    <div className="grid grid-cols-1 gap-2 overflow-y-auto " style={{
         backgroundImage: "url(https://pes.edu/wp-content/uploads/2019/09/pesit-v2.jpg)",
         backgroundAttachment: 'fixed',
         backgroundSize: 'cover',
@@ -24,7 +24,7 @@ return (
 
         {/* RR Campus */}
 
-        <div className='bg-white h-90 w-80 justify-evenly text-center p-8 m-5 rounded-lg '>
+        <div className='bg-white h-90 w-80 text-center p-8 m-5 rounded-lg '>
             <div className='p-0'>
             <img src="https://pes.edu/wp-content/uploads/2023/10/campus-400x265-1.jpg" alt="RR" />
             </div>
@@ -210,7 +210,7 @@ return (
 
         {/* Dean info */}
 
-        <div className='bg-white col-span-1 h-80  justify-evenly text-center p-10  pl-20 pr-20 mt-60 ml-36 mr-20 rounded-lg '>
+        <div className='bg-white h-90 w-80 justify-evenly text-center p-8 m-5 rounded-lg  '>
                         <p className='text-sky-800 font-semibold text-xl p-5'>Dean of Research</p>
                         <p className='flex gap-4 font-medium'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
