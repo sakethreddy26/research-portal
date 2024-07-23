@@ -369,14 +369,27 @@ const Patents = () => {
         </div>
     
 {/* ******************process*********** */}
+{/* https://www.uspto.gov/ */}
+{/* https://www.epo.org/en */}
+{/* https://www.ipindia.gov.in/ */}
+
         <div className="hidden col-span-3 flex-auto mr-10 ml-7 p-5 bg-white bg-opacity-90 font-serif" id="ppa" data-answer-content1>
           <div>
+            <div className="flex">
+              <div>
           <h2 className="font-bold mb-5">Process of Claiming a Patent in India</h2>
           <img
             src="img/patent-procedure.png"
             alt="An overview of the process of filing a Patent in India"
             className="mb-5"
           />
+          </div>
+          <div className=" text-blue-500 underline p-10 ml-96 text-2xl leading-10">
+            <a href="https://www.uspto.gov/">USA Patents</a> <br />
+            <a href="https://www.epo.org/en">European Patents</a> <br />
+            <a href="https://www.ipindia.gov.in/">Indian Patents</a> <br />
+          </div>
+          </div>
           <div className="space-y-5 text-lg">
             <div>
               <p className="font-bold cursor-pointer" data-question="q1" data-answer="a1">
@@ -496,6 +509,15 @@ const Patents = () => {
           </div>
           </div>
         </div>
+        {/* ******************** */}
+        <div className="hidden bg-white opacity-90 p-10 font-serif m-10 rounded text-xl  w-full leading-10" id="pa" data-answer-content1>
+          <p>Click Below to Download the form to apply for patents</p>
+        <a href="patent-form.docx" className="text-blue-800 hover:underline" download>Patent Form</a>
+        <p>You can edit the docx and submit it!</p>
+        <button className="bg-sky-800 text-white font-serif text-lg p-3">
+          Submit
+        </button>
+        </div>
 {/* **********Published************** */}
         <div className="hidden col-span-3 mr-10 ml-7 p-5 font-serif  rounded-lg leading-4 " id="ppb" data-answer-content1>
           <div className="bg-transparent ">
@@ -557,9 +579,9 @@ const Patents = () => {
                     />
               </div>
 
-              <div className="mt-5 ml-20 block leading-10">
+              <div className="mt-5 ml-20 block leading-10 text-center">
                 <p className="text-lg">Upload the Certificate</p>
-                <label htmlForfor="file " className="text-lg">Select a file:
+                <label htmlForfor="file " className="text-lg text-center">Select a file:
                 <input type="file" id="file" name="file" />
               </label>
               </div>
@@ -580,35 +602,36 @@ const Patents = () => {
           </div>
           </div>
           <br />
-          <div className="bg-transparent mt-10 flex-wrap leading-7" id="ppb">
+          <div className="bg-transparent mt-10 flex-wrap   leading-7" id="ppb">
 
-              <div className="opacity-90 bg-white rounded p-10 pt-4">
-                <div className="flex">
+              <div className="opacity-90 bg-white rounded p-10 pt-4 leading-8 grid grid-cols-4">
+                <div className="block w-auto col-span-3">
                   <p className="text-xl text-black pl-5">Title : A SHOPPING TROLLEY WITH AUTOMATIC BILLING SYSTEM</p>
-                  <p className="text-xl text-black pl-10 pr-10">Patent Number : 541176</p>
-                  <p className="text-lg text-black pl-10 pr-10">Year of Award : 07/06/2024</p>
+                  <p className="text-lg text-black pl-5 ">Deepti C</p>
+                  <p className="text-xl text-black pl-5">Patent Number : 541176</p>
+                  <p className="text-lg text-black pl-5 ">Year of Award : 07/06/2024</p>
                 </div>
-                <div className="flex">
-                  <p className="text-lg text-black pl-5  pr-72">Deepti C</p>
-                  <a href="https://drive.google.com/file/d/1b7W9i5Fl0iwnI_-OHWrt_ozehG0Vw367/view?usp=sharing" className="pl-72 pr-10 text-lg text-blue-600 underline ">
+                <div className="col-span-1 ">
+                  <a href="https://drive.google.com/file/d/1b7W9i5Fl0iwnI_-OHWrt_ozehG0Vw367/view?usp=sharing" className=" text-lg text-blue-600 underline ">
                   Link to Patent Published Certificate</a>
                   
                 </div>
 
               </div>
-              </div>
+          </div>
 
               <div className="bg-transparent mt-10 flex-wrap leading-7" id="ppb">
 
-                <div className="opacity-90 bg-white rounded p-10 pt-4">
-                  <div className="flex">
+                <div className="opacity-90 bg-white rounded p-10 pt-4 leading-8 grid grid-cols-4">
+                  <div className="block w-auto col-span-3">
                     <p className="text-xl text-black pl-5">Title : FRUIT PICKER</p>
-                    <p className="text-xl text-black pl-10 pr-10">Patent Number : 409651-001</p>
-                    <p className="text-lg text-black pl-10 pr-10">Year of Award : 02/05/2024</p>
+                    <p className="text-lg text-black pl-5 ">Dr.Suja C M</p>
+                    <p className="text-xl text-black pl-5 ">Patent Number : 409651-001</p>
+                    <p className="text-lg text-black pl-5 ">Year of Award : 02/05/2024</p>
                   </div>
-                  <div className="flex">
-                    <p className="text-lg text-black pl-5  pr-72">Dr.Suja C M</p>
-                    <a href="https://drive.google.com/file/d/1MaY6AQ6vh7p8pmznTol1oPGwus2gtu8d/view?usp=sharing" className="pl-72 pr-10 text-lg text-blue-600 underline ">
+                  <div className="col-span-1">
+
+                    <a href="https://drive.google.com/file/d/1MaY6AQ6vh7p8pmznTol1oPGwus2gtu8d/view?usp=sharing" className="text-lg text-blue-600 underline ">
                     Link to Patent Published Certificate</a>
                     
                   </div>
@@ -618,21 +641,57 @@ const Patents = () => {
 
                 <div className="bg-transparent mt-10 flex-wrap leading-7" id="ppb">
 
-                    <div className="opacity-90 bg-white rounded p-10 pt-4">
-                          <div className="flex">
+                    <div className="opacity-90 bg-white rounded p-10 pt-4 leading-8 grid grid-cols-4">
+                          <div className="block w-auto col-span-3">
                             <p className="text-xl text-black pl-5">Title : BLOCKCHAIN AND IOT BASED ELECTRONICS HEALTH RECORD DEVICE</p>
-                            <p className="text-xl text-black pl-10 pr-10">Patent Number : 415054-001</p>
-                            <p className="text-lg text-black pl-10 pr-10">Year of Award : 13/06/2024</p>
+                            <p className="text-lg text-black pl-5 ">Prof.Surbhi Choudhary</p>
+                            <p className="text-xl text-black pl-5">Patent Number : 415054-001</p>
+                            <p className="text-lg text-black pl-5">Year of Award : 13/06/2024</p>
                           </div>
-                          <div className="flex">
-                            <p className="text-lg text-black pl-5  pr-72">Prof.Surbhi Choudhary</p>
-                            <a href="https://drive.google.com/file/d/1Qp39yg64O7r45sng_Vl03thijVBdKh0-/view" className="pl-72 pr-10 text-lg text-blue-600 underline ">
+                          <div className="col-span-1">
+                            <a href="https://drive.google.com/file/d/1Qp39yg64O7r45sng_Vl03thijVBdKh0-/view" className="text-lg text-blue-600 underline ">
                             Link to Patent Published Certificate</a>
                             
                           </div>
 
                     </div>
                 </div>
+                <div className="bg-transparent mt-10 flex-wrap leading-7" id="ppb">
+
+                    <div className="opacity-90 bg-white rounded p-10 pt-4 leading-8 grid grid-cols-4 gap-5">
+                          <div className="block w-auto col-span-3">
+                            <p className="text-xl text-black pl-5 uppercase">Title : An author strain independent scoring system to measure scientific independence</p>
+                            <p className="text-lg text-black pl-5 ">Dr. Sudeepa Roy Dey</p>
+                            <p className="text-xl text-black pl-5">Patent Number : 20 2022 101 927.4(german)</p>
+                            <p className="text-lg text-black pl-5">Year of Award : 2022</p>
+                          </div>
+                          <div className="col-span-1">
+                            <a href="#" className="text-lg text-blue-600 underline ">
+                            Link to Patent Published Certificate</a>
+                            
+                          </div>
+
+                    </div>
+                </div>
+
+                <div className="bg-transparent mt-10 flex-wrap leading-7" id="ppb">
+
+                    <div className="opacity-90 bg-white rounded p-10 pt-4 leading-8 grid grid-cols-4 gap-5">
+                          <div className="block w-auto col-span-3">
+                            <p className="text-xl text-black pl-5 uppercase">Title : A System For Streaming And Storing The Heterogeneous Streamed Sensor Data Using Microservices Architecture Model</p>
+                            <p className="text-lg text-black pl-5 ">DJ Ruby Dinakar</p>
+                            <p className="text-xl text-black pl-5">Patent Number : 202022103462 (German)</p>
+                            <p className="text-lg text-black pl-5">Year of Award : 2022</p>
+                          </div>
+                          <div className="col-span-1">
+                            <a href="#" className="text-lg text-blue-600 underline ">
+                            Link to Patent Published Certificate</a>
+                            
+                          </div>
+
+                    </div>
+                </div>
+                
 
           </div>
           </div>
