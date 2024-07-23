@@ -9,7 +9,20 @@ const Conference = () => {
       console.error("Questions or answers not found");
       return;
     }
+    answers.forEach((answer) => {
+      if (answer.id !== "c1") {
+        answer.classList.add("hidden");
+      } else {
+        answer.classList.remove("hidden");
+      }
+    });
 
+    // Highlight the corresponding question
+    questions.forEach((question) => {
+      if (question.getAttribute("data-answer") === "c1") {
+        question.classList.add("text-blue-600");
+      }
+    });
     // Function to toggle visibility of the answer
     const toggleAnswer = (event) => {
       // Hide all answers first
@@ -47,7 +60,7 @@ const Conference = () => {
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(2023);
+  const [selectedYear, setSelectedYear] = useState("all");
   const [nameFilter, setNameFilter] = useState("");
   const getAllConference = async () => {
     try {
@@ -66,9 +79,13 @@ const Conference = () => {
       }
       const res = await response.json();
       setData(res);
+      setFilteredData(
+        res.filter((item) => item["Publication Type"] === "Conference Paper")
+      );
     } catch (error) {
       console.log("Error in fetching data");
       setData(["error in fetching data"]);
+      setFilteredData(["error in fetching data"]);
     } finally {
       setLoading(false);
     }
@@ -77,26 +94,38 @@ const Conference = () => {
     getAllConference();
   }, []);
 
+  const filterData = () => {
+    let filtered = data.filter(
+      (item) => item["Publication Type"] === "Conference Paper"
+    );
+    if (selectedYear !== 0) {
+      filtered = filtered.filter(
+        (item) => item.Year === parseInt(selectedYear)
+      );
+    } else {
+    }
+    if (nameFilter) {
+      filtered = filtered.filter((item) =>
+        item.First_Name.toLowerCase().includes(nameFilter.toLowerCase())
+      );
+    }
+    setFilteredData(filtered);
+    setCurrentPage(0);
+  };
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 9;
-
+  const [filteredData, setFilteredData] = useState([]);
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
 
   // Calculate the data to display on the current page
-  const filteredData = data
-    .filter((item) => item["Publication Type"] === "Conference Paper")
-    .filter(
-      (item) =>
-        !nameFilter ||
-        item.First_Name.toLowerCase().includes(nameFilter.toLowerCase())
-    )
-    .filter((item) => item.Year === selectedYear);
-  // Calculate the data to display on the current page
   const offset = currentPage * itemsPerPage;
   const currentPageData = filteredData.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
+  useEffect(() => {
+    filterData();
+  }, [selectedYear, nameFilter]);
   return (
     <div>
       <div>
@@ -131,7 +160,18 @@ const Conference = () => {
             >
               Conference Paper Format
             </li>
-            <li className="hover:text-blue-600" data-question="" data-answer="">
+            <li
+              className="hover:text-blue-600"
+              data-question="q3"
+              data-answer="c3"
+            >
+              Conferences
+            </li>
+            <li
+              className="hover:text-blue-600"
+              data-question="q4"
+              data-answer="c4"
+            >
               Reimbursement
             </li>
           </ul>
@@ -148,16 +188,19 @@ const Conference = () => {
                   id="year"
                   name="year"
                   value={selectedYear}
-                  onChange={(e) => setSelectedYear(Number(e.target.value))}
+                  onChange={(e) => {
+                    setSelectedYear(Number(e.target.value));
+                  }}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 >
-                  {Array.from({ length: 24 }, (_, i) => 2000 + i).map(
+                  {Array.from({ length: 18 }, (_, i) => 2007 + i).map(
                     (year) => (
                       <option key={year} value={year}>
                         {year}
                       </option>
                     )
                   )}
+                  <option value={0}>All Years</option>
                 </select>
               </div>
               <div>
@@ -165,7 +208,7 @@ const Conference = () => {
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Name
+                  Faculty Name
                 </label>
                 <input
                   type="text"
@@ -181,7 +224,11 @@ const Conference = () => {
         </div>
 
         {/* Here will be search */}
-        <div className="grid grid-cols-3 col-span-4 m-3 h-full">
+        <div
+          className="grid grid-cols-3 col-span-4 m-3 h-full"
+          id="c3"
+          data-answer-content
+        >
           {loading ? (
             <div className="text-center py-4 w-full col-span-4 bg-white">
               Loading Conference Data... Please Wait
@@ -391,6 +438,124 @@ const Conference = () => {
             inform your research.{" "}
           </p>{" "}
           <br />
+        </div>
+        <div
+          className="col-span-4 col-start-2 row-start-1 p-5 font-serif bg-white opacity-90 rounded-lg mr-10 mt-3"
+          id="c4"
+          data-answer-content
+        >
+          <h1 class="text-3xl font-bold mb-4">Conference Reimbursement</h1>
+          <p class="mb-6">
+            You can get reimbursement from here by uploading the necessary
+            documents.
+          </p>
+
+          <form
+            action="/submit-reimbursement"
+            method="post"
+            enctype="multipart/form-data"
+            class="space-y-4"
+          >
+            <div>
+              <label class="block mb-2 font-medium" for="conference-webpage">
+                Conference Webpage Print
+              </label>
+              <input
+                class="block w-full px-3 py-2 border rounded"
+                type="file"
+                id="conference-webpage"
+                name="conference-webpage"
+                accept=".pdf"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-2 font-medium" for="acceptance-email">
+                Acceptance Email Print
+              </label>
+              <input
+                class="block w-full px-3 py-2 border rounded"
+                type="file"
+                id="acceptance-email"
+                name="acceptance-email"
+                accept=".pdf"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-2 font-medium" for="payment-receipt">
+                Payment Receipt Print
+              </label>
+              <input
+                class="block w-full px-3 py-2 border rounded"
+                type="file"
+                id="payment-receipt"
+                name="payment-receipt"
+                accept=".pdf"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-2 font-medium" for="ieee-paper">
+                Our IEEE Paper Print
+              </label>
+              <input
+                class="block w-full px-3 py-2 border rounded"
+                type="file"
+                id="ieee-paper"
+                name="ieee-paper"
+                accept=".pdf"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-2 font-medium" for="certificates">
+                Certificates Print
+              </label>
+              <input
+                class="block w-full px-3 py-2 border rounded"
+                type="file"
+                id="certificates"
+                name="certificates"
+                accept=".pdf"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-2 font-medium" for="university-id">
+                University ID Card
+              </label>
+              <input
+                class="block w-full px-3 py-2 border rounded"
+                type="file"
+                id="university-id"
+                name="university-id"
+                accept=".pdf"
+              />
+            </div>
+
+            <div>
+              <label class="block mb-2 font-medium" for="cancelled-cheque">
+                Cancelled Cheque Leaf
+              </label>
+              <input
+                class="block w-full px-3 py-2 border rounded"
+                type="file"
+                id="cancelled-cheque"
+                name="cancelled-cheque"
+                accept=".pdf"
+              />
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
