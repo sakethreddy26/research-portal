@@ -218,7 +218,7 @@ return (
                 </svg>
 
 
-                <a href="mailto:admissions@pes.edu" className='text-blue-600'>dean.research@pes.edu</a>
+                <a href="mailto:admissions@pes.edu" className='text-blue-600 text-center mr-5'>dean.research@pes.edu</a>
             </p>
 
         </div>
