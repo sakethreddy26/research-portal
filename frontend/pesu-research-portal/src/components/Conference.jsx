@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+
 const Conference = () => {
   useEffect(() => {
     const questions = document.querySelectorAll("[data-question]");
@@ -62,6 +63,8 @@ const Conference = () => {
   const [data, setData] = useState([]);
   const [selectedYear, setSelectedYear] = useState("all");
   const [nameFilter, setNameFilter] = useState("");
+  const [showConferences, setShowConferences] = useState(true);
+
   const getAllConference = async () => {
     try {
       const response = await fetch(
@@ -175,7 +178,7 @@ const Conference = () => {
               Reimbursement
             </li>
           </ul>
-          <div className="mt-6">
+          <div className="mt-6" data-question="a" data-answer="b">
             <form className="space-y-4">
               <div>
                 <label
@@ -230,7 +233,7 @@ const Conference = () => {
           data-answer-content
         >
           {loading ? (
-            <div className="text-center py-4 w-full col-span-4 bg-white">
+            <div className="text-center py-4 w-full col-span-4 bg-white ">
               Loading Conference Data... Please Wait
             </div>
           ) : (
