@@ -63,9 +63,10 @@ const ResearchSupport = () => {
                 //overflow: 'hidden' // Hide any overflow
         }}>  
         <div className="col-span-1 p-10 bg-white bg-opacity-80 min-h-screen justify-evenly">
-            <ul className="font-serif text-lg cursor-pointer gap-5 leading-10 text-center">
-                <li data-question='a' data-answer='b'>RESEARCH ETHICS</li>
-                <li data-question='c' data-answer='d'>COLLABORATIONS</li>
+            <ul className="font-serif text-xl cursor-pointer gap-5 leading-10 text-center">
+                <li data-question='a' data-answer='b'>Research Ethics</li>
+                <li data-question='pdf' data-answer='pdf'>Research Retreat Insights</li>
+                <li data-question='c' data-answer='d'>Collaboration</li>
             </ul>
         </div> 
 
@@ -99,9 +100,20 @@ const ResearchSupport = () => {
 
             </article> 
 
+            <div className="p-5  bg-white opacity-90 mr-10 rounded-lg hidden min-h-screen" id="pdf" data-answer-content>
+                            {/* PDF Viewer */}
+                            <iframe
+                                src="ResearchRetreat_Complete.pdf"
+                                width="100%"
+                                height="100%"
+                                title="PDF Viewer"
+                                className="w-full min-h-screen"
+                            ></iframe>
+                        </div>
+
                 
         </section>
-        </div>
+        </div > 
     </div>
     
         </div>

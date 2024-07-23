@@ -24,8 +24,8 @@ return (
 
         {/* RR Campus */}
 
-        <div className='bg-white h-90 w-80 text-center p-8 m-5 rounded-lg '>
-            <div className='p-0'>
+        <div className='bg-white h-90 w-80  text-center p-8 m-5 rounded-lg '>
+            <div className=''>
             <img src="https://pes.edu/wp-content/uploads/2023/10/campus-400x265-1.jpg" alt="RR" />
             </div>
             <h3 className='text-sky-800 font-semibold text-xl p-5'>
@@ -87,7 +87,7 @@ return (
 
             {/* EC CAMPUS */}
         <div className='bg-white h-90 w-80 justify-evenly text-center p-8 m-5 rounded-lg '>
-            <div className='p-0'>
+            <div className=''>
             <img src="https://pes.edu/wp-content/uploads/2023/10/ec400x265-1.jpg" alt="EC" />
             </div>
             <h3 className='text-sky-800 font-semibold text-xl p-5'>
@@ -230,7 +230,3 @@ return (
 }
 
 export default Contact;
-
-
-
-
