@@ -63,8 +63,6 @@ const Conference = () => {
   const [data, setData] = useState([]);
   const [selectedYear, setSelectedYear] = useState("all");
   const [nameFilter, setNameFilter] = useState("");
-  const [showConferences, setShowConferences] = useState(true);
-
   const getAllConference = async () => {
     try {
       const response = await fetch(
@@ -178,7 +176,7 @@ const Conference = () => {
               Reimbursement
             </li>
           </ul>
-          <div className="mt-6" data-question="a" data-answer="b">
+          <div className="mt-6">
             <form className="space-y-4">
               <div>
                 <label

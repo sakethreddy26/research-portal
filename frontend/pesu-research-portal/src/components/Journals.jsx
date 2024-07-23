@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
-
+import ReactPaginate from "react-paginate";
 const Journals = () => {
   useEffect(() => {
     const questions = document.querySelectorAll("[data-question]");
@@ -168,7 +168,11 @@ const Journals = () => {
             >
               Journals
             </li>
-            <li className="hover:text-blue-600" data-question="" data-answer="">
+            <li
+              className="hover:text-blue-600"
+              data-question="q4"
+              data-answer="a4"
+            >
               Incentives
             </li>
           </ul>
@@ -426,6 +430,53 @@ const Journals = () => {
             your claims.{" "}
           </p>{" "}
           <br />
+        </div>
+        <div
+          className="col-span-4 col-start-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
+          id="a4"
+          data-answer-content
+        >
+          <h2 className="text-center text-3xl m-2"> INCENTIVES </h2> <br />{" "}
+          <br />
+          <div className="text-center">
+            <h3 className="text-center text-3xl m-2 text-gray-700">
+              Name of Journal
+            </h3>
+            <input
+              type="text"
+              className="border border-gray-300 p-2 rounded w-full mb-4"
+              placeholder="Enter journal names"
+            />
+            <h3 className="text-center text-3xl m-2 text-gray-700">
+              Journal Indexing
+            </h3>
+            <input
+              type="text"
+              className="border border-gray-300 p-2 rounded w-full mb-4"
+              placeholder="Enter indexing"
+            />
+            <h3 className="text-center text-3xl m-2 text-gray-700">
+              {" "}
+              Digital Object Identifier (DOI)
+            </h3>
+            <input
+              type="text"
+              className="border border-gray-300 p-2 rounded w-full mb-4"
+              placeholder="Enter DOI"
+            />
+            <label
+              htmlFor="fileUpload"
+              className="block text-center text-3xl m-2 text-gray-700"
+            >
+              Upload Journal Paper
+            </label>
+            <input
+              type="file"
+              id="fileUpload"
+              name="fileUpload"
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
         </div>
       </div>
     </div>
