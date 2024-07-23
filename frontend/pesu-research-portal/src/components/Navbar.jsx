@@ -20,7 +20,7 @@ const Navbar = () => {
                     <a href="patent-process">Patents</a>
                 </div>
                 <div>
-                    <a>Research-Grant</a>
+                    <a href="Research-Grant">Research-Grant</a>
                 </div>
                 <div>
                     <a>Conference</a>
