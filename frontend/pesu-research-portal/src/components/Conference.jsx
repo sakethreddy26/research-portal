@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+
 const Conference = () => {
   useEffect(() => {
     const questions = document.querySelectorAll("[data-question]");
@@ -49,6 +50,8 @@ const Conference = () => {
   const [data, setData] = useState([]);
   const [selectedYear, setSelectedYear] = useState(2023);
   const [nameFilter, setNameFilter] = useState("");
+  const [showConferences, setShowConferences] = useState(true);
+
   const getAllConference = async () => {
     try {
       const response = await fetch(
@@ -97,6 +100,58 @@ const Conference = () => {
   const offset = currentPage * itemsPerPage;
   const currentPageData = filteredData.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
+
+  // oof
+
+  useEffect(() => {
+    const questions = document.querySelectorAll('[data-question]');
+    const answers = document.querySelectorAll('[data-answer-content]');
+    if (questions.length === 0 || answers.length === 0) {
+        console.error('Questions or answers not found');
+        return;
+    }    
+
+    // Function to toggle visibility of the answer
+    const toggleAnswer = (event) => {
+        // Hide all answers first
+        answers.forEach(answer => {
+            answer.classList.add('hidden');
+        });
+
+        questions.forEach(question => {
+            question.classList.remove('text-blue-600');
+        });
+        // Show the clicked answer
+        const answerId = event.currentTarget.getAttribute('data-answer');
+        const answer = document.getElementById(answerId);
+        
+        if (answer) {
+            answer.classList.remove('hidden');
+            
+            }
+            event.currentTarget.classList.add('text-blue-600');
+        
+        // Add the class to the clicked question
+    
+    };
+
+    // Add event listeners to each question
+    questions.forEach(question => {
+        question.addEventListener('click', toggleAnswer);   
+    });
+
+    // Cleanup function to remove event listeners
+    return () => {
+        questions.forEach(question => {
+            question.removeEventListener('click', toggleAnswer);
+        });
+    };
+}, []); // Empty dependency array ensures this effect runs once
+
+// oof
+
+  
+
   return (
     <div>
       <div>
@@ -135,7 +190,7 @@ const Conference = () => {
               Reimbursement
             </li>
           </ul>
-          <div className="mt-6">
+          <div className="mt-6" data-question='a' data-answer='b'>
             <form className="space-y-4">
               <div>
                 <label
@@ -181,9 +236,9 @@ const Conference = () => {
         </div>
 
         {/* Here will be search */}
-        <div className="grid grid-cols-3 col-span-4 m-3 h-full">
+        <div className="grid grid-cols-3 col-span-4 m-3 h-full" id="b" data-answer-content>
           {loading ? (
-            <div className="text-center py-4 w-full col-span-4 bg-white">
+            <div className="text-center py-4 w-full col-span-4 bg-white ">
               Loading Conference Data... Please Wait
             </div>
           ) : (
