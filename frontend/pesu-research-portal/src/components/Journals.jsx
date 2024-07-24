@@ -256,25 +256,23 @@ const Journals = () => {
           </div>
           <p>
             {" "}
-            <h3 className="p-3 text-center text-black text-2xl">
-              - High-impact journals:
-            </h3>
-            <div className="text-center text-xl text-gray-700">
-              - Indexed in databases like SCI, Scopus, or PubMed. <br />
-              - Highly respected with stringent acceptance criteria. <br />
-              - Rigorous peer-review process. <br /> <br />
-              <h3 className="text-black p-3 text-2xl">- Mid-tier journals:</h3>
-              - Well-regarded but may have a broader scope. <br />
-              - Less rigorous review standards compared to top-tier journals.
-              <br /> <br />
-              <h3 className="text-black p-3 text-2xl">
-                - Lower-tier or emerging journals:
-              </h3>
-              - Focus on niche areas or emerging fields.
-              <br />
-              - Faster publication process.
-              <br />
-              - Less stringent review process. <br /> <br />
+            <h3 className="p-3 text-center text-black text-2xl">Q1 JOURNALS</h3>
+                    <div className="text-center text-xl text-gray-700 leading-8">
+                        - Q1 journals are in the top 25% of journals in a particular field. They typically have the highest impact factors in their field.<br />
+                        - The peer-review process is usually very rigorous and thorough.<br />
+                        - Acceptance rates are low, meaning these journals are highly selective about the papers they publish. <br />
+                        - Articles in Q1 journals receive high visibility and are frequently cited.
+                        <br /><br />
+                        <h3 className="text-black p-3 text-2xl">Q2 JOURNALS</h3>
+                        - Q2 journals fall within the 25% to 50% range in their field. They have a respectable impact factor, though not as high as Q1 journals. <br />
+                        - The peer-review process is quite rigorous.<br />
+                        - These journals are moderately selective <br /> 
+                        - Articles in Q2 journals have good visibility and are frequently cited.<br /><br />
+                        <h3 className="text-black p-3 text-2xl">Q3 JOURNALS</h3>
+                        - Q3 journals are in the 50% to 75% range in their field.<br />
+                        - Less stringent review process. <br />
+                        - The acceptance rates are generally higher, making them less selective than Q1 and Q2 journals. <br />
+                        - Articles in Q3 journals have moderate visibility and are cited less frequently. <br /><br />
             </div>
           </p>
         </div>
