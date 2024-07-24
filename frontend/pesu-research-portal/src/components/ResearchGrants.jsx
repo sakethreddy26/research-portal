@@ -53,7 +53,7 @@ const ResearchGrants = () => {
             <div>
                 <Navbar/>
             </div>
-           
+        
 
             <div className="grid grid-cols-5 gap-2 overflow-y-auto" style={{
                     backgroundImage: "url(/img/pixelcut-export.jpg)",
@@ -89,7 +89,7 @@ const ResearchGrants = () => {
             </div>
         </div>
         </div>
-     );
+    );
 }
- 
+
 export default ResearchGrants;
