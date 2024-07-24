@@ -285,7 +285,7 @@ const Journals = () => {
         >
           {loading ? (
             <div className="text-center py-4 w-full col-span-4 bg-white">
-              Loading Conference Data... Please Wait
+              Loading Journals Data... Please Wait
             </div>
           ) : (
             <>
