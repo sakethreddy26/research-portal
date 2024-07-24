@@ -118,6 +118,7 @@ const Journals = () => {
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
+  const [doi, setDoi] = useState("");
 
   // Calculate the data to display on the current page
   const offset = currentPage * itemsPerPage;
@@ -289,23 +290,29 @@ const Journals = () => {
           ) : (
             <>
               <div className="grid grid-cols-3 col-span-4 gap-4 h-full">
-                {currentPageData.map((item) => (
-                  <div
-                    key={item.id}
-                    className="w-full p-2 border border-gray-200 bg-white"
-                  >
-                    <h1 className="font-bold text-lg mb-5">{item.Title_y}</h1>
-                    <h1 className="font-medium text-sm mb-5">
-                      Presented at {item.Journal} in Year: {item.Year}
-                    </h1>
-                    <h1 className="font-medium text-sm mb-5">
-                      Year: {item.Year}
-                    </h1>
-                    <h1 className="font-semibold text-xs">
-                      by {item.First_Name} {item.Last_Name}
-                    </h1>
+                {currentPageData.length > 0 ? (
+                  currentPageData.map((item) => (
+                    <div
+                      key={item.id}
+                      className="w-full p-2 border border-gray-200 bg-white"
+                    >
+                      <h1 className="font-bold text-lg mb-5">{item.Title_y}</h1>
+                      <h1 className="font-medium text-sm mb-5">
+                        Presented at {item.Journal} in Year: {item.Year}
+                      </h1>
+                      <h1 className="font-medium text-sm mb-5">
+                        Year: {item.Year}
+                      </h1>
+                      <h1 className="font-semibold text-xs">
+                        by {item.First_Name} {item.Last_Name}
+                      </h1>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-4 w-full col-span-4 bg-white flex items-center justify-center">
+                    <h1 className="text-4xl text-center">No Records Found</h1>
                   </div>
-                ))}
+                )}
               </div>
             </>
           )}
@@ -461,9 +468,18 @@ const Journals = () => {
             </h3>
             <input
               type="text"
+              onChange={(e) => setDoi(e.target.value)}
+              value={doi}
               className="border border-gray-300 p-2 rounded w-full mb-4"
               placeholder="Enter DOI"
             />
+            <a
+              href={doi}
+              className="text-3xl text-blue-500 mt-5"
+              target="_blank"
+            >
+              {doi}
+            </a>
             <label
               htmlFor="fileUpload"
               className="block text-center text-3xl m-2 text-gray-700"
