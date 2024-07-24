@@ -1,41 +1,73 @@
 import Navbar from "./Navbar";
 import React, { useState } from "react";
 
-const Reasearch = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const Research = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
-  };
-
-  const handleLogin = () => {
-    setIsAuthenticated(true);
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
   };
 
   const renderContent = () => {
     switch (selectedOption) {
-      case "research-scholar-details":
+      case "Research Scholar Details":
+        const scholars = [
+          { name: "Richa Sharma", year: 2019, duration: "3 years", fellowship: "Full time", exam: "PESU, PhD entrance" },
+          { name: "Smrithi S", year: 2020, duration: "3 years", fellowship: "Full time", exam: "PESU, PhD entrance" },
+          { name: "Divyaprabha K N", year: 2019, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
+          { name: "Shruthi L", year: 2022, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
+          { name: "Rohit Vaidya K", year: 2022, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
+          { name: "Kundavai K R", year: 2024, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
+          { name: "Pallabi Kar", year: 2023, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
+          { name: "Afshman Rehaman", year: 2019, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Niveditha N Reddy", year: 2021, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Priya K", year: 2019, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Gururaj P", year: 2022, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "U Ananthanagu", year: 2020, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Asha Kurian", year: 2019, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Vishwachetan D", year: 2022, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Suguna A", year: 2024, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Ranjith Gnana Suthakar", year: 2022, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Nagamanoj K", year: 2024, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+          { name: "Abhay Srivastav", year: 2024, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
+        ];
+
         return (
-          <div className="p-4 bg-white bg-opacity-75 rounded-lg shadow-lg mt-1">
+          <div className="p-4 bg-white bg-opacity-75 rounded-lg shadow-lg mt-1 overflow-y-auto max-h-[70vh]">
             <h2 className="text-2xl font-bold mb-4 text-center">Research Scholar Details</h2>
-            <p>Here are some details about research scholars.</p>
+            <div className="grid grid-cols-1 gap-4">
+              {scholars.map((scholar, index) => (
+                <div key={index} className="p-4 bg-gray-100 rounded-lg shadow">
+                  {/* <h3 className="text-xl font-semibold mb-2">Scholar {index + 1}</h3> */}
+                  <p><strong>Name:</strong> {scholar.name}</p>
+                  <p><strong>Year of Enrolment:</strong> {scholar.year}</p>
+                  <p><strong>Duration:</strong> {scholar.duration}</p>
+                  <p><strong>Type of Fellowship:</strong> {scholar.fellowship}</p>
+                  <p><strong>Qualifying Exam:</strong> {scholar.exam}</p>
+                </div>
+              ))}
+            </div>
           </div>
         );
       case "circulars":
         return (
-          <div className="p-4 bg-white bg-opacity-75 rounded-lg shadow-lg mt-1">
-            <h2 className="text-2xl font-bold mb-4 text-center">Circulars</h2>
-            <p>Here are some circulars.</p>
-          </div>
+          <iframe
+            src="guidelines.pdf"
+            width="100%"
+            height="100vh"
+            title="PDF Viewer"
+            className="w-full h-full"
+          ></iframe>
         );
       case "fee-details":
         return (
-          <div className="p-4 bg-white bg-opacity-75 rounded-lg shadow-lg mt-1">
-            <h2 className="text-2xl font-bold mb-4 text-center">Fee Details</h2>
-            <p>Here are some fee details.</p>
-          </div>
+          <iframe
+            src="app_b.pdf"
+            width="100%"
+            height="100vh"
+            title="PDF Viewer"
+            className="w-full h-full"
+          ></iframe>
         );
       default:
         return null;
@@ -54,110 +86,29 @@ const Reasearch = () => {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        {isAuthenticated ? (
-          <div className="flex flex-1">
-            <div className="flex-none w-48 bg-white bg-opacity-75 rounded-lg shadow-lg p-4 ml-4 mt-8 flex flex-col items-center">
-              <h2 className="text-2xl font-bold mb-2 text-center">Welcome</h2>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-1 w-full" onClick={() => setSelectedOption("research-scholar-details")}>
-                Research Scholar Details
-              </button>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-1 w-full" onClick={() => setSelectedOption("circulars")}>
-                Circulars
-              </button>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" onClick={() => setSelectedOption("fee-details")}>
-                Fee Details
-              </button>
-            </div>
-            <div className="flex-1 p-4 mt-2">
-              {renderContent()}
+        <div className="flex flex-1">
+          <div className="bg-white bg-opacity-80 w-1/5 h-[100vh] p-5">
+            <div className="text-center">
+              <ul className="leading-10 font-serif text-xl">
+                <li className="cursor-pointer" onClick={() => handleOptionClick("Research Scholar Details")}>
+                  Research Scholar Details
+                </li>
+                <li className="cursor-pointer" onClick={() => handleOptionClick("circulars")}>
+                  Circulars
+                </li>
+                <li className="cursor-pointer" onClick={() => handleOptionClick("fee-details")}>
+                  Fee Details
+                </li>
+              </ul>
             </div>
           </div>
-        ) : (
-          <div className="flex flex-1 items-center justify-center">
-            <div className="p-4 bg-white bg-opacity-75 rounded-lg shadow-lg h-80 w-96">
-              {isLogin ? (
-                <>
-                  <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-                  <form className="mb-6">
-                    <div className="mb-4">
-                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="loginSerialNumber">
-                        SRN
-                      </label>
-                      <input
-                        id="loginSerialNumber"
-                        type="text"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Enter your SRN"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="loginPassword">
-                        Password
-                      </label>
-                      <input
-                        id="loginPassword"
-                        type="password"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Enter your password"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button" onClick={handleLogin}>
-                        Login
-                      </button>
-                    </div>
-                  </form>
-                  <div className="text-center">
-                    <button className="text-blue-500 hover:underline" onClick={toggleForm}>
-                      Don't have an account? Register
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
-                  <form className="mb-6">
-                    <div className="mb-4">
-                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="registerSerialNumber">
-                        SRN
-                      </label>
-                      <input
-                        id="registerSerialNumber"
-                        type="text"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Enter your serial number"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="registerPassword">
-                        Password
-                      </label>
-                      <input
-                        id="registerPassword"
-                        type="password"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Enter your password"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button" onClick={handleLogin}>
-                        Register
-                      </button>
-                    </div>
-                  </form>
-                  <div className="text-center">
-                    <button className="text-blue-500 hover:underline" onClick={toggleForm}>
-                      Already have an account? Login
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
+          <div className="flex-1 p-4 mt-2">
+            {renderContent()}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default Reasearch;
+export default Research;
