@@ -384,7 +384,7 @@ const Patents = () => {
             className="mb-5"
           />
           </div>
-          <div className=" text-blue-500 underline p-10 ml-96 text-2xl leading-10">
+          <div className=" text-blue-500 underline p-10 ml-96 text-xl leading-10">
             <a href="https://www.uspto.gov/">USA Patents</a> <br />
             <a href="https://www.epo.org/en">European Patents</a> <br />
             <a href="https://www.ipindia.gov.in/">Indian Patents</a> <br />
@@ -510,10 +510,15 @@ const Patents = () => {
           </div>
         </div>
         {/* ******************** */}
-        <div className="hidden bg-white opacity-90 p-10 font-serif m-10 rounded text-xl  w-full leading-10" id="pa" data-answer-content1>
+        <div className="hidden bg-white opacity-90 p-10 font-serif m-10 rounded text-xl  w-1/2 h-1/2 leading-10" id="pa" data-answer-content1>
           <p>Click Below to Download the form to apply for patents</p>
         <a href="patent-form.docx" className="text-blue-800 hover:underline" download>Patent Form</a>
         <p>You can edit the docx and submit it!</p>
+        <p>Upload the filled form :</p>
+        <label htmlForfor="file " className="text-lg text-center mr-10">Select a file:
+                <input type="file" id="file" name="file"  className="ml-10"/>
+              </label> <br /> <br />
+              
         <button className="bg-sky-800 text-white font-serif text-lg p-3">
           Submit
         </button>
