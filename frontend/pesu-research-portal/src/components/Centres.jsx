@@ -130,34 +130,36 @@ const Centres = () => {
 
 
             {/* Electronic City */}
-            <div className="font-serif p-10 md:text-lg  col-start-2 col-span-3 hidden  gap-4" id="a2" data-answer-content>
+            <div className="font-serif p-10 md:text-xl  col-start-2 col-span-3 hidden  gap-4" id="a2" data-answer-content>
 
-            <div className=" bg-white opacity-90 rounded-lg">
+            <div className=" bg-white opacity-90 rounded-lg pr-6">
 
                
-                <a href="https://cie.pes.edu/" className="p-3 flex text-center gap-10  hover:text-blue-800 hover:shadow-xl">
+                <a href="https://cie.pes.edu/" className="p-5 flex text-center gap-7 hover:text-blue-800 hover:shadow-xl">
                     <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="CIE" />
-
-                    CIE - CENTRE FOR INNOVATION AND ENTREPRENEURSHIP
+                    Centre for Innovation and Entrepreneurship (CIE)
+                    
                 </a>
-                <a href="https://www.pesuventurelabs.com/" className="p-3 flex text-center gap-10   hover:text-blue-800 hover:shadow-xl ">
+                <a href="https://www.pesuventurelabs.com/" className="p-5 flex text-center gap-7 hover:text-blue-800 hover:shadow-xl ">
                     <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="PVL" />
-                    PVL - PESU VENTURE LABS
+                    PESU Venture Labs (PVL)  
                 </a>
 
-                <a href="https://research.pes.edu/centre-of-data-modelling-analytics-and-visualization-codmav/" className="p-3 flex text-center gap-10   hover:text-blue-800 hover:shadow-xl ">
+                <a href="https://research.pes.edu/centre-of-data-modelling-analytics-and-visualization-codmav/" className="p-5 flex text-center gap-7 hover:text-blue-800 hover:shadow-xl">
                     <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="CoDMAV" />
-                    CoDMAV - CENTRE FOR DATA MODELLING ANALYTICS AND VISUALISATION
+                    Centre for Data Modelling Analytics and Visualization (CoDMAV)
                 </a>
 
-                <a href="https://research.pes.edu/centre-of-cognitive-computing-and-computational-intelligence-c3i/" className="p-3 flex text-center gap-10  hover:text-blue-800 hover:shadow-xl ">
+                <a href="https://research.pes.edu/centre-of-cognitive-computing-and-computational-intelligence-c3i/" className="p-5 flex text-center gap-7 hover:text-blue-800 hover:shadow-xl">
                     <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="C3I" />
-                    C3I - CENTRE OF COGNITIVE COMPUTING AND COMPUTATIONAL INTELLIGENCE
+                    Centre of Cognitive Computing and Computational Intelligence (C3I)
+                    
                 </a>
 
-                <a href="https://research.pes.edu/center-for-computer-networks-and-cyber-security-ccncs/" className="p-3 flex text-center gap-10 hover:text-blue-800 hover:shadow-xl ">
+                <a href="https://research.pes.edu/center-for-computer-networks-and-cyber-security-ccncs/" className="p-5 flex text-center gap-7 hover:text-blue-800 hover:shadow-xl">
                     <img className="object-fill h-6 w-6 mt-1" src="img-c/button.png" alt="CCNCS" />
-                    CCNCS - CENTRE FOR COMPUTER NETWORKS AND CYBER SECURITY</a>
+                    Centre for Computer Networks and Cyber Security (CCNCS)
+                </a>
 
                     </div>
 

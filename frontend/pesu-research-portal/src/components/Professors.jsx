@@ -569,6 +569,36 @@ const Professors = () => {
                     </ul>
                   )}
                 </li>
+                <li className="mb-4">
+                  <button
+                    className="text-blue-800 hover:underline transition ease-out duration-500"
+                    // onClick={() => handleCampusClick('EC Campus')}
+                  >
+                    HN Campus
+                  </button>
+                  {/* {openDropdown === 'EC Campus' && (
+                    <ul>
+                      {ecCampusDepartments.map((dept) => (
+                        <li key={dept} className="mb-2">
+                          <button
+                            className="text-blue-600 hover:underline transition ease-out duration-500"
+                            onClick={() => handleDomainClick(dept)}
+                          >
+                            {dept.replace(/-/g, ' ')}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )} */}
+                </li>
+
+                <li className="mb-4">
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLScpkIXufj4p0svmqqlP-4kNIBKgMIsCs_V7gZHOv6NB33yuFw/viewform?usp=sf_link"  className="text-blue-800 hover:underline transition ease-out duration-500">
+                    Apply to IRINS 
+                  </a>
+                </li>
+
+
               </ul>
             </nav>
           </div>
