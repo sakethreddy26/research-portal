@@ -15,6 +15,7 @@ import Journals from "./components/Journals";
 import ResearchGrants from "./components/ResearchGrants";
 import Reasearch from "./components/rprogram";
 import Grant from "./components/Grant";
+import Home from "./components/Home";
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/journals" element={<Journals />} />
         <Route path="/Research-Grant" element={<Grant />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );
