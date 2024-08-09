@@ -25,7 +25,7 @@ const facultyLogin = async (req, res) => {
     } 
 
 
-    const token = jwt.sign({ email: existingFaculty.email, id: existingFaculty._id }, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign({ name: existingFaculty.name, id: existingFaculty._id }, secretKey, { expiresIn: '1h' });
 
 
     res.cookie('auth', token, {
