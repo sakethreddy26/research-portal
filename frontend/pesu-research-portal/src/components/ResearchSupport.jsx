@@ -66,7 +66,7 @@ const ResearchSupport = () => {
             <ul className="font-serif text-xl cursor-pointer gap-5 leading-10 text-center">
                 <li data-question='a' data-answer='b'>Research Ethics</li>
                 <li data-question='pdf' data-answer='pdf'>Research Retreat Insights</li>
-                <li data-question='c' data-answer='d'>Collaboration</li>
+                <li data-question='c' data-answer='d'><a href="http://localhost:5173">Collaboration</a></li>
             </ul>
         </div> 
 

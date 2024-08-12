@@ -19,7 +19,7 @@ const verifyToken = (req, res, next) => {
 };
 
 const signToken = (payload) => {
-  return jwt.sign(payload, secretKey, { expiresIn: '1h' }); // Adjust expiry as needed
+  return jwt.sign(payload, secretKey, { expiresIn: '1h' }); 
 };
 
 module.exports = { verifyToken, signToken };

@@ -657,77 +657,7 @@ const Patents = () => {
           data-answer-content1
         >
           <div className="bg-transparent ">
-            <div>
-              <div className="opacity-90 bg-white rounded p-10 flex">
-                <p className="text-2xl flex">
-                  Upload any recently published Patent Details
-                </p>
-                <div className=" flex flex-wrap">
-                  <div className="m-5">
-                    <label
-                      htmlFor="name"
-                      className="block text-lg text-black leading-10"
-                    >
-                      Faculty Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      width="100"
-                      // value={nameFilter}
-                      // onChange={(e) => setNameFilter(e.target.value)}
-                      className="mt-1 block w-72 px-3 py-2 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div className="m-5">
-                    <label
-                      htmlFor="id"
-                      className="block text-lg text-black leading-10"
-                    >
-                      Patent ID
-                    </label>
-                    <input
-                      type="Number"
-                      id="id"
-                      name="id"
-                      // value={nameFilter}
-                      // onChange={(e) => setNameFilter(e.target.value)}
-                      className="mt-1 block w-72 px-3 py-2 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div className="m-5">
-                    <label
-                      htmlFor="title"
-                      className="block text-lg text-black leading-10"
-                    >
-                      Patent Title
-                    </label>
-                    <input
-                      type="text"
-                      id="title"
-                      name="title"
-                      // value={nameFilter}
-                      // onChange={(e) => setNameFilter(e.target.value)}
-                      className="mt-1 block w-72 px-3 py-2 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div className="mt-5 ml-20 block leading-10 text-center">
-                    <p className="text-lg">Upload the Certificate</p>
-                    <label htmlForfor="file " className="text-lg text-center">
-                      Select a file:
-                      <input type="file" id="file" name="file" />
-                    </label>
-                  </div>
-                  <div className="bg-sky-800 text-white h-10 w-24 text-opacity-100 rounded-lg text-center mt-6 ml-36 block leading-10">
-                    <button>Submit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
           <br />
           <div className="bg-transparent mt-10 flex-wrap   leading-7" id="ppb">
