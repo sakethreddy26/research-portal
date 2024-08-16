@@ -53,6 +53,9 @@ const Navbar = () => {
           <a href="/Research-Grant">Research-Grant</a>
         </div>
         <div>
+          <a href="/Capstone">Capstone</a>
+        </div>
+        <div>
           <Link to={"/conference"}>Conference</Link>
         </div>
         <div>
