@@ -9,12 +9,14 @@ import ResearchSupport from "./components/ResearchSupport";
 import Patents from "./components/Patents";
 import Signup from "./components/Signup";
 
+import Capstone from "./components/Capstone";
 import Conference from "./components/Conference";
 import Contact from "./components/Contact";
 import Journals from "./components/Journals";
 import ResearchGrants from "./components/ResearchGrants";
 import Reasearch from "./components/rprogram";
 import Grant from "./components/Grant";
+import Home from "./components/Home";
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
@@ -33,10 +35,12 @@ const App = () => {
         <Route path="/research-support" element={<ResearchSupport />} />
         <Route path="/patent-process" element={<Patents />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/capstone" element={<Capstone />} />
         <Route path="/conference" element={<Conference />} />
         <Route path="/journals" element={<Journals />} />
         <Route path="/Research-Grant" element={<Grant />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );
