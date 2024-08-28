@@ -64,7 +64,19 @@ const Signup = () => {
     return (
         <div className="relative min-h-screen bg-cover bg-center" >
             <Navbar/>
-            <div className="bg-white bg-opacity-80 pt-20" style={{ backgroundImage: 'url(https://www.pesuacademy.com/Academy/images/login_bg_acdemy.jpg)',height:"100vh" }}>
+            <div
+                className="relative flex justify-center items-center bg-cover bg-center"
+                style={{
+                backgroundImage: "url(/img/pixelcut-export.jpg)",
+                backgroundSize: 'cover', // Ensures the image covers the entire div
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                width: '100vw', // Full viewport width
+                height: '100vh', // Full viewport height
+                overflow: 'hidden', // Hide any overflow
+                // opacity:'0.6'
+                }}
+            >
             <div className="relative text-white bg-cyan-950 bg-opacity-60  p-6 max-w-xs mx-auto rounded-md shadow-md"  style={{ marginRight: '5rem' }}>
                 <div className="font-bold text-4xl text-center mb-4">
                     <h2>Signup</h2>

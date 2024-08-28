@@ -20,6 +20,8 @@ const Profile = () => {
                 });
 
                 if (!response.ok) {
+                    alert("some error occured")
+                    window.location.href="/login    "
                     throw new Error('Network response was not ok');
                 }
 
