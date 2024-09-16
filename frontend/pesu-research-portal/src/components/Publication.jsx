@@ -19,9 +19,7 @@ const Publication = () => {
           width: "100vw", // Full viewport width
           height: "100vh", // Full viewport height
         }}
-      >
-        <PublicationNavbar />
-      </div>
+      ></div>
     </div>
   );
 };

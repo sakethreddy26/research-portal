@@ -56,7 +56,7 @@ const Navbar = () => {
           <a href="/Capstone">Capstone</a>
         </div>
         <div>
-          <Link to={"/publications"}>Publications</Link>
+          <Link to={"/conference"}>Publications</Link>
         </div>
         <div>
           <a href="/research-support">Research Support</a>

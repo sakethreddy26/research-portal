@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PublicationNavbar from "./PublicationNavbar";
 
 const Conference = () => {
@@ -129,12 +129,13 @@ const Conference = () => {
   useEffect(() => {
     filterData();
   }, [selectedYear, nameFilter]);
+  const route = useLocation();
+  const { pathname } = route;
   return (
     <div>
       <div>
         <Navbar />
       </div>
-      <PublicationNavbar />
 
       <div
         className="grid grid-cols-5 gap-2 overflow-y-auto"
@@ -150,7 +151,24 @@ const Conference = () => {
         }}
       >
         <div className="col-span-1 p-10 mt-2 bg-white h-full justify-evenly text-center bg-opacity-80">
-          <ul className="font-serif text-xl leading-10 cursor-pointer p-15">
+          <ul className="font-serif text-xl leading-10 cursor-pointer p-15 mb-5">
+            <li
+              className={`hover:text-blue-600 ${
+                pathname === "/conference" && "text-blue-600"
+              }`}
+            >
+              <Link to={"/conference"}>Conferences</Link>
+            </li>
+            <li
+              className={`hover:text-blue-600 ${
+                pathname === "/journals" && "text-blue-600"
+              }`}
+            >
+              <Link to={"/journals"}>Journals</Link>
+            </li>
+          </ul>
+          <hr class="border-gray-800 dark:border-black" />
+          <ul className="font-serif text-xl leading-10 cursor-pointer p-15 mt-5">
             <li
               className="hover:text-blue-600"
               data-question="q1"
