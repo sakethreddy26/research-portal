@@ -7,6 +7,7 @@ const { getProfessorById } = require("../controllers/professor_controller");
 const facultySignup = require("../controllers/faculty_signup");
 const { facultyLogin } = require("../controllers/faculty_login");
 const profile = require("../controllers/profile");
+const getallscholars=require("../controllers/scholars")
 const {
   getAllPublicationsByYear,
   getAllPublicationsByName,
@@ -26,5 +27,6 @@ router.get("/getAllPublications", getAllPublications);
 router.get("/faculty/profile", profile);
 router.post("/faculty/signup", facultySignup);
 router.post("/faculty/login", facultyLogin);
+router.get("/getAllscholars",getallscholars)
 
 module.exports = router;

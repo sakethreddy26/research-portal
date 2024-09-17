@@ -18,6 +18,7 @@ import Reasearch from "./components/rprogram";
 import Grant from "./components/Grant";
 import Home from "./components/Home";
 import Publication from "./components/Publication";
+import Homepublications from "./components/Homepublications";
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
@@ -26,7 +27,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/dummy" element={<Homepublications />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/Professors" element={<Professors />} />
         <Route path="/rprogram" element={<Reasearch />} />{" "}
@@ -42,7 +43,7 @@ const App = () => {
         <Route path="/journals" element={<Journals />} />
         <Route path="/Research-Grant" element={<Grant />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
       </Routes>
     </Router>
   );
