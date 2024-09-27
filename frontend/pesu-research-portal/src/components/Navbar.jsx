@@ -167,12 +167,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div>
-          <a
-            href="/research-support"
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Research Support
-          </a>
+          <Link to={"/conference"}>Publications</Link>
         </div>
         <div>
           <a
