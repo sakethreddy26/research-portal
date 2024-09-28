@@ -73,7 +73,7 @@ const Signup = () => {
                 backgroundRepeat: 'no-repeat',
                 width: '100vw', // Full viewport width
                 height: '100vh', // Full viewport height
-                overflow: 'hidden', // Hide any overflow
+                backgroundAttachment: 'fixed', 
                 // opacity:'0.6'
                 }}
             >
