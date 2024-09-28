@@ -37,13 +37,15 @@ const App = () => {
         <Route path="/research-support" element={<ResearchSupport />} />
         <Route path="/patent-process" element={<Patents />} />
         <Route path="/signup" element={<Signup />} />
-        {/* <Route path="/publications" element={<Conference />} /> */}
+        <Route path="/publications" element={<Conference />} />
+        {/* <Route path="/publications" element={<Publication />} /> */}
         <Route path="/capstone" element={<Capstone />} />
         <Route path="/conference" element={<Conference />} />
         <Route path="/journals" element={<Journals />} />
         <Route path="/Research-Grant" element={<Grant />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );
