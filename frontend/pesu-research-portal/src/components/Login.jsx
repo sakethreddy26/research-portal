@@ -44,17 +44,17 @@ const Login = () => {
     };
 
     return (
-        <div className="relative min-h-screen bg-cover bg-center opacity-100" style={{
+        <div style={{
             backgroundImage: "url(/img/pixelcut-export.jpg)",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed', // Ensure the background is fixed
             width: '100vw',
-            height: '100vh',
-            overflow: 'hidden',
-        }}>
+            minHeight: '100vh',
+          }}>
             {/* Dark overlay for the background */}
-            <div className="absolute inset-0 bg-gray-900 opacity-70"></div>
+            {/* <div className="absolute inset-0 bg-gray-900 opacity-70"></div> */}
 
             <div className="relative text-white pb-36 z-10">
                 <Navbar />
