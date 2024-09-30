@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 
 const Guidelines = () => {
     return (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 3 }} >
             <Typography variant="h5" gutterBottom>
                 Call for Research / Project Proposals March 2024
             </Typography>
