@@ -19,10 +19,7 @@ const connect_to_db=async()=>{
     }
 }
 app.use(cookieParser());
-app.use(cors({
-    origin: 'http://localhost:3000', 
-    credentials: true
-}))
+app.use(cors())
 app.use(express.json())
 
 
