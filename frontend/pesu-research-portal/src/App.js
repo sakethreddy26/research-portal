@@ -19,6 +19,9 @@ import Grant from "./components/Grant";
 import Home from "./components/Home";
 import Publication from "./components/Publication";
 import Homepublications from "./components/Homepublications";
+import Ethics from "./components/Ethics";
+import RR from "./components/RR";
+import EC from "./components/EC";
 // import axios from "axios";
 
 // axios.defaults.withCredentials=true
@@ -34,6 +37,8 @@ const App = () => {
         {/* Add the route for the reasearch component */}
         <Route path="/getProfessorbyid/:id" element={<ProfessorDetail />} />
         <Route path="/centres" element={<Centres />} />
+        <Route path="/centres/rr" element={<RR />} />
+        <Route path="/centres/ec" element={<EC />} />
         <Route path="/research-support" element={<ResearchSupport />} />
         <Route path="/patent-process" element={<Patents />} />
         <Route path="/signup" element={<Signup />} />
@@ -46,6 +51,7 @@ const App = () => {
         <Route path="/Contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
+        <Route path="/ethics" element={<Ethics />} />
       </Routes>
     </Router>
   );
