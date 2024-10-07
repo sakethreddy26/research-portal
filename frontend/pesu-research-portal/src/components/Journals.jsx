@@ -1,6 +1,8 @@
 import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { Link, useLocation } from "react-router-dom";
+import PublicationNavbar from "./PublicationNavbar";
 const Journals = () => {
   useEffect(() => {
     const questions = document.querySelectorAll("[data-question]");
@@ -127,12 +129,13 @@ const Journals = () => {
   useEffect(() => {
     filterData();
   }, [selectedYear, nameFilter]);
+  const route = useLocation();
+  const { pathname } = route;
   return (
     <div>
       <div>
         <Navbar />
       </div>
-
       <div
         className="grid grid-cols-5 gap-2 overflow-y-auto"
         style={{
@@ -146,7 +149,24 @@ const Journals = () => {
           //overflow: 'hidden' // Hide any overflow
         }}
       >
-        <div className="col-span-1 p-10  bg-white h-full justify-evenly text-center bg-opacity-80">
+        <div className="col-span-1 p-10 mt-2 bg-white h-full justify-evenly text-center bg-opacity-80">
+          <ul className="font-serif text-xl leading-10 cursor-pointer p-15 mb-5">
+            <li
+              className={`hover:text-blue-600 ${
+                pathname === "/conference" && "text-blue-600"
+              }`}
+            >
+              <Link to={"/conference"}>Conferences</Link>
+            </li>
+            <li
+              className={`hover:text-blue-600 ${
+                pathname === "/journals" && "text-blue-600"
+              }`}
+            >
+              <Link to={"/journals"}>Journals</Link>
+            </li>
+          </ul>
+          <hr class="border-gray-800 dark:border-black" />
           <ul className="font-serif text-xl leading-10 cursor-pointer p-15">
             <li
               className="hover:text-blue-600"
@@ -226,7 +246,7 @@ const Journals = () => {
         </div>
 
         <div
-          className="col-span-4 col-start-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
+          className="col-span-4 mt-2 col-start-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
           id="a1"
           data-answer-content
         >
@@ -257,22 +277,39 @@ const Journals = () => {
           <p>
             {" "}
             <h3 className="p-3 text-center text-black text-2xl">Q1 JOURNALS</h3>
-                    <div className="text-center text-xl text-gray-700 leading-8">
-                        - Q1 journals are in the top 25% of journals in a particular field. They typically have the highest impact factors in their field.<br />
-                        - The peer-review process is usually very rigorous and thorough.<br />
-                        - Acceptance rates are low, meaning these journals are highly selective about the papers they publish. <br />
-                        - Articles in Q1 journals receive high visibility and are frequently cited.
-                        <br /><br />
-                        <h3 className="text-black p-3 text-2xl">Q2 JOURNALS</h3>
-                        - Q2 journals fall within the 25% to 50% range in their field. They have a respectable impact factor, though not as high as Q1 journals. <br />
-                        - The peer-review process is quite rigorous.<br />
-                        - These journals are moderately selective <br /> 
-                        - Articles in Q2 journals have good visibility and are frequently cited.<br /><br />
-                        <h3 className="text-black p-3 text-2xl">Q3 JOURNALS</h3>
-                        - Q3 journals are in the 50% to 75% range in their field.<br />
-                        - Less stringent review process. <br />
-                        - The acceptance rates are generally higher, making them less selective than Q1 and Q2 journals. <br />
-                        - Articles in Q3 journals have moderate visibility and are cited less frequently. <br /><br />
+            <div className="text-center text-xl text-gray-700 leading-8">
+              - Q1 journals are in the top 25% of journals in a particular
+              field. They typically have the highest impact factors in their
+              field.
+              <br />
+              - The peer-review process is usually very rigorous and thorough.
+              <br />
+              - Acceptance rates are low, meaning these journals are highly
+              selective about the papers they publish. <br />
+              - Articles in Q1 journals receive high visibility and are
+              frequently cited.
+              <br />
+              <br />
+              <h3 className="text-black p-3 text-2xl">Q2 JOURNALS</h3>
+              - Q2 journals fall within the 25% to 50% range in their field.
+              They have a respectable impact factor, though not as high as Q1
+              journals. <br />
+              - The peer-review process is quite rigorous.
+              <br />
+              - These journals are moderately selective <br />
+              - Articles in Q2 journals have good visibility and are frequently
+              cited.
+              <br />
+              <br />
+              <h3 className="text-black p-3 text-2xl">Q3 JOURNALS</h3>
+              - Q3 journals are in the 50% to 75% range in their field.
+              <br />
+              - Less stringent review process. <br />
+              - The acceptance rates are generally higher, making them less
+              selective than Q1 and Q2 journals. <br />
+              - Articles in Q3 journals have moderate visibility and are cited
+              less frequently. <br />
+              <br />
             </div>
           </p>
         </div>
@@ -336,7 +373,7 @@ const Journals = () => {
           </div>
         </div>
         <div
-          className="col-span-4 col-start-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
+          className="col-span-4 col-start-2 mt-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
           id="a2"
           data-answer-content
         >
@@ -437,7 +474,7 @@ const Journals = () => {
           <br />
         </div>
         <div
-          className="col-span-4 col-start-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
+          className="col-span-4 col-start-2 mt-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
           id="a4"
           data-answer-content
         >

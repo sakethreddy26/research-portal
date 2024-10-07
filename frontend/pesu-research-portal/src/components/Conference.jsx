@@ -1,6 +1,8 @@
 import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { Link, useLocation } from "react-router-dom";
+import PublicationNavbar from "./PublicationNavbar";
 
 const Conference = () => {
   useEffect(() => {
@@ -127,11 +129,14 @@ const Conference = () => {
   useEffect(() => {
     filterData();
   }, [selectedYear, nameFilter]);
+  const route = useLocation();
+  const { pathname } = route;
   return (
     <div>
       <div>
         <Navbar />
       </div>
+
       <div
         className="grid grid-cols-5 gap-2 overflow-y-auto"
         style={{
@@ -145,8 +150,25 @@ const Conference = () => {
           //overflow: 'hidden' // Hide any overflow
         }}
       >
-        <div className="col-span-1 p-10  bg-white h-full justify-evenly text-center bg-opacity-80">
-          <ul className="font-serif text-xl leading-10 cursor-pointer p-15">
+        <div className="col-span-1 p-10 mt-2 bg-white h-full justify-evenly text-center bg-opacity-80">
+          <ul className="font-serif text-xl leading-10 cursor-pointer p-15 mb-5">
+            <li
+              className={`hover:text-blue-600 ${
+                pathname === "/conference" && "text-blue-600"
+              }`}
+            >
+              <Link to={"/conference"}>Conferences</Link>
+            </li>
+            <li
+              className={`hover:text-blue-600 ${
+                pathname === "/journals" && "text-blue-600"
+              }`}
+            >
+              <Link to={"/journals"}>Journals</Link>
+            </li>
+          </ul>
+          <hr class="border-gray-800 dark:border-black" />
+          <ul className="font-serif text-xl leading-10 cursor-pointer p-15 mt-5">
             <li
               className="hover:text-blue-600"
               data-question="q1"
@@ -285,7 +307,7 @@ const Conference = () => {
           </div>
         </div>
         <div
-          className="col-span-4 col-start-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
+          className="col-span-4 col-start-2 mt-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
           id="c1"
           data-answer-content
         >
@@ -356,7 +378,7 @@ const Conference = () => {
           </p>
         </div>
         <div
-          className="col-span-4 col-start-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
+          className="col-span-4 mt-2 col-start-2 row-start-1 p-5 hidden font-serif bg-white opacity-90 rounded-lg mr-10"
           id="c2"
           data-answer-content
         >
@@ -451,8 +473,8 @@ const Conference = () => {
           id="c4"
           data-answer-content
         >
-          <h1 class="text-3xl font-bold mb-4">Conference Reimbursement</h1>
-          <p class="mb-6">
+          <h1 className="text-3xl font-bold mb-4">Conference Reimbursement</h1>
+          <p className="mb-6">
             You can get reimbursement from here by uploading the necessary
             documents.
           </p>
