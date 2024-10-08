@@ -35,7 +35,7 @@ const App = () => {
         <Route path="/Professors" element={<Professors />} />
         <Route path="/rprogram" element={<Reasearch />} />{" "}
         {/* Add the route for the reasearch component */}
-        <Route path="/getProfessorbyid/:id" element={<ProfessorDetail />} />
+        <Route path="/getProfessorbyemail/:email" element={<ProfessorDetail />} />
         <Route path="/centres" element={<Centres />} />
         <Route path="/centres/rr" element={<RR />} />
         <Route path="/centres/ec" element={<EC />} />

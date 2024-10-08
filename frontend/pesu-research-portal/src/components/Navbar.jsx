@@ -7,6 +7,10 @@ const Navbar = () => {
   const [showPublicationsDropdown, setShowPublicationsDropdown] =
     useState(false);
   const [showCentresDropdown, setShowCentresDropdown] = useState(false);
+  const [showFacultyDropdown, setShowFacultyDropdown] = useState(false);
+  const [showECDropdown, setShowECDropdown] = useState(false);
+  const [showRRDropdown, setShowRRDropdown] = useState(false);
+
   function getCookieValue(cookieName) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${cookieName}=`);
@@ -29,6 +33,9 @@ const Navbar = () => {
     setIsLoggedIn(false);
     window.location.href = "/";
   };
+
+  const ecDepartments = ['CSE', 'ECE', 'CSE (AI & ML)', 'Science and Humanities'];
+  const rrDepartments = ['CSE', 'ECE', 'CSE (AI & ML)', 'EEE', 'Mechanical', 'Biotechnology', 'Science and Humanities'];
 
   return (
     <div className="">
@@ -82,14 +89,83 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="relative group z-10">
+          <div
+            onMouseEnter={() => setShowFacultyDropdown(true)}
+            onMouseLeave={() => setShowFacultyDropdown(false)}
+            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
+          >
+            Faculty
+          </div>
+          <div
+            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${
+              showFacultyDropdown
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-2 pointer-events-none"
+            }`}
+            onMouseEnter={() => setShowFacultyDropdown(true)}
+            onMouseLeave={() => setShowFacultyDropdown(false)}
+          >
+            <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <div
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 relative"
+                onMouseEnter={() => setShowECDropdown(true)}
+                onMouseLeave={() => setShowECDropdown(false)}
+              >
+                EC Campus
+                <div
+                  className={`absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${
+                    showECDropdown
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 pointer-events-none"
+                  }`}
+                >
+                  {ecDepartments.map((dept, index) => (
+                    <Link
+                      key={index}
+                      to={`/professors?campus=EC&department=${encodeURIComponent(dept)}`}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
+                    >
+                      {dept}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 relative"
+                onMouseEnter={() => setShowRRDropdown(true)}
+                onMouseLeave={() => setShowRRDropdown(false)}
+              >
+                RR Campus
+                <div
+                  className={`absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${
+                    showRRDropdown
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 pointer-events-none"
+                  }`}
+                >
+                  {rrDepartments.map((dept, index) => (
+                    <Link
+                      key={index}
+                      to={`/professors?campus=RR&department=${encodeURIComponent(dept)}`}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
+                    >
+                      {dept}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <div>
           <a
             href="/professors"
             className="inline-block hover:scale-125 transition-transform duration-200 p-4"
           >
             Faculty
           </a>
-        </div>
+        </div> */}
         <div>
           <a
             href="/rprogram"
