@@ -14,23 +14,25 @@ const ResearchPolicyContent = () => {
             <Typography variant="body1" paragraph>
                 The pursuit of quality, the impact of research, and the general research environment are achieved by the following objectives as part of the research policy plan:
             </Typography>
-            <Typography variant="body1" paragraph>
-                <ul>
-                    <li>University offers academic freedom wherein the researchers enjoy freedom of thought and expression, and have freedom in the choice of their research subjects and identifying methods of solving problems in accordance with ethical practices and principles.</li>
-                    <li>Young and experienced researchers are encouraged to shift boundaries in accordance with quality criteria in their field of research. The university provides the best support to their efforts with suitable infrastructure and facilities.</li>
-                    <li>The university offers a stimulating environment providing researchers opportunities to grow and collaborate with other reputed universities through faculty exchange programmes or exploring to work in reputed research labs or work environments for a brief period of time.</li>
-                    <li>Researchers are accountable to conduct research that benefits the university and society at large and should be responsible to make it available to public/public organisations.</li>
-                    <li>In terms of transparency, researchers are entitled to transparency in policy priorities, in quality and selection criteria, and in promotion procedures.</li>
-                    <li>The research data generated or obtained must be properly documented, stored safely, retrievable, accessible, and must be available for other researchers wherever possible subject to certain rules and conditions for legal reasons.</li>
-                    <li>If research involves data of a confidential nature, confidentiality must be maintained.</li>
-                    <li>The university research plan encourages inter-disciplinary research in various academic fields.</li>
-                    <li>University researchers, faculty members, and students who undertake research must adhere to the highest principles of honesty and accuracy so that the knowledge is represented without distortion of the truth.</li>
-                    <li>The University expects that those engaged in research activity are committed to high standards of professional conduct, integrity, and ethics.</li>
-                    <li>Research results should be open to scrutiny and review by colleagues within the university under appropriate regulations of the university. All the publications must have suitable affiliation of the PES University.</li>
-                    <li>The research equipment and software thus obtained either through internal funds or external grants must be available for any researcher within the university, subject to availability.</li>
-                    <li>The admission of research students and appointment of supervisors will be in accordance with the rules and regulations of the University.</li>
-                </ul>
-            </Typography>
+            <div>
+                <Typography variant="body1" paragraph>
+                    <ul>
+                        <li>University offers academic freedom wherein the researchers enjoy freedom of thought and expression, and have freedom in the choice of their research subjects and identifying methods of solving problems in accordance with ethical practices and principles.</li>
+                        <li>Young and experienced researchers are encouraged to shift boundaries in accordance with quality criteria in their field of research. The university provides the best support to their efforts with suitable infrastructure and facilities.</li>
+                        <li>The university offers a stimulating environment providing researchers opportunities to grow and collaborate with other reputed universities through faculty exchange programmes or exploring to work in reputed research labs or work environments for a brief period of time.</li>
+                        <li>Researchers are accountable to conduct research that benefits the university and society at large and should be responsible to make it available to public/public organisations.</li>
+                        <li>In terms of transparency, researchers are entitled to transparency in policy priorities, in quality and selection criteria, and in promotion procedures.</li>
+                        <li>The research data generated or obtained must be properly documented, stored safely, retrievable, accessible, and must be available for other researchers wherever possible subject to certain rules and conditions for legal reasons.</li>
+                        <li>If research involves data of a confidential nature, confidentiality must be maintained.</li>
+                        <li>The university research plan encourages inter-disciplinary research in various academic fields.</li>
+                        <li>University researchers, faculty members, and students who undertake research must adhere to the highest principles of honesty and accuracy so that the knowledge is represented without distortion of the truth.</li>
+                        <li>The University expects that those engaged in research activity are committed to high standards of professional conduct, integrity, and ethics.</li>
+                        <li>Research results should be open to scrutiny and review by colleagues within the university under appropriate regulations of the university. All the publications must have suitable affiliation of the PES University.</li>
+                        <li>The research equipment and software thus obtained either through internal funds or external grants must be available for any researcher within the university, subject to availability.</li>
+                        <li>The admission of research students and appointment of supervisors will be in accordance with the rules and regulations of the University.</li>
+                    </ul>
+                </Typography>
+            </div>
             <Typography variant="body1" paragraph>
                 PES University’s ambitions for research policies and initiatives can be grouped into ten objectives:
             </Typography>
