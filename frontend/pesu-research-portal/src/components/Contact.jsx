@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from "./Navbar";
 
@@ -6,7 +7,8 @@ return (
     <div>
     <Navbar />
     <div className="grid grid-cols-1 gap-2 overflow-y-auto " style={{
-        backgroundImage: "url(https://pes.edu/wp-content/uploads/2019/09/pesit-v2.jpg)",
+
+        backgroundImage: "url('./img/pesit-v2.jpg')",
         backgroundAttachment: 'fixed',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -26,7 +28,7 @@ return (
 
         <div className='bg-white h-90 w-80  text-center p-8 m-5 rounded-lg '>
             <div className=''>
-            <img src="https://pes.edu/wp-content/uploads/2023/10/campus-400x265-1.jpg" alt="RR" />
+            <img src="./img/rrc.jpg" alt="RR" />
             </div>
             <h3 className='text-sky-800 font-semibold text-xl p-5'>
                 PES UNIVERSITY
@@ -88,7 +90,7 @@ return (
             {/* EC CAMPUS */}
         <div className='bg-white h-90 w-80 justify-evenly text-center p-8 m-5 rounded-lg '>
             <div className=''>
-            <img src="https://pes.edu/wp-content/uploads/2023/10/ec400x265-1.jpg" alt="EC" />
+            <img src="./img/ecc.jpg" alt="EC" />
             </div>
             <h3 className='text-sky-800 font-semibold text-xl p-5'>
                 PES UNIVERSITY
@@ -159,7 +161,7 @@ return (
 
         <div className='bg-white h-90 w-80 justify-evenly text-center p-8 m-5 rounded-lg  '>
             <div className='p-0'>
-            <img src="https://pes.edu/wp-content/uploads/2023/10/HN-400X265.jpg" alt="HN" />
+            <img src="./img/hnc.jpg" alt="HN" />
             </div>
             <h3 className='text-sky-800 font-semibold text-xl p-5'>
                 PES UNIVERSITY
