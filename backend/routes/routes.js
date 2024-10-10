@@ -2,8 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
-const { getAllProfessors } = require("../controllers/professor_controller");
-const { getProfessorById } = require("../controllers/professor_controller");
+const { getAllProfessors,getProfessorbyemail } = require("../controllers/professor_controller");
+const { getProfessorById,get_all_rr_ec_profs } = require("../controllers/professor_controller");
 const facultySignup = require("../controllers/faculty_signup");
 const { facultyLogin } = require("../controllers/faculty_login");
 const profile = require("../controllers/profile");
@@ -20,6 +20,7 @@ router.get("/", (_, res) => {
 
 router.get("/getProfessors", getAllProfessors);
 router.get("/getProfessorbyid/:id", getProfessorById);
+router.get("/getProfessorbyemail/:email",getProfessorbyemail);
 // router.get("/getResearchDetails/:authorId",getResearchDetails)
 router.get("/getPublications/:year", getAllPublicationsByYear);
 router.get("/getPublicationsByName/:name", getAllPublicationsByName);
@@ -28,5 +29,6 @@ router.get("/faculty/profile", profile);
 router.post("/faculty/signup", facultySignup);
 router.post("/faculty/login", facultyLogin);
 router.get("/getAllscholars",getallscholars)
+router.get("/getAllprofs",get_all_rr_ec_profs)
 
 module.exports = router;

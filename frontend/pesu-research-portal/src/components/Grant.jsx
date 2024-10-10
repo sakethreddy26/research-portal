@@ -18,6 +18,7 @@ const Grant = () => {
     const [selectedInternalTab, setSelectedInternalTab] = useState(0);
     const [uploadedFile, setUploadedFile] = useState(null);
     const [showPdf, setShowPdf] = useState(false);  // For internal funding form PDF display
+    const [staticDocuments, setStaticDocuments] = useState([]); // New state to store static documents
 
     const handleMainTabChange = (event, newValue) => {
         setSelectedMainTab(newValue);  // Show content when a tab is clicked
@@ -43,6 +44,18 @@ const Grant = () => {
     };
 
     const pdfUrl = '/PAF.pdf';
+
+    // Handle adding static documents
+    const handleAddStaticDocument = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setStaticDocuments((prevDocuments) => [...prevDocuments, file]);
+        }
+    };
+
+    const handleStaticDocumentDownload = (file) => {
+        saveAs(file, file.name);
+    };
 
     return (
         <div
@@ -97,6 +110,50 @@ const Grant = () => {
                             sx={{ color: 'black', textAlign: 'left', textTransform: 'none', fontFamily: 'Times New Roman, Times, serif', fontSize: '20px' }}
                         />
                     </Tabs>
+
+                    {/* Add Static Document */}
+                    <Box sx={{ marginTop: '20px' }}>
+                        <Typography variant="h6" sx={{ marginBottom: '10px' }}></Typography>
+                        <label htmlFor="static-file-upload" style={{ cursor: 'pointer' }}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                component="span"
+                                startIcon={<FileUploadIcon />}
+                            >
+                                Add Document
+                            </Button>
+                        </label>
+                        <input
+                            id="static-file-upload"
+                            type="file"
+                            style={{ display: 'none' }}
+                            onChange={handleAddStaticDocument}
+                        />
+
+                        {/* Display Static Documents */}
+                        {staticDocuments.length > 0 && (
+                            <Box sx={{ marginTop: '20px', textAlign: 'left' }}>
+                                <Typography variant="subtitle1">Available Documents:</Typography>
+                                <ul>
+                                    {staticDocuments.map((doc, index) => (
+                                        <li key={index}>
+                                            <Typography variant="body1" sx={{ display: 'inline-block', marginRight: '10px' }}>
+                                                {doc.name}
+                                            </Typography>
+                                            <Button
+                                                variant="outlined"
+                                                startIcon={<DownloadIcon />}
+                                                onClick={() => handleStaticDocumentDownload(doc)}
+                                            >
+                                                Download
+                                            </Button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Box>
+                        )}
+                    </Box>
                 </Box>
 
                 {/* Content display: Only show after a tab is clicked */}
@@ -166,7 +223,7 @@ const Grant = () => {
                                                 </Button>
                                             </label>
                                         </Box>
-                                        {showPdf ||  (
+                                        {showPdf || (
                                             <Box sx={{ mt: 3, p: 2, backgroundColor: 'white', borderRadius: 5 }}>
                                                 <iframe
                                                     src={pdfUrl}
@@ -187,75 +244,76 @@ const Grant = () => {
                     {selectedMainTab === 1 && (
                         <Box
                             sx={{
-                                backgroundColor: 'white', // White background for external funding content
+                                display: 'flex',
+                                backgroundColor: 'rgba(255, 255, 255, 0.7)', // White background for external funding content
                                 borderRadius: '8px',
                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                                 padding: '20px',
                             }}
                         >
-                            <Typography variant="h6" marginTop={'20px'} textAlign={'center'} gutterBottom>
+                            <Typography variant="h5" marginTop={'-20px'} textAlign={'Centre'} gutterBottom>
                                 External Funding Resources
                             </Typography>
                             <Box sx={{ overflowX: 'auto' }}>
                                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                     <thead>
                                         <tr>
-                                            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Organization</th>
-                                            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Website</th>
+                                            <th style={{ border: '0px solid #ddd', padding: '8px' }}>Organization</th>
+                                            <th style={{ border: '0px solid #ddd', padding: '8px' }}>Website</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Defence Research and Development Organisation (DRDO)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="https://www.drdo.gov.in" target="_blank" rel="noopener noreferrer">DRDO Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px', fontFamily:'Arial Black'   }}>Defence Research and Development Organisation (DRDO)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="https://www.drdo.gov.in" target="_blank" rel="noopener noreferrer">DRDO Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Indian Space Research Organisation (ISRO)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="https://www.isro.gov.in" target="_blank" rel="noopener noreferrer">ISRO Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px' ,fontFamily:'Arial Black'}}>Indian Space Research Organisation (ISRO)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px' ,fontFamily:'Arial Black'}}><a href="https://www.isro.gov.in" target="_blank" rel="noopener noreferrer">ISRO Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Council of Scientific and Industrial Research (CSIR)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="https://www.csir.res.in" target="_blank" rel="noopener noreferrer">CSIR Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}>Council of Scientific and Industrial Research (CSIR)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="https://www.csir.res.in" target="_blank" rel="noopener noreferrer">CSIR Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Indian Council of Agricultural Research (ICAR)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="https://www.icar.org.in" target="_blank" rel="noopener noreferrer">ICAR Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}>Indian Council of Agricultural Research (ICAR)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px' ,fontFamily:'Arial Black'}}><a href="https://www.icar.org.in" target="_blank" rel="noopener noreferrer">ICAR Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Indian Council of Medical Research (ICMR)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="https://www.icmr.nic.in" target="_blank" rel="noopener noreferrer">MeitY Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px' ,fontFamily:'Arial Black'}}>Indian Council of Medical Research (ICMR)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="https://www.icmr.nic.in" target="_blank" rel="noopener noreferrer">MeitY Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Bhabha Atomic Research Centre (BARC)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="http://www.barc.gov.in" target="_blank" rel="noopener noreferrer">NABARD Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}>Bhabha Atomic Research Centre (BARC)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="http://www.barc.gov.in" target="_blank" rel="noopener noreferrer">NABARD Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Indian Institute of Science (IISc)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="https://www.iisc.ac.in" target="_blank" rel="noopener noreferrer">NSF Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}>Indian Institute of Science (IISc)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px' ,fontFamily:'Arial Black'}}><a href="https://www.iisc.ac.in" target="_blank" rel="noopener noreferrer">NSF Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>National Institute of Oceanography (NIO)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="http://www.nio.org" target="_blank" rel="noopener noreferrer">NIO Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px' ,fontFamily:'Arial Black'}}>National Institute of Oceanography (NIO)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px' ,fontFamily:'Arial Black'}}><a href="http://www.nio.org" target="_blank" rel="noopener noreferrer">NIO Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Centre for Development of Advanced Computing (C-DAC)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="https://www.cdac.in" target="_blank" rel="noopener noreferrer">C-DAC Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px' ,fontFamily:'Arial Black'}}>Centre for Development of Advanced Computing (C-DAC)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="https://www.cdac.in" target="_blank" rel="noopener noreferrer">C-DAC Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>National Aerospace Laboratories (NAL)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="http://www.nal.res.in" target="_blank" rel="noopener noreferrer">NAL Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}>National Aerospace Laboratories (NAL)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="http://www.nal.res.in" target="_blank" rel="noopener noreferrer">NAL Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Indian Institute of Tropical Meteorology (IITM)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="http://www.tropmet.res.in" target="_blank" rel="noopener noreferrer">IITM Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}>Indian Institute of Tropical Meteorology (IITM)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="http://www.tropmet.res.in" target="_blank" rel="noopener noreferrer">IITM Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>National Institute of Immunology (NII)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="http://www.nii.res.in" target="_blank" rel="noopener noreferrer">NII Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}>National Institute of Immunology (NII)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="http://www.nii.res.in" target="_blank" rel="noopener noreferrer">NII Website</a></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>Central Marine Fisheries Research Institute (CMFRI)</td>
-                                            <td style={{ border: '1px solid #ddd', padding: '8px' }}><a href="(http://www.cmfri.org.in" target="_blank" rel="noopener noreferrer">CMFRI Website</a></td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}>Central Marine Fisheries Research Institute (CMFRI)</td>
+                                            <td style={{ border: '2px solid #000000', padding: '8px',fontFamily:'Arial Black' }}><a href="(http://www.cmfri.org.in" target="_blank" rel="noopener noreferrer">CMFRI Website</a></td>
                                         </tr>
                                     </tbody>
                                 </table>

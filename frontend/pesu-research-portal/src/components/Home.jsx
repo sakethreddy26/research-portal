@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Chart from "chart.js/auto";
 import { Bar, Pie } from "react-chartjs-2";
 import axios from 'axios';
 import Navbar from './Navbar';
+import {Chart, ArcElement,registerables} from 'chart.js'
+Chart.register(ArcElement,...registerables);
+
 
 const HomePage = () => {
   const [professors, setProfessors] = useState([]);
@@ -14,7 +16,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchProfessors = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/v1/api/getProfessors");
+        const response = await axios.get("http://localhost:4000/v1/api/getAllprofs");
         setProfessors(response.data);
       } catch (error) {
         console.error("Error fetching professors:", error);
@@ -58,20 +60,19 @@ const HomePage = () => {
     fetchPublicationsByYear();
   }, []);
 
-  // Data for bar chart: publications per year
+  // Refined bar chart data
   const barChartData = {
-    labels: Object.keys(publicationsByYear), // Years as labels
-    datasets: [
-      {
-        label: "Publications",
-        data: Object.values(publicationsByYear), // Number of publications per year
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderWidth: 1,
-      },
-    ],
+    labels: Object.keys(publicationsByYear),
+    datasets: [{
+      label: "Publications",
+      data: Object.values(publicationsByYear),
+      backgroundColor: "rgba(75, 192, 192, 0.6)",
+      borderColor: "rgba(75, 192, 192, 1)",
+      borderWidth: 1,
+    }],
   };
 
-  // Data for pie chart: distribution of professors by department
+  // Refined pie chart data
   const departmentDistribution = professors.reduce((acc, professor) => {
     const department = professor.department;
     acc[department] = (acc[department] || 0) + 1;
@@ -80,48 +81,50 @@ const HomePage = () => {
 
   const pieChartData = {
     labels: Object.keys(departmentDistribution),
-    datasets: [
-      {
-        data: Object.values(departmentDistribution),
-        backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56",
-          "#4BC0C0",
-          "#9966FF",
-          "#FF9F40",
-        ],
-      },
-    ],
+    datasets: [{
+      data: Object.values(departmentDistribution),
+      backgroundColor: [
+        "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40",
+      ],
+    }],
   };
 
   return (
-    <div className="w-full p-0">
+    <div className="min-h-screen bg-gray-100">
       <Navbar />
-      <div className="w-full mx-0 px-0 py-4">
-        <h1 className="text-4xl font-bold mb-4 text-center underline italic">WELCOME TO PESU RESEARCH PORTAL</h1>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center text-indigo-700">
+          Welcome To PESU Research Portal
+        </h1>
+
+        {/* Statistics Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {[
+            { title: "Total Conferences", value: publications.filter(item => item["Publication Type"] === "Conference Paper").length },
+            { title: "Total Journals", value: publications.filter(item => item["Publication Type"] === "Article").length },
+            { title: "Total Publications", value: publications.length },
+          ].map((stat, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-lg p-6 text-center transform transition-transform duration-300 hover:scale-105">
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">{stat.title}</h3>
+              <p className="text-3xl font-bold text-indigo-600">{stat.value}</p>
+            </div>
+          ))}
+        </div>
 
         {/* Recent Publications */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Recent Publications (2024)</h2>
+        <div className="mb-12">
+          <h2 className="text-2xl font-semibold mb-6 text-indigo-700">Recent Publications (2024)</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recentPublications2024.slice(0, 5).map((pub) => (
-              <div
-                key={pub._id}
-                className="bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:scale-105"
-              >
+            {recentPublications2024.slice(0, 6).map((pub) => (
+              <div key={pub._id} className="bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:scale-105">
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">{pub.Title}</h3>
                 <p className="text-gray-600 mb-4">
-                  <span className="font-medium">
-                    by {pub.First_Name} {pub.Last_Name}
-                  </span>
+                  <span className="font-medium">by {pub.First_Name} {pub.Last_Name}</span>
                 </p>
                 <p className="text-gray-500">
                   Published on:{" "}
                   <span className="text-gray-700">
-                    {pub["Pub.Date"]
-                      ? new Date(pub["Pub.Date"]).toLocaleDateString()
-                      : pub.Year || "Unknown"}
+                    {pub["Pub.Date"] ? new Date(pub["Pub.Date"]).toLocaleDateString() : pub.Year || "Unknown"}
                   </span>
                 </p>
               </div>
@@ -129,49 +132,46 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Total Professors and Publications */}
-        <div className="flex justify-around mb-8">
-          <div className="bg-gray-100 p-4 rounded-md shadow-md">
-            <h3 className="text-xl">Total Conferences</h3>
-            <p className="text-2xl">
-              {publications.filter((item) => item["Publication Type"] === "Conference Paper").length}
-            </p>
-          </div>
-          <div className="bg-gray-100 p-4 rounded-md shadow-md">
-            <h3 className="text-xl">Total Journals</h3>
-            <p className="text-2xl">
-              {publications.filter((item) => item["Publication Type"] === "Article").length}
-            </p>
-          </div>
-          <div className="bg-gray-100 p-4 rounded-md shadow-md">
-            <h3 className="text-xl">Total Publications</h3>
-            <p className="text-2xl">{publications.length}</p>
-          </div>
-        </div>
-
-        {/* Bar Chart: Publications per Year */}
-        <div className="flex justify-between">
-          <div className="w-full">
-          <h2 className="text-2xl font-semibold">Publications Per Year</h2>
+        {/* Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Bar Chart: Publications per Year */}
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-semibold mb-4 text-indigo-700">Publications Per Year</h2>
             {Object.keys(publicationsByYear).length > 0 ? (
-              <Bar data={barChartData} />
+              <Bar 
+                data={barChartData} 
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: { display: false },
+                    title: { display: false },
+                  },
+                  scales: {
+                    y: { beginAtZero: true }
+                  }
+                }}
+              />
             ) : (
-              <p>No data available for publications by year.</p>
+              <p className="text-gray-500">No data available for publications by year.</p>
             )}
           </div>
 
           {/* Pie Chart: Professors by Department */}
-          <div className=" w-full flex justify-evenly">
-            <div className="w-full max-w-xs">
-              <h2 className="text-2xl font-semibold">Professors by Department</h2>
-              <Pie data={pieChartData} />
-            </div>
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-semibold mb-4 text-indigo-700">Professors by Department</h2>
+            <Pie 
+              data={pieChartData} 
+              options={{
+                responsive: true,
+                plugins: {
+                  legend: { position: 'bottom' },
+                }
+              }}
+            />
           </div>
         </div>
       </div>
     </div>
-
-
   );
 };
 

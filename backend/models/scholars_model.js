@@ -8,4 +8,4 @@ const scholarSchema = new mongoose.Schema({
     exam: String,
   });
 
-module.exports=mongoose.model("scholars",scholarSchema,"scholars");
+module.exports=mongoose.model("scholars_final",scholarSchema,"scholars_final");
