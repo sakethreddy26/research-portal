@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Research = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -9,6 +10,24 @@ const Research = () => {
   const [newCircularTitle, setNewCircularTitle] = useState('');
   const [newCircularFile, setNewCircularFile] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [scholars, setScholars] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchScholars = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get("http://localhost:4000/v1/api/getAllscholars");
+        setScholars(response.data);
+      } catch (error) {
+        console.error("Error fetching scholars:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchScholars();
+  }, []);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -28,35 +47,13 @@ const Research = () => {
     }
   };
 
-  const scholars = [
-    { name: "Richa Sharma", year: 2019, duration: "3 years", fellowship: "Full time", exam: "PESU, PhD entrance" },
-    { name: "Smrithi S", year: 2020, duration: "3 years", fellowship: "Full time", exam: "PESU, PhD entrance" },
-    { name: "Divyaprabha K N", year: 2019, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
-    { name: "Shruthi L", year: 2022, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
-    { name: "Rohit Vaidya K", year: 2022, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
-    { name: "Kundavai K R", year: 2024, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
-    { name: "Pallabi Kar", year: 2023, duration: "5 years", fellowship: "Internal Part time", exam: "PESU, PhD entrance" },
-    { name: "Afshman Rehaman", year: 2019, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Niveditha N Reddy", year: 2021, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Priya K", year: 2019, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Gururaj P", year: 2022, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "U Ananthanagu", year: 2020, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Asha Kurian", year: 2019, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Vishwachetan D", year: 2022, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Suguna A", year: 2024, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Ranjith Gnana Suthakar", year: 2022, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Nagamanoj K", year: 2024, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-    { name: "Abhay Srivastav", year: 2024, duration: "5 years", fellowship: "External Part time", exam: "PESU, PhD entrance" },
-
-  ];
-
   const filteredScholars = scholars.filter(scholar => {
+    if (!scholar) return false;
     return (
-      scholar.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      scholar.year.toString().includes(searchTerm) ||
-      scholar.duration.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      scholar.fellowship.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      scholar.exam.toLowerCase().includes(searchTerm.toLowerCase())
+      scholar["Name of the Scholar"]?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      scholar.SRN?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      scholar["FT/PT"]?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      scholar.Dept?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
 
@@ -68,22 +65,25 @@ const Research = () => {
             <h2 className="text-2xl font-bold mb-4 text-center">Research Scholar Details</h2>
             <input
               type="text"
-              placeholder="Search by Name, Year, Duration, Fellowship, Exam"
+              placeholder="Search by Name, SRN, FT/PT, Department"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="p-2 mb-4 w-full border border-gray-300 rounded"
             />
-            <div className="grid grid-cols-1 gap-4">
-              {filteredScholars.map((scholar, index) => (
-                <div key={index} className="p-4 bg-gray-100 rounded-lg shadow">
-                  <p><strong>Name:</strong> {scholar.name}</p>
-                  <p><strong>Year of Enrolment:</strong> {scholar.year}</p>
-                  <p><strong>Duration:</strong> {scholar.duration}</p>
-                  <p><strong>Type of Fellowship:</strong> {scholar.fellowship}</p>
-                  <p><strong>Qualifying Exam:</strong> {scholar.exam}</p>
-                </div>
-              ))}
-            </div>
+            {isLoading ? (
+              <p>Loading scholars...</p>
+            ) : (
+              <div className="grid grid-cols-1 gap-4">
+                {filteredScholars.map((scholar) => (
+                  <div key={scholar.SRN} className="p-4 bg-gray-100 rounded-lg shadow">
+                    <p><strong>Name:</strong> {scholar["Name of the Scholar"]}</p>
+                    <p><strong>SRN:</strong> {scholar.SRN}</p>
+                    <p><strong>Type:</strong> {scholar["FT/PT"]}</p>
+                    <p><strong>Department:</strong> {scholar["Dept."]}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         );
 
