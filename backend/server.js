@@ -20,7 +20,7 @@ const connect_to_db=async()=>{
 }
 app.use(cookieParser());
 app.use(cors({
-    origin: ['http://10.2.80.90:8080',"http://10.2.80.90:8081"], 
+    origin: ['http://10.2.80.90:8080'],
     credentials: true
 }));
 app.use(express.json())
