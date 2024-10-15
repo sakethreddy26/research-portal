@@ -62,7 +62,7 @@ const Grant = () => {
         const fetchDesignation = async () => {
           try {
             const Response = await fetch(`http://10.2.80.90:8081/api/v1/auth/verifyToken`,{
-                credentials:"omit",
+                credentials:"include",
             });
             if (!Response.ok) {
               throw new Error(`HTTP error! status: ${Response.status}`);
