@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -17,6 +17,7 @@ const Grant = () => {
     const [selectedMainTab, setSelectedMainTab] = useState(null);  // Initially set to null to show no content
     const [selectedInternalTab, setSelectedInternalTab] = useState(0);
     const [uploadedFile, setUploadedFile] = useState(null);
+    const [professorDetail,setProfessorDetail]=useState({});
     const [showPdf, setShowPdf] = useState(false);  // For internal funding form PDF display
     const [staticDocuments, setStaticDocuments] = useState([]); // New state to store static documents
 
@@ -56,6 +57,26 @@ const Grant = () => {
     const handleStaticDocumentDownload = (file) => {
         saveAs(file, file.name);
     };
+
+    useEffect(() => {
+        const fetchDesignation = async () => {
+          try {
+            const Response = await fetch(`http://10.2.80.90:8081/api/v1/auth/verifyToken`,{
+                credentials:"include",
+            });
+            if (!Response.ok) {
+              throw new Error(`HTTP error! status: ${Response.status}`);
+            }
+            const professorData = await Response.json();
+            console.log(professorData.user)
+            setProfessorDetail(professorData.user);
+          } catch (err) {
+            console.log(err.message);
+          }
+        };
+    
+        fetchDesignation();
+      }, []);
 
     return (
         <div
@@ -112,7 +133,7 @@ const Grant = () => {
                     </Tabs>
 
                     {/* Add Static Document */}
-                    <Box sx={{ marginTop: '20px' }}>
+                    {professorDetail && professorDetail.designation=="HOD" && <Box sx={{ marginTop: '20px' }}>
                         <Typography variant="h6" sx={{ marginBottom: '10px' }}></Typography>
                         <label htmlFor="static-file-upload" style={{ cursor: 'pointer' }}>
                             <Button
@@ -131,7 +152,7 @@ const Grant = () => {
                             onChange={handleAddStaticDocument}
                         />
 
-                        {/* Display Static Documents */}
+
                         {staticDocuments.length > 0 && (
                             <Box sx={{ marginTop: '20px', textAlign: 'left' }}>
                                 <Typography variant="subtitle1">Available Documents:</Typography>
@@ -153,7 +174,7 @@ const Grant = () => {
                                 </ul>
                             </Box>
                         )}
-                    </Box>
+                    </Box>} 
                 </Box>
 
                 {/* Content display: Only show after a tab is clicked */}
