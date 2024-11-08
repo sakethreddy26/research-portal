@@ -14,6 +14,12 @@ const {
   getAllPublications,
 } = require("../controllers/publication_controller");
 
+const {
+  upload,
+  addCircular,
+  getCirculars,
+} = require('../controllers/add_circulars');
+
 router.get("/", (_, res) => {
   res.status(200).send({ message: "pesu-portal-backend" });
 });
@@ -30,5 +36,7 @@ router.post("/faculty/signup", facultySignup);
 router.post("/faculty/login", facultyLogin);
 router.get("/getAllscholars",getallscholars)
 router.get("/getAllprofs",get_all_rr_ec_profs)
+router.post('/addCircular', upload.single('file'), addCircular);
+router.get('/getCirculars', getCirculars);
 
 module.exports = router;
