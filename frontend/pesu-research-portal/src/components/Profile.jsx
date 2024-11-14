@@ -151,7 +151,7 @@ const Profile = () => {
 
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <Box display="flex" justifyContent="center" mt={4}>
                 <Card sx={{ width: 600, padding: 4, boxShadow: 3 }}>
                     <Box display="flex" alignItems="center" flexDirection="column" mb={3}>

@@ -18,10 +18,13 @@ const connect_to_db=async()=>{
         console.log("err",error)
     }
 }
-app.use(cors({
-    origin:'http://10.2.80.90:8080',
-    credentials: true
-}));
+
+app.use(
+    cors({
+      origin: 'http://localhost:3000', 
+      credentials: true,
+    })
+  );
 app.use(cookieParser());
 app.use(express.json())
 app.use(express.static('public'));

@@ -34,8 +34,8 @@ const Navbar = () => {
     window.location.href = "/";
   };
 
-  const ecDepartments = ['CSE', 'ECE', 'CSE (AI & ML)', 'Science and Humanities'];
-  const rrDepartments = ['CSE', 'ECE', 'CSE (AI & ML)', 'EEE', 'Mechanical', 'Biotechnology', 'Science and Humanities'];
+  const ecDepartments = ['Computer Science', 'Electronics & Communications', 'Computer Science (AIML)', 'Science & Humanities'];
+  const rrDepartments = ['Computer Science', 'Electronics & Communications', 'Computer Science (AIML)', 'Electrical & Electronics', 'Mechanical', 'Biotechnology', 'Science & Humanities'];
 
   return (
     <div className="">
@@ -58,11 +58,10 @@ const Navbar = () => {
             Centres
           </div>
           <div
-            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${
-              showCentresDropdown
+            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showCentresDropdown
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-2 pointer-events-none"
-            }`}
+              }`}
             onMouseEnter={() => setShowCentresDropdown(true)}
             onMouseLeave={() => setShowCentresDropdown(false)}
           >
@@ -98,11 +97,10 @@ const Navbar = () => {
             Faculty
           </div>
           <div
-            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${
-              showFacultyDropdown
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-2 pointer-events-none"
-            }`}
+            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showFacultyDropdown
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-2 pointer-events-none"
+              }`}
             onMouseEnter={() => setShowFacultyDropdown(true)}
             onMouseLeave={() => setShowFacultyDropdown(false)}
           >
@@ -114,16 +112,15 @@ const Navbar = () => {
               >
                 EC Campus
                 <div
-                  className={`absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${
-                    showECDropdown
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 -translate-x-2 pointer-events-none"
-                  }`}
+                  className={`absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showECDropdown
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-2 pointer-events-none"
+                    }`}
                 >
                   {ecDepartments.map((dept, index) => (
                     <Link
                       key={index}
-                      to={`/professors?campus=EC&department=${encodeURIComponent(dept)}`}
+                      to={`/faculty?campus=EC Campus&department=${encodeURIComponent(dept)}`}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
                     >
                       {dept}
@@ -138,16 +135,15 @@ const Navbar = () => {
               >
                 RR Campus
                 <div
-                  className={`absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${
-                    showRRDropdown
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 -translate-x-2 pointer-events-none"
-                  }`}
+                  className={`absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showRRDropdown
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-2 pointer-events-none"
+                    }`}
                 >
                   {rrDepartments.map((dept, index) => (
                     <Link
                       key={index}
-                      to={`/professors?campus=RR&department=${encodeURIComponent(dept)}`}
+                      to={`/faculty?campus=RR Campus&department=${encodeURIComponent(dept)}`}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
                     >
                       {dept}
@@ -199,11 +195,10 @@ const Navbar = () => {
             Publications
           </div>
           <div
-            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${
-              showPublicationsDropdown
+            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showPublicationsDropdown
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-2 pointer-events-none"
-            }`}
+              }`}
             onMouseEnter={() => setShowPublicationsDropdown(true)}
             onMouseLeave={() => setShowPublicationsDropdown(false)}
           >
@@ -231,24 +226,16 @@ const Navbar = () => {
           </div>
         </div>
         <div>
-          <Link
-            to={"/ethics"}
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Ethics
-          </Link>
-        </div>
-        <div>
           <a
             href="/research-support"
             className="inline-block hover:scale-125 transition-transform duration-200 p-4"
           >
-            Research Support
+            Ethics
           </a>
         </div>
         <div>
           <a
-            href="/Contact"
+            href="/"
             className="inline-block hover:scale-125 transition-transform duration-200 p-4"
           >
             Collaborations
@@ -271,7 +258,7 @@ const Navbar = () => {
               Logout
             </button>
           ) : (
-            <a href="http://10.2.80.90:8081/login">login</a>
+            <a href="http://10.2.80.90:8081/login">Login</a>
           )}
         </div>
       </div>
