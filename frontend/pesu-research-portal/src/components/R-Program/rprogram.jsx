@@ -1,4 +1,3 @@
-// Research.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
@@ -13,6 +12,7 @@ const Research = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [scholars, setScholars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sectionFiles, setSectionFiles] = useState({});
 
   useEffect(() => {
     const fetchScholars = async () => {
@@ -72,7 +72,6 @@ const Research = () => {
             'Content-Type': 'multipart/form-data',
           },
         });
-        // After successful upload, fetch the updated list of circulars
         fetchCirculars();
         setNewCircularTitle('');
         setNewCircularFile(null);
@@ -80,6 +79,20 @@ const Research = () => {
         console.error('Error adding circular:', error);
       }
     }
+  };
+
+  const handleFileUpload = async (sectionId, file) => {
+    // Here you would typically upload the file to your server
+    // For now, we'll just store it in the local state
+    setSectionFiles(prev => ({
+      ...prev,
+      [sectionId]: [...(prev[sectionId] || []), {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        uploadedAt: new Date().toISOString()
+      }]
+    }));
   };
 
   const fetchCirculars = async () => {
@@ -101,14 +114,19 @@ const Research = () => {
     );
   });
 
+  const isHOD = professorDetail && professorDetail.designation === "HOD";
+
   return (
     <div className="flex flex-1">
       <div className="bg-white bg-opacity-80 w-1/5 h-[100vh] p-5">
-        {/* Sidebar content */}
-        <Sidebar handleOptionClick={handleOptionClick} selectedOption={selectedOption} />
+        <Sidebar 
+          handleOptionClick={handleOptionClick} 
+          selectedOption={selectedOption}
+          onFileUpload={handleFileUpload}
+          isHOD={isHOD}
+        />
       </div>
       <div className="flex-1 p-4 mt-2">
-        {/* Main content */}
         <Main
           selectedOption={selectedOption}
           professorDetail={professorDetail}
@@ -122,6 +140,7 @@ const Research = () => {
           setSearchTerm={setSearchTerm}
           filteredScholars={filteredScholars}
           isLoading={isLoading}
+          sectionFiles={sectionFiles}
         />
       </div>
     </div>

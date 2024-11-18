@@ -15,9 +15,9 @@ const Layout = () => {
       }}
     >
       <Navbar />
-      {/* <div className="flex flex-1 overflow-hidden"> */}
+      <main className="flex-grow">
         <Outlet />
-      {/* </div> */}
+      </main>
     </div>
   );
 };
