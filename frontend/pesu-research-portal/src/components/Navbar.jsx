@@ -235,7 +235,7 @@ const Navbar = () => {
         </div>
         <div>
           <a
-            href="/"
+            href="http://10.2.80.90:9001/"
             className="inline-block hover:scale-125 transition-transform duration-200 p-4"
           >
             Collaborations

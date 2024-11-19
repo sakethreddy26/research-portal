@@ -68,9 +68,29 @@ const Main = ({ selectedOption }) => {
       year: '2024',
       link: 'https://drive.google.com/file/d/1MaY6AQ6vh7p8pmznTol1oPGwus2gtu8d/view?usp=sharing',
     },
-    // ... (include all other published patents here)
+    {
+      title: 'Blockchain and IoT Based Electronics Health Record Device',
+      inventors: 'Prof. Surbhi Choudhary',
+      number: '415054-001',
+      year: '2024',
+      link: 'https://drive.google.com/file/d/1Qp39yg64O7r45sng_Vl03thijVBdKh0-/view',
+    },
+    {
+      title: 'An Author Strain Independent Scoring System to Measure Scientific Independence',
+      inventors: 'Dr. Sudeepa Roy Dey',
+      number: '20 2022 101 927.4 (German)',
+      year: '2022',
+      link: '#',  
+    },
+    {
+      title: 'A System For Streaming And Storing The Heterogeneous Streamed Sensor Data Using Microservices Architecture Model',
+      inventors: 'DJ Ruby Dinakar',
+      number: '202022103462 (German)',
+      year: '2022',
+      link: '#',  
+    },
   ];
-
+  
   const renderSection = () => {
     switch (selectedOption) {
       case 'processes':
