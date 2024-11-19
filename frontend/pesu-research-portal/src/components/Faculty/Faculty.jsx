@@ -37,7 +37,7 @@ const Faculty = () => {
 
     const fetchProfessors = async () => {
       try {
-        const response = await fetch('http://localhost:4000/v1/api/getAllprofs');
+        const response = await fetch('/v1/api/getAllprofs');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

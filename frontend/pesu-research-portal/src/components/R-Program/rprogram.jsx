@@ -18,7 +18,7 @@ const Research = () => {
     const fetchScholars = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get("http://localhost:4000/v1/api/getAllscholars");
+        const response = await axios.get("/v1/api/getAllscholars");
         setScholars(response.data);
       } catch (error) {
         console.error("Error fetching scholars:", error);
@@ -44,7 +44,7 @@ const Research = () => {
 
     const fetchCirculars = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/v1/api/getCirculars");
+        const response = await axios.get("/v1/api/getCirculars");
         setCirculars(response.data);
       } catch (error) {
         console.error("Error fetching circulars:", error);
@@ -67,7 +67,7 @@ const Research = () => {
       formData.append('file', newCircularFile);
 
       try {
-        await axios.post('http://localhost:4000/v1/api/addCircular', formData, {
+        await axios.post('/v1/api/addCircular', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -97,7 +97,7 @@ const Research = () => {
 
   const fetchCirculars = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/v1/api/getCirculars");
+      const response = await axios.get("/v1/api/getCirculars");
       setCirculars(response.data);
     } catch (error) {
       console.error("Error fetching circulars:", error);

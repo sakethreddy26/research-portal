@@ -67,7 +67,7 @@
 //   const getAllConference = async () => {
 //     try {
 //       const response = await fetch(
-//         "http://localhost:4000/v1/api/getAllPublications/",
+//         "/v1/api/getAllPublications/",
 //         {
 //           method: "GET",
 //           credentials: "include",
@@ -541,7 +541,7 @@ const Journals = () => {
   const getAllJournals = async () => {
     try {
       const response = await fetch(
-        "http://localhost:4000/v1/api/getAllPublications/",
+        "/v1/api/getAllPublications/",
         {
           method: "GET",
           credentials: "include",

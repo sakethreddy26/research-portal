@@ -11,7 +11,7 @@
 //     useEffect(() => {
 //         const fetchProfile = async () => {
 //             try {
-//                 const response = await fetch("http://localhost:4000/v1/api/faculty/profile", {
+//                 const response = await fetch("/v1/api/faculty/profile", {
 //                     method: 'GET',
 //                     credentials: 'include',
 //                     headers: {
@@ -102,7 +102,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch("http://localhost:4000/v1/api/faculty/profile", {
+                const response = await fetch("/v1/api/faculty/profile", {
                     method: 'GET',
                     credentials: 'include',
                     headers: {

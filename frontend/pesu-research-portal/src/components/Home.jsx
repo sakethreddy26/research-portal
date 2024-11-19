@@ -19,8 +19,8 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const [profResponse, pubResponse] = await Promise.all([
-          axios.get("http://localhost:4000/v1/api/getAllprofs"),
-          axios.get("http://localhost:4000/v1/api/getAllPublications"),
+          axios.get("/v1/api/getAllprofs"),
+          axios.get("/v1/api/getAllPublications"),
         ]);
 
         setProfessors(profResponse.data);
