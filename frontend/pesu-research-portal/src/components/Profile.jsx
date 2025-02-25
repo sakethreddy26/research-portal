@@ -102,7 +102,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch("/v1/api/faculty/profile", {
+                const response = await fetch("/api/profile", {
                     method: 'GET',
                     credentials: 'include',
                     headers: {
@@ -111,9 +111,11 @@ const Profile = () => {
                 });
 
                 if (!response.ok) {
-                    alert("Some error occurred");
-                    window.location.href = "/login";
-                    throw new Error('Network response was not ok');
+                    if (response.status === 401) {
+                        window.location.href = "/login";
+                        throw new Error('Please login to continue');
+                    }
+                    throw new Error('Failed to fetch profile');
                 }
 
                 const data = await response.json();

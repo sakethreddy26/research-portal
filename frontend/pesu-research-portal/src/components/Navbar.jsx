@@ -1,31 +1,45 @@
 import "../App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showPublicationsDropdown, setShowPublicationsDropdown] =
-    useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showCentresDropdown, setShowCentresDropdown] = useState(false);
   const [showFacultyDropdown, setShowFacultyDropdown] = useState(false);
-  const [showECDropdown, setShowECDropdown] = useState(false);
-  const [showRRDropdown, setShowRRDropdown] = useState(false);
 
-  function getCookieValue(cookieName) {
+  const ecDepartments = ["ECE", "CSE"];
+  const rrDepartments = ["Mechanical", "Civil", "Chemical"];
+  const sidebarRef = useRef(null);
+
+  // Function to get a cookie value
+  const getCookieValue = (cookieName) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${cookieName}=`);
     if (parts.length === 2) {
-      const cookieValue = parts.pop().split(";").shift();
-      return cookieValue;
+      return parts.pop().split(";").shift();
     }
     return null;
-  }
+  };
 
   useEffect(() => {
     const tokenFromCookie = getCookieValue("auth");
     if (tokenFromCookie) {
       setIsLoggedIn(true);
     }
+
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+      setIsSidebarOpen(false);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -34,217 +48,50 @@ const Navbar = () => {
     window.location.href = "/";
   };
 
-  const ecDepartments = ['Computer Science', 'Electronics & Communications', 'Computer Science (AIML)', 'Science & Humanities'];
-  const rrDepartments = ['Computer Science', 'Electronics & Communications', 'Computer Science (AIML)', 'Electrical & Electronics', 'Mechanical', 'Biotechnology', 'Science & Humanities'];
+  const toggleSidebar = (event) => {
+    event.stopPropagation();
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
-    <div className="">
-      <div className="bg-sky-800 text-white flex justify-between gap-2 items-center cursor-pointer font-bold text-lg">
-        <div className="bg-white border-sky-800 rounded-r-full p-10">
-          <a href="/">
+    <div className="relative">
+      {/* Navbar */}
+      <div className="bg-sky-800 text-white flex h-16 justify-between items-center font-bold text-lg">
+        <div className="bg-white flex items-center h-16 p-2 rounded-r-full">
+          <button
+            onClick={toggleSidebar}
+            className="p-2 focus:outline-none hover:scale-110 transition-transform duration-200"
+            aria-label="Toggle Sidebar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-gray-800"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+          <a href="/" className="ml-2">
             <img
-              className=""
+              className="h-12 object-contain"
               src="https://research.pes.edu/wp-content/uploads/2023/03/PESU-new-logo.png"
-              alt=""
+              alt="Logo"
             />
           </a>
         </div>
-        <div className="relative group z-10">
-          <div
-            onMouseEnter={() => setShowCentresDropdown(true)}
-            onMouseLeave={() => setShowCentresDropdown(false)}
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Centres
-          </div>
-          <div
-            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showCentresDropdown
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-2 pointer-events-none"
-              }`}
-            onMouseEnter={() => setShowCentresDropdown(true)}
-            onMouseLeave={() => setShowCentresDropdown(false)}
-          >
-            <div
-              className="py-1"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="options-menu"
-            >
-              <Link
-                to="/centres/rr"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
-                role="menuitem"
-              >
-                RR Campus
-              </Link>
-              <Link
-                to="/centres/ec"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
-                role="menuitem"
-              >
-                EC Campus
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="relative group z-10">
-          <div
-            onMouseEnter={() => setShowFacultyDropdown(true)}
-            onMouseLeave={() => setShowFacultyDropdown(false)}
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Faculty
-          </div>
-          <div
-            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showFacultyDropdown
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-2 pointer-events-none"
-              }`}
-            onMouseEnter={() => setShowFacultyDropdown(true)}
-            onMouseLeave={() => setShowFacultyDropdown(false)}
-          >
-            <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-              <div
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 relative"
-                onMouseEnter={() => setShowECDropdown(true)}
-                onMouseLeave={() => setShowECDropdown(false)}
-              >
-                EC Campus
-                <div
-                  className={`absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showECDropdown
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-2 pointer-events-none"
-                    }`}
-                >
-                  {ecDepartments.map((dept, index) => (
-                    <Link
-                      key={index}
-                      to={`/faculty?campus=EC Campus&department=${encodeURIComponent(dept)}`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
-                    >
-                      {dept}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 relative"
-                onMouseEnter={() => setShowRRDropdown(true)}
-                onMouseLeave={() => setShowRRDropdown(false)}
-              >
-                RR Campus
-                <div
-                  className={`absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showRRDropdown
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-2 pointer-events-none"
-                    }`}
-                >
-                  {rrDepartments.map((dept, index) => (
-                    <Link
-                      key={index}
-                      to={`/faculty?campus=RR Campus&department=${encodeURIComponent(dept)}`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
-                    >
-                      {dept}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <div>
-          <a
-            href="/professors"
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Faculty
-          </a>
-        </div> */}
-        <div>
-          <a
-            href="/rprogram"
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            PHD Program
-          </a>
-        </div>
-        <div>
-          <a
-            href="/patent-process"
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Patents
-          </a>
-        </div>
-        <div>
-          <a
-            href="/Research-Grant"
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Research-Grant
-          </a>
-        </div>
-        <div className="relative group z-10">
-          <div
-            onMouseEnter={() => setShowPublicationsDropdown(true)}
-            onMouseLeave={() => setShowPublicationsDropdown(false)}
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Publications
-          </div>
-          <div
-            className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ease-in-out ${showPublicationsDropdown
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-2 pointer-events-none"
-              }`}
-            onMouseEnter={() => setShowPublicationsDropdown(true)}
-            onMouseLeave={() => setShowPublicationsDropdown(false)}
-          >
-            <div
-              className="py-1"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="options-menu"
-            >
-              <Link
-                to="/conference"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
-                role="menuitem"
-              >
-                Conferences
-              </Link>
-              <Link
-                to="/journals"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
-                role="menuitem"
-              >
-                Journals
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div>
-          <a
-            href="/research-support"
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Ethics
-          </a>
-        </div>
-        <div>
-          <a
-            href="http://10.2.80.90:9001/"
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
-          >
-            Collaborations
-          </a>
-        </div>
-        <div>
+        <div className="absolute top-0 right-20 flex items-center space-x-4 p-4">
           <a
             href="/Contact"
-            className="inline-block hover:scale-125 transition-transform duration-200 p-4"
+            className="hover:scale-125 transition-transform duration-200 p-4"
           >
             Contact Us
           </a>
@@ -253,14 +100,139 @@ const Navbar = () => {
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
-              className="inline-block hover:scale-125 transition-transform duration-200 p-4"
+              className="hover:scale-125 transition-transform duration-200 p-4 text-[#F97316] font-bold"
             >
               Logout
             </button>
           ) : (
-            <a href="http://10.2.80.90:8081/login">Login</a>
+            <a
+              href="/login"
+              className=" font-bold"
+            >
+              Login
+            </a>
           )}
         </div>
+      </div>
+
+      {/* Sidebar */}
+      <div
+        ref={sidebarRef}
+        className={`fixed top-0 left-0 h-full bg-sky-800 text-white w-64 transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out z-50`}
+      >
+        <div className="p-4 font-bold text-xl">Menu</div>
+        <ul className="p-4 space-y-4">
+          {/* Centres Dropdown */}
+          <li
+            onMouseEnter={() => setShowCentresDropdown(true)}
+            onMouseLeave={() => setShowCentresDropdown(false)}
+          >
+            <button className="w-full text-left hover:underline">
+              Centres
+            </button>
+            {showCentresDropdown && (
+              <ul className="pl-4 space-y-2">
+                <li>
+                  <Link
+                    to="/centres/rr"
+                    className="block hover:underline"
+                    onClick={closeSidebar}
+                  >
+                    RR Campus
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/centres/ec"
+                    className="block hover:underline"
+                    onClick={closeSidebar}
+                  >
+                    EC Campus
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
+
+          {/* Faculty Dropdown */}
+          <li
+            onMouseEnter={() => setShowFacultyDropdown(true)}
+            onMouseLeave={() => setShowFacultyDropdown(false)}
+          >
+            <button className="w-full text-left hover:underline">
+              Faculty
+            </button>
+            {showFacultyDropdown && (
+              <ul className="pl-4 space-y-2">
+                <li>
+                  <div className="font-semibold">EC Campus</div>
+                  <ul className="pl-4 space-y-2">
+                    {ecDepartments.map((dept, index) => (
+                      <li key={index}>
+                        <Link
+                          to={`/faculty?campus=EC Campus&department=${encodeURIComponent(
+                            dept
+                          )}`}
+                          className="block hover:underline"
+                          onClick={closeSidebar}
+                        >
+                          {dept}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+                <li>
+                  <div className="font-semibold">RR Campus</div>
+                  <ul className="pl-4 space-y-2">
+                    {rrDepartments.map((dept, index) => (
+                      <li key={index}>
+                        <Link
+                          to={`/faculty?campus=RR Campus&department=${encodeURIComponent(
+                            dept
+                          )}`}
+                          className="block hover:underline"
+                          onClick={closeSidebar}
+                        >
+                          {dept}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </ul>
+            )}
+          </li>
+
+          {/* Static Links */}
+          <li>
+            <Link to="/rprogram" className="hover:underline" onClick={closeSidebar}>
+              PHD Program
+            </Link>
+          </li>
+          <li>
+            <Link to="/patent-process" className="hover:underline" onClick={closeSidebar}>
+              Patents
+            </Link>
+          </li>
+          <li>
+            <Link to="/Research-Grant" className="hover:underline" onClick={closeSidebar}>
+              Research-Grant
+            </Link>
+          </li>
+          <li>
+            <Link to="/research-support" className="hover:underline" onClick={closeSidebar}>
+              Ethics
+            </Link>
+          </li>
+          <li>
+            <a href="http://10.2.80.90:9001/" className="hover:underline" onClick={closeSidebar}>
+              Collaborations
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   );

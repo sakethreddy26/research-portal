@@ -17,14 +17,17 @@ import RR from "./components/Centers/RR";
 import EC from "./components/Centers/EC";
 import Faculty from "./components/Faculty/Faculty";
 import FacultyDetail from "./components/Faculty/FacultyDetails";
+import AuthPages from "./components/login";
 
 const App = () => {
   return (
     <Router>
       <Routes>
+        {/* All routes are nested under Layout */}
         <Route element={<Layout />}>
+          <Route path="/login" element={<AuthPages/>}/>
+          <Route path="/" element={<Home />} />
           <Route path="/rprogram" element={<Research />} />
-          {/* <Route path="/Professors" element={<Professors />} /> */}
           <Route path="/faculty" element={<Faculty />} />
           <Route path="/faculty/:email" element={<FacultyDetail />} />
           <Route path="/patent-process" element={<Patents />} />
@@ -37,12 +40,12 @@ const App = () => {
           <Route path="/journals" element={<Journals />} />
           <Route path="/research-support" element={<ResearchSupport />} />
           <Route path="/Contact" element={<Contact />} />
-          <Route path="/" element={<Home />} />
-        </Route>
           <Route path="/ethics" element={<Ethics />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/publications" element={<Conference />} />
+          <Route path="/publications" element={<Conference />} />
+        </Route>
 
+        {/* Any routes that should not have a layout can be added outside */}
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

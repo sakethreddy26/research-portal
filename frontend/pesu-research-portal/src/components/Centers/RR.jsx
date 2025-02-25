@@ -1,9 +1,7 @@
+import React, { useEffect } from "react";
 import Navbar from "../Navbar";
-import React, { useState, useEffect } from "react";
 
 const RR = () => {
-  const [activeTab, setActiveTab] = useState("q1");
-
   useEffect(() => {
     const answer = document.getElementById("a1");
     if (answer) {
@@ -11,100 +9,86 @@ const RR = () => {
     }
   }, []);
 
-  const toggleAnswer = (questionId) => {
-    setActiveTab(questionId);
-  };
-
   const centres = [
     {
       href: "https://research.pes.edu/cloud-computing-big-data/",
       text: "Centre for Cloud Computing & Big Data",
+      bgImage: "/img-c/CloudComputing.png",
     },
     {
       href: "https://research.pes.edu/knowledge-analytics-ont-ological-engineering-kanoe/",
       text: "Knowledge Analytics & Ont-ological Engineering (KANOE)",
+      bgImage: "/img-c/KANOE.png",
     },
     {
       href: "https://research.pes.edu/center-for-pattern-recognition/",
       text: "Center for Pattern Recognition",
+      bgImage: "/img-c/PatternRecognition.png",
     },
     {
       href: "https://research.pes.edu/crsst/",
       text: "Centre for Research in Space Science and Technology (CRSST)",
+      bgImage: "/img-c/CRSST.png",
     },
     {
       href: "https://research.pes.edu/center-for-data-sciences-and-applied-machine-learning/",
       text: "Center for Data Sciences and Applied Machine Learning (CDSAML)",
+      bgImage: "/img-c/CDSAML.png",
     },
     {
       href: "https://www.isfcr.pes.edu/",
-      text: "Center of Excellence in Information Security, Forensics and Cyber Resilience (C- ISFCR)",
+      text: "Center of Excellence in Information Security, Forensics and Cyber Resilience (C-ISFCR)",
+      bgImage: "/img-c/ISFCR.png",
     },
     {
       href: "https://www.iot.pes.edu/",
       text: "Center of Excellence in Internet of Things (C-IoT)",
+      bgImage: "/img-c/CIoT.png",
     },
   ];
 
   return (
-    <div>
+    
       <div>
-        {/* <Navbar /> */}
-      </div>
-
+        <div className="bg-white bg-opacity-75">
+        <h1 className="text-center text-2xl font-bold p-5 text-[#0A4C82]">Research Centers @ RR Campus</h1>
+        </div>
       <div
-        className="grid grid-cols-4 gap-2"
-        style={{
-          backgroundImage: "url(/img/pixelcut-export.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          width: "100vw",
-          height: "100vh",
-          overflow: "hidden",
-        }}
+        className="relative w-full bg-white bg-opacity-75"
       >
-        <div className="col-span-1 p-10 bg-white bg-opacity-80 w-4/5 h-full">
-          <ul className="font-serif text-lg space-y-4 cursor-pointer w-full">
-            <li
-              className={`transition-all duration-300 p-3 rounded-lg text-blue-600 ${
-                activeTab === "q1" ? "hover:text-blue-600" : "hover:bg-blue-100"
-              }`}
-              onClick={() => toggleAnswer("q1")}
-            >
-              RR Campus
-            </li>
-          </ul>
-        </div>
+        
+        {/* Light gray transparent overlay */}
+        <div className="absolute inset-0 bg-[#F5F5F5] bg-opacity-50"></div>
 
-        {/* Ring Road */}
-        <div
-          className="font-serif p-10 md:text-xl col-span-3 col-start-2"
-          id="a1"
-        >
-          <div className="bg-white opacity-90 rounded-lg shadow-lg overflow-hidden">
-            {centres.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="block p-5 hover:bg-blue-50 transition-all duration-300 border-b border-gray-200 last:border-b-0"
-              >
-                <div className="flex items-center gap-4 group">
-                  <img
-                    className="object-fill h-6 w-6 mt-1"
-                    src="/img-c/button.png"
-                    alt=""
-                  />
-                  <span className="group-hover:text-blue-800 transition-colors duration-300">
-                    {item.text}
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
+        {/* Content */}
+        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 p-10">
+          {centres.map((item, index) => (
+            <div
+              key={index}
+              className="rounded-xl shadow-lg overflow-hidden bg-white flex flex-col transform transition-transform duration-300 hover:scale-102 cursor-pointer hover:border hover:border-[#007ACC]"
+              onClick={() => window.open(item.href, "_blank")}
+            >
+              {/* Image section */}
+              <div
+                className="h-40 bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(${item.bgImage})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  padding: "10px",
+                }}
+              ></div>
+
+              {/* Title section */}
+              <div className="p-4 text-[#0A4C82] text-center">
+                <h3 className="text-lg font-bold">{item.text}</h3>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 
