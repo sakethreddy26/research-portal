@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // API configuration
 axios.defaults.baseURL = 'http://localhost:5000';
@@ -301,6 +302,7 @@ const SignUpPage = ({ onSignUpSuccess }) => {
 };
 
 const LoginPage = ({ onSignUpClick }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     employeeId: '',
     password: ''
@@ -325,7 +327,6 @@ const LoginPage = ({ onSignUpClick }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     
-    // Add validation
     if (!validateForm()) {
       return;
     }
@@ -339,11 +340,11 @@ const LoginPage = ({ onSignUpClick }) => {
         withCredentials: true
       });
 
-      // Cookie is automatically set by the browser
-      // Don't store sensitive data in localStorage
+      // Set login state in sessionStorage
       sessionStorage.setItem('userName', response.data.user.name);
+      sessionStorage.setItem('isLoggedIn', 'true');
       
-      // Redirect to home page
+      // Force a reload to ensure the navbar updates
       window.location.href = '/';
     } catch (error) {
       setErrors({

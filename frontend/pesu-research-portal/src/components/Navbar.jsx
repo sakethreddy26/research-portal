@@ -1,6 +1,6 @@
 import "../App.css";
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,6 +11,8 @@ const Navbar = () => {
   const ecDepartments = ["ECE", "CSE"];
   const rrDepartments = ["Mechanical", "Civil", "Chemical"];
   const sidebarRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Function to get a cookie value
   const getCookieValue = (cookieName) => {
@@ -22,12 +24,23 @@ const Navbar = () => {
     return null;
   };
 
+  // Check login status whenever location changes
   useEffect(() => {
-    const tokenFromCookie = getCookieValue("auth");
-    if (tokenFromCookie) {
-      setIsLoggedIn(true);
-    }
+    const checkLoginStatus = () => {
+      const tokenFromCookie = getCookieValue("auth");
+      const isLoggedInFromSession = sessionStorage.getItem('isLoggedIn') === 'true';
+      
+      if (tokenFromCookie || isLoggedInFromSession) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+    
+    checkLoginStatus();
+  }, [location.pathname]); // Re-check when route changes
 
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setIsSidebarOpen(false);
@@ -44,8 +57,10 @@ const Navbar = () => {
 
   const handleLogout = () => {
     document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('userName');
     setIsLoggedIn(false);
-    window.location.href = "/";
+    navigate("/login");
   };
 
   const toggleSidebar = (event) => {
@@ -54,6 +69,9 @@ const Navbar = () => {
   };
 
   const closeSidebar = () => setIsSidebarOpen(false);
+  
+  // Don't show login/logout button if on login page
+  const showAuthButton = location.pathname !== "/login";
 
   return (
     <div className="relative">
@@ -96,23 +114,25 @@ const Navbar = () => {
             Contact Us
           </a>
         </div>
-        <div className="p-4">
-          {isLoggedIn ? (
-            <button
-              onClick={handleLogout}
-              className="hover:scale-125 transition-transform duration-200 p-4 text-[#F97316] font-bold"
-            >
-              Logout
-            </button>
-          ) : (
-            <a
-              href="/login"
-              className=" font-bold"
-            >
-              Login
-            </a>
-          )}
-        </div>
+        {showAuthButton && (
+          <div className="p-4">
+            {isLoggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="hover:scale-125 transition-transform duration-200 p-4 text-[#F97316] font-bold"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="hover:scale-125 transition-transform duration-200 p-4 font-bold"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Sidebar */}
@@ -124,7 +144,7 @@ const Navbar = () => {
       >
         <div className="p-4 font-bold text-xl">Menu</div>
         <ul className="p-4 space-y-4">
-          {/* Centres Dropdown */}
+          {/* Centres Dropdown - Always visible */}
           <li
             onMouseEnter={() => setShowCentresDropdown(true)}
             onMouseLeave={() => setShowCentresDropdown(false)}
@@ -156,7 +176,7 @@ const Navbar = () => {
             )}
           </li>
 
-          {/* Faculty Dropdown */}
+          {/* Faculty Dropdown - Always visible */}
           <li
             onMouseEnter={() => setShowFacultyDropdown(true)}
             onMouseLeave={() => setShowFacultyDropdown(false)}
@@ -206,32 +226,52 @@ const Navbar = () => {
             )}
           </li>
 
-          {/* Static Links */}
-          <li>
-            <Link to="/rprogram" className="hover:underline" onClick={closeSidebar}>
-              PHD Program
-            </Link>
-          </li>
-          <li>
-            <Link to="/patent-process" className="hover:underline" onClick={closeSidebar}>
-              Patents
-            </Link>
-          </li>
-          <li>
-            <Link to="/Research-Grant" className="hover:underline" onClick={closeSidebar}>
-              Research-Grant
-            </Link>
-          </li>
-          <li>
-            <Link to="/research-support" className="hover:underline" onClick={closeSidebar}>
-              Ethics
-            </Link>
-          </li>
-          <li>
-            <a href="http://10.2.80.90:9001/" className="hover:underline" onClick={closeSidebar}>
-              Collaborations
-            </a>
-          </li>
+          {/* Items only visible when logged in */}
+          {isLoggedIn && (
+            <>
+              <li>
+                <Link
+                  to="/rprogram"
+                  className="block hover:underline"
+                  onClick={closeSidebar}
+                >
+                  PHD Program
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/patent-process"
+                  className="block hover:underline"
+                  onClick={closeSidebar}
+                >
+                  Patents
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/Research-Grant"
+                  className="block hover:underline"
+                  onClick={closeSidebar}
+                >
+                  Research Grant
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/ethics"
+                  className="block hover:underline"
+                  onClick={closeSidebar}
+                >
+                  Ethics
+                </Link>
+              </li>
+              <li>
+                <a href="http://10.2.80.90:9001/" className="block hover:underline" onClick={closeSidebar}>
+                  Collaborations
+                </a>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>
