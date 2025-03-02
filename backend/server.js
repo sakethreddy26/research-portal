@@ -7,12 +7,14 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const router = require("./routes/routes");
 const rateLimit = require('express-rate-limit');
+const professorRoutes = require('./routes/professorRoutes');
 
 const app = express();
 
 // Middleware
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
@@ -39,6 +41,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Use routes
 app.use('/api', router);
+app.use('/v1/api', professorRoutes);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!', details: err.message });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

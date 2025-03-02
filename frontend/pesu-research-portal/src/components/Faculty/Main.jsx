@@ -116,6 +116,9 @@ const Main = ({
                     <Typography variant="body2" color="text.secondary" align="center">
                       {professor.department || 'N/A'}
                     </Typography>
+                    <Typography variant="body2" color="text.secondary" align="center">
+                      {professor.campus}
+                    </Typography>
                   </CardContent>
                 </StyledCard>
               </Grid>

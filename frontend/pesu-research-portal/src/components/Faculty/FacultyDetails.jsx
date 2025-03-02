@@ -1,7 +1,12 @@
 // FacultyDetail.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
+import SchoolIcon from '@mui/icons-material/School';
+import WorkIcon from '@mui/icons-material/Work';
+import ArticleIcon from '@mui/icons-material/Article';
+import LinkIcon from '@mui/icons-material/Link';
+import CitationIcon from '@mui/icons-material/FormatQuote';
 
 import {
   Typography,
@@ -16,6 +21,11 @@ import {
   List,
   ListItem,
   Pagination,
+  Divider,
+  Grid,
+  Chip,
+  Paper,
+  Button,
 } from '@mui/material';
 
 const FacultyDetail = () => {
@@ -48,9 +58,19 @@ const FacultyDetail = () => {
 
   const handleTabChange = (event, newValue) => {
     setCurrentTab(newValue);
+    setCurrentPage(1); // Reset to first page when changing tabs
   };
 
   const paginate = (event, pageNumber) => setCurrentPage(pageNumber);
+
+  // Calculate pagination for research papers
+  const getPublicationsForPage = () => {
+    if (!professor || !professor["Research Papers"]) return [];
+    
+    const indexOfLastPublication = currentPage * publicationsPerPage;
+    const indexOfFirstPublication = indexOfLastPublication - publicationsPerPage;
+    return professor["Research Papers"].slice(indexOfFirstPublication, indexOfLastPublication);
+  };
 
   if (loading) {
     return (
@@ -68,167 +88,265 @@ const FacultyDetail = () => {
     return <Alert severity="warning">No Professor Found</Alert>;
   }
 
-  const indexOfLastPublication = currentPage * publicationsPerPage;
-  const indexOfFirstPublication = indexOfLastPublication - publicationsPerPage;
-  const currentPublications = professor.publications?.slice(indexOfFirstPublication, indexOfLastPublication) || [];
+  // Format experience text
+  const formatExperience = (experienceText) => {
+    if (!experienceText) return [];
+    return experienceText.split('\n').filter(line => line.trim() !== '');
+  };
+
+  // Format qualification text
+  const formatQualification = (qualificationText) => {
+    if (!qualificationText) return [];
+    return qualificationText.split('\n').filter(line => line.trim() !== '');
+  };
+
+  const experienceItems = formatExperience(professor.Experience);
+  const qualificationItems = formatQualification(professor.Qualification);
+  const totalPublications = professor["Research Papers"]?.length || 0;
+  const totalPages = Math.ceil(totalPublications / publicationsPerPage);
+  const currentPublications = getPublicationsForPage();
 
   return (
-    <Box sx={{ minHeight: '100vh', backgroundImage: 'url(/img/pixelcut-export.jpg)', backgroundSize: 'cover', p: 3 }}>
-      {/* Profile Header */}
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
-          alignItems: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-          borderRadius: 2,
-          p: 3,
-          mb: 4,
-        }}
-      >
-        <Avatar
-          alt={professor.name}
-          sx={{ width: 120, height: 120, mr: { md: 4 }, mb: { xs: 2, md: 0 }, bgcolor: 'primary.main', fontSize: 80 }}
-        >
-          {professor.profileImage ? (
-            <img
-              src={professor.profileImage}
-              alt={professor.name}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            <PersonIcon fontSize="inherit" />
-          )}
-        </Avatar>
-
-        <Box>
-          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-            {professor.name}
-          </Typography>
-          <Typography variant="h6" color="textSecondary">
-            {professor.designation || 'Professor'}
-          </Typography>
-          <Typography variant="body1" color="textSecondary">
-            {professor.department} - {professor.campus} Campus
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Email: {professor.email}
-          </Typography>
-        </Box>
-      </Box>
+    <Box sx={{ p: 3, maxWidth: '1200px', mx: 'auto' }}>
+      {/* Professor Header */}
+      <Paper elevation={3} sx={{ p: 3, mb: 4 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+            <Avatar
+              sx={{
+                width: 150,
+                height: 150,
+                border: '3px solid #1976d2',
+              }}
+              src={professor["Profile Image"] || ''}
+              alt={professor.Name}
+            >
+              {!professor["Profile Image"] && <PersonIcon sx={{ fontSize: 80 }} />}
+            </Avatar>
+          </Grid>
+          <Grid item xs={12} md={9}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              {professor.Name}
+            </Typography>
+            <Typography variant="h6" color="text.secondary" gutterBottom>
+              {professor.Department || 'Computer Science'}, {professor.Campus || 'EC Campus'}
+            </Typography>
+            
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="subtitle1" gutterBottom>
+                <strong>Expertise:</strong> {professor.Expertise || 'Not specified'}
+              </Typography>
+              
+              <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                {professor["Academic IDs"] && Object.entries(professor["Academic IDs"]).map(([key, value]) => (
+                  value && (
+                    <Button 
+                      key={key}
+                      variant="outlined" 
+                      size="small" 
+                      startIcon={<LinkIcon />}
+                      href={value}
+                      target="_blank"
+                      sx={{ mr: 1, mb: 1 }}
+                    >
+                      {key}
+                    </Button>
+                  )
+                ))}
+              </Box>
+              
+              <Box sx={{ mt: 2 }}>
+                <Chip 
+                  icon={<CitationIcon />} 
+                  label={`Total Papers: ${professor["Total Papers"] || 0}`} 
+                  color="primary" 
+                  sx={{ mr: 1, mb: 1 }} 
+                />
+                {professor["Citations & Indices"] && (
+                  <>
+                    <Chip 
+                      icon={<CitationIcon />} 
+                      label={`Citations: ${professor["Citations & Indices"]["CITATIONS"] || 0}`} 
+                      color="secondary" 
+                      sx={{ mr: 1, mb: 1 }} 
+                    />
+                    <Chip 
+                      icon={<CitationIcon />} 
+                      label={`H-Index: ${professor["Citations & Indices"]["H-INDEX"] || 0}`} 
+                      color="info" 
+                      sx={{ mr: 1, mb: 1 }} 
+                    />
+                  </>
+                )}
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Paper>
 
       {/* Tabs */}
-      <Box sx={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: 2 }}>
+      <Box sx={{ width: '100%', mb: 2 }}>
         <Tabs
           value={currentTab}
           onChange={handleTabChange}
           variant="scrollable"
           scrollButtons="auto"
-          sx={{ borderBottom: 1, borderColor: 'divider' }}
+          aria-label="professor details tabs"
         >
-          <Tab label="About" />
           <Tab label="Publications" />
           <Tab label="Education" />
           <Tab label="Experience" />
+          {professor["Google Scholar"] && <Tab label="Google Scholar" />}
         </Tabs>
+      </Box>
 
-        {/* Tab Panels */}
-        <Box sx={{ p: 3 }}>
-          {currentTab === 0 && (
-            <>
-              <Typography variant="h6" gutterBottom>
-                Responsibilities
-              </Typography>
-              <Typography variant="body1">
-                {professor.responsibilities?.join(', ') || 'N/A'}
-              </Typography>
-            </>
-          )}
-
-          {currentTab === 1 && (
-            <>
-              <Typography variant="h6" gutterBottom>
-                Publications
-              </Typography>
-              {currentPublications.length > 0 ? (
-                <>
-                  {currentPublications.map((publication, index) => (
-                    <Card sx={{ mb: 2 }} key={index}>
-                      <CardContent>
-                        <Typography variant="h6">{publication.Title_y || 'N/A'}</Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Authors: {publication['Author(s)'] || 'N/A'}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Journal: {publication.Journal || 'N/A'}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Year: {publication.Year || 'N/A'}
-                        </Typography>
-                        {publication.DOI && (
-                          <Typography variant="body2">
-                            <a href={`https://doi.org/${publication.DOI}`} target="_blank" rel="noopener noreferrer" style={{ color: '#1976d2' }}>
-                              Read More
-                            </a>
-                          </Typography>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
+      {/* Tab Content */}
+      <Box sx={{ p: 2 }}>
+        {currentTab === 0 && (
+          <>
+            <Typography variant="h6" gutterBottom>
+              Research Publications
+            </Typography>
+            {currentPublications.length > 0 ? (
+              <>
+                {currentPublications.map((paper, index) => (
+                  <Card key={index} sx={{ mb: 2 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div">
+                        {paper.Title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" gutterBottom>
+                        {paper.Authors}
+                      </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        <strong>Type:</strong> {paper.Type}
+                      </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        <strong>Year:</strong> {paper.Year}
+                      </Typography>
+                      {paper.DOI && paper.DOI !== "No DOI" && (
+                        <Button 
+                          variant="outlined" 
+                          size="small" 
+                          href={paper.DOI} 
+                          target="_blank"
+                          startIcon={<LinkIcon />}
+                          sx={{ mt: 1 }}
+                        >
+                          DOI Link
+                        </Button>
+                      )}
+                      <Typography variant="body2" sx={{ mt: 1 }}>
+                        <strong>Citations:</strong> {paper.Citations || '0'}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))}
+                
+                {/* Pagination */}
+                <Box display="flex" justifyContent="center" mt={3}>
                   <Pagination
-                    count={Math.ceil((professor.publications?.length || 0) / publicationsPerPage)}
+                    count={totalPages}
                     page={currentPage}
                     onChange={paginate}
-                    variant="outlined"
-                    shape="rounded"
                     color="primary"
-                    sx={{ mt: 2 }}
                   />
-                </>
-              ) : (
-                <Typography>No Publications Found</Typography>
-              )}
-            </>
-          )}
+                </Box>
+              </>
+            ) : (
+              <Typography>No Publications Found</Typography>
+            )}
+          </>
+        )}
 
-          {currentTab === 2 && (
-            <>
-              <Typography variant="h6" gutterBottom>
-                Education
-              </Typography>
-              {professor.education?.length > 0 ? (
-                <List>
-                  {professor.education.map((edu, index) => (
-                    <ListItem key={index}>
-                      <Typography variant="body1">{edu}</Typography>
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                <Typography>No Education Details Found</Typography>
-              )}
-            </>
-          )}
+        {currentTab === 1 && (
+          <>
+            <Typography variant="h6" gutterBottom>
+              Education
+            </Typography>
+            {qualificationItems.length > 0 ? (
+              <List>
+                {qualificationItems.map((edu, index) => (
+                  <ListItem key={index} sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <SchoolIcon sx={{ mr: 2, mt: 0.5 }} color="primary" />
+                    <Typography variant="body1">{edu}</Typography>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <Typography>No Education Details Found</Typography>
+            )}
+          </>
+        )}
 
-          {currentTab === 3 && (
-            <>
-              <Typography variant="h6" gutterBottom>
-                Experience
-              </Typography>
-              {professor.experience?.length > 0 ? (
-                <List>
-                  {professor.experience.map((exp, index) => (
-                    <ListItem key={index}>
-                      <Typography variant="body1">{exp}</Typography>
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                <Typography>No Experience Details Found</Typography>
-              )}
-            </>
-          )}
-        </Box>
+        {currentTab === 2 && (
+          <>
+            <Typography variant="h6" gutterBottom>
+              Experience
+            </Typography>
+            {experienceItems.length > 0 ? (
+              <List>
+                {experienceItems.map((exp, index) => (
+                  <ListItem key={index} sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <WorkIcon sx={{ mr: 2, mt: 0.5 }} color="primary" />
+                    <Typography variant="body1">{exp}</Typography>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <Typography>No Experience Details Found</Typography>
+            )}
+          </>
+        )}
+
+        {currentTab === 3 && professor["Google Scholar"] && (
+          <>
+            <Typography variant="h6" gutterBottom>
+              Google Scholar Metrics
+            </Typography>
+            <Card sx={{ mb: 3 }}>
+              <CardContent>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={4}>
+                    <Box sx={{ textAlign: 'center', p: 2 }}>
+                      <Typography variant="h4" color="primary">
+                        {professor["Google Scholar"]["CITATION"] || 0}
+                      </Typography>
+                      <Typography variant="body1">Citations</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Box sx={{ textAlign: 'center', p: 2 }}>
+                      <Typography variant="h4" color="primary">
+                        {professor["Google Scholar"]["H INDEX"] || 0}
+                      </Typography>
+                      <Typography variant="body1">H-Index</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Box sx={{ textAlign: 'center', p: 2 }}>
+                      <Typography variant="h4" color="primary">
+                        {professor["Google Scholar"]["I-10 INDEX"] || 0}
+                      </Typography>
+                      <Typography variant="body1">i10-Index</Typography>
+                    </Box>
+                  </Grid>
+                </Grid>
+                <Box sx={{ mt: 2, textAlign: 'center' }}>
+                  <Button 
+                    variant="contained" 
+                    color="primary"
+                    href={professor["Academic IDs"]["Google Scholar Id"] || '#'}
+                    target="_blank"
+                    startIcon={<LinkIcon />}
+                  >
+                    View Google Scholar Profile
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </>
+        )}
       </Box>
     </Box>
   );
