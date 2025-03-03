@@ -1,0 +1,16 @@
+# System Requirements for Ubuntu Server
+
+# Node.js (v18.x or higher)
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Nginx
+sudo apt-get install -y nginx
+
+# PM2 (Install globally)
+sudo npm install -g pm2
+
+# Other system dependencies
+sudo apt-get update
+sudo apt-get install -y build-essential
+sudo apt-get install -y git 
