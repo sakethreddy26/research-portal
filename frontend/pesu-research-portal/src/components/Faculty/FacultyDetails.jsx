@@ -107,7 +107,7 @@ const FacultyDetail = () => {
   const currentPublications = getPublicationsForPage();
 
   return (
-    <Box sx={{ p: 3, maxWidth: '1200px', mx: 'auto' }}>
+    <Box sx={{ p: 3, maxWidth: '1500px', mx: 'auto', backgroundColor: "#f5f5f5"}}>
       {/* Professor Header */}
       <Paper elevation={3} sx={{ p: 3, mb: 4 }}>
         <Grid container spacing={3}>

@@ -21,64 +21,107 @@ const Sidebar = ({ selectedCampus, selectedDomain, handleCampusSelect, handleDom
   };
 
   return (
-    <Box>
-      <Typography variant="h6" gutterBottom>
-        Filter By
-      </Typography>
+    <Box
+  sx={{
+    backgroundColor: "#f5f5f5", // Light gray background
+    padding: "16px",
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Subtle shadow
+  }}
+>
+  {/* Styled Title */}
+  <Typography
+    variant="h6"
+    gutterBottom
+    sx={{
+      backgroundColor: "#f5f5f5", // Primary blue
+      color: "#1976d2",
+      padding: "8px",
+      borderRadius: "4px",
+      textAlign: "center",
+    }}
+  >
+    Filter By
+  </Typography>
 
-      {/* Campus Filter */}
-      <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography variant="subtitle1">Campus</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <List>
-            {campuses.map((campus) => (
-              <ListItemButton
-                key={campus}
-                selected={selectedCampus === campus}
-                onClick={() => handleCampusSelect(campus)}
-              >
-                <ListItemText primary={campus} />
-              </ListItemButton>
-            ))}
-          </List>
-        </AccordionDetails>
-      </Accordion>
+  {/* Campus Filter */}
+  <Accordion
+    defaultExpanded
+    sx={{
+      backgroundColor: "white",
+      boxShadow: "none",
+      border: "1px solid #ddd",
+      borderRadius: "8px",
+      marginTop: "8px",
+    }}
+  >
+    <AccordionSummary expandIcon={<ExpandMore />}>
+      <Typography variant="subtitle1" fontWeight="bold">Campus</Typography>
+    </AccordionSummary>
+    <AccordionDetails>
+      <List>
+        {campuses.map((campus) => (
+          <ListItemButton
+            key={campus}
+            selected={selectedCampus === campus}
+            onClick={() => handleCampusSelect(campus)}
+            sx={{
+              "&.Mui-selected": {
+                backgroundColor: "#1976d2",
+                color: "white",
+                fontWeight: "bold",
+              },
+              borderRadius: "4px",
+              marginBottom: "4px",
+            }}
+          >
+            <ListItemText primary={campus} />
+          </ListItemButton>
+        ))}
+      </List>
+    </AccordionDetails>
+  </Accordion>
 
-      {/* Department Filter */}
-      {selectedCampus && (
-        <Accordion defaultExpanded>
-          <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography variant="subtitle1">Department</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              {departmentsByCampus[selectedCampus].map((dept) => (
-                <ListItemButton
-                  key={dept}
-                  selected={selectedDomain === dept}
-                  onClick={() => handleDomainSelect(dept)}
-                >
-                  <ListItemText primary={dept} />
-                </ListItemButton>
-              ))}
-            </List>
-          </AccordionDetails>
-        </Accordion>
-      )}
+  {/* Department Filter */}
+  {selectedCampus && (
+    <Accordion
+      defaultExpanded
+      sx={{
+        backgroundColor: "white",
+        boxShadow: "none",
+        border: "1px solid #ddd",
+        borderRadius: "8px",
+        marginTop: "8px",
+      }}
+    >
+      <AccordionSummary expandIcon={<ExpandMore />}>
+        <Typography variant="subtitle1" fontWeight="bold">Department</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <List>
+          {departmentsByCampus[selectedCampus].map((dept) => (
+            <ListItemButton
+              key={dept}
+              selected={selectedDomain === dept}
+              onClick={() => handleDomainSelect(dept)}
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#1976d2",
+                  color: "white",
+                  fontWeight: "bold",
+                },
+                borderRadius: "4px",
+                marginBottom: "4px",
+              }}
+            >
+              <ListItemText primary={dept} />
+            </ListItemButton>
+          ))}
+        </List>
+      </AccordionDetails>
+    </Accordion>
+  )}
+</Box>
 
-      {/* Apply to IRINS Button */}
-      {/* <Box mt={4} textAlign="center">
-        <Button
-          href="https://docs.google.com/forms/d/e/1FAIpQLScpkIXufj4p0svmqqlP-4kNIBKgMIsCs_V7gZHOv6NB33yuFw/viewform?usp=sf_link"
-          variant="contained"
-          color="primary"
-        >
-          Apply to IRINS
-        </Button>
-      </Box> */}
-    </Box>
   );
 };
 

@@ -61,7 +61,14 @@ const Main = ({
     );
 
   return (
-    <Box>
+    <Box
+    sx={{
+      padding: "16px",
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Subtle shadow
+      backgroundColor:"#f5f5f5"
+    }}
+    >
+      
       {/* Search Bar */}
       <Paper
         component="form"
@@ -126,14 +133,14 @@ const Main = ({
           </Grid>
 
           {/* Pagination */}
-          <Box mt={4} display="flex" justifyContent="center">
+          <Box mt={4} display="flex" justifyContent="center" color="white">
             <Pagination
               count={Math.ceil(totalProfessorsCount / professorsPerPage)}
               page={currentPage}
               onChange={handlePageChange}
               variant="outlined"
               shape="rounded"
-              color="primary"
+              color='primary'
             />
           </Box>
         </>

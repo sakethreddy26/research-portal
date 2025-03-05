@@ -14,6 +14,7 @@ const HomePage = () => {
   const [publicationsByYear, setPublicationsByYear] = useState({});
   const [recentPublications, setRecentPublications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,25 +24,33 @@ const HomePage = () => {
           axios.get("/v1/api/getAllPublications"),
         ]);
 
-        setProfessors(profResponse.data);
-        setPublications(pubResponse.data);
+        // Ensure we have arrays
+        const profsData = Array.isArray(profResponse.data) ? profResponse.data : [];
+        const pubsData = Array.isArray(pubResponse.data) ? pubResponse.data : [];
 
-        const pubsByYear = pubResponse.data.reduce((acc, pub) => {
-          const year = pub.Year || "Unknown";
-          acc[year] = (acc[year] || 0) + 1;
-          return acc;
-        }, {});
-        setPublicationsByYear(pubsByYear);
+        setProfessors(profsData);
+        setPublications(pubsData);
 
-        const currentYear = new Date().getFullYear();
-        const recentPubs = pubResponse.data
-          .filter((pub) => pub.Year >= currentYear - 1)
-          .slice(0, 6);
-        setRecentPublications(recentPubs);
+        // Only process publications if we have data
+        if (pubsData.length > 0) {
+          const pubsByYear = pubsData.reduce((acc, pub) => {
+            const year = pub.Year || "Unknown";
+            acc[year] = (acc[year] || 0) + 1;
+            return acc;
+          }, {});
+          setPublicationsByYear(pubsByYear);
+
+          const currentYear = new Date().getFullYear();
+          const recentPubs = pubsData
+            .filter((pub) => pub.Year >= currentYear - 1)
+            .slice(0, 6);
+          setRecentPublications(recentPubs);
+        }
 
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError("Failed to load data. Please try again later.");
         setIsLoading(false);
       }
     };
@@ -119,6 +128,10 @@ const HomePage = () => {
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
             </div>
+          ) : error ? (
+            <div className="text-center text-red-600 p-4">
+              {error}
+            </div>
           ) : (
             <>
               <motion.div 
@@ -147,7 +160,7 @@ const HomePage = () => {
                     color: "bg-yellow-100 text-yellow-800",
                   },
                 ].map((stat, index) => (
-                  <div key={index} className={`${stat.color} rounded-lg shadow-lg p-6 text-center`}>
+                  <div key={index} className={'${stat.color} rounded-lg shadow-lg p-6 text-center'}>
                     <div className="text-4xl mb-4">{stat.icon}</div>
                     <h3 className="text-xl font-semibold mb-2">{stat.title}</h3>
                     <p className="text-3xl font-bold">
