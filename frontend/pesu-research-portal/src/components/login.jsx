@@ -162,7 +162,7 @@ const SignUpPage = ({ onSignUpSuccess }) => {
     }
 
     try {
-      const response = await axios.post('/api/signup', {
+      const response = await axios.post('http://10.2.80.90:5000/v1/api/signup', {
         employeeId: formData.employeeId,
         name: formData.name,
         email: formData.email,
@@ -333,7 +333,7 @@ const LoginPage = ({ onSignUpClick }) => {
     
     setIsLoading(true);
     try {
-      const response = await axios.post('/api/login', {
+      const response = await axios.post('http://10.2.80.90:5000/v1/api/login', {
         employeeId: formData.employeeId,
         password: formData.password
       }, {
