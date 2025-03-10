@@ -40,7 +40,7 @@ const FacultyDetail = () => {
   useEffect(() => {
     const fetchProfessor = async () => {
       try {
-        const professorResponse = await fetch(`/v1/api/getProfessorbyemail/${email}`);
+        const professorResponse = await fetch(`http://localhost:5000/v1/api/getProfessorbyemail/${email}`);
         if (!professorResponse.ok) {
           throw new Error(`HTTP error! status: ${professorResponse.status}`);
         }

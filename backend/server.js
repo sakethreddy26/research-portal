@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin:  '10.2.80.90:8089',
+    origin:  '*',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -29,7 +29,7 @@ const limiter = rateLimit({
   max: 100 // limit each IP to 100 requests per windowMs
 });
 
-app.use('/api', limiter);
+app.use(limiter);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
@@ -40,7 +40,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch(err => console.error('MongoDB connection error:', err));
 
 // Use routes
-app.use('/api', router);
+app.use('/v1/api', router);
 app.use('/v1/api', professorRoutes);
 
 // Error handling middleware
